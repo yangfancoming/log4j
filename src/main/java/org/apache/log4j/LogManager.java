@@ -70,21 +70,24 @@ public class LogManager {
 
         /** Search for the properties file log4j.properties in the CLASSPATH.  */
         //读取操作系统配置的环境变量log4j.defaultInitOverride的值
-        String override =OptionConverter.getSystemProperty(DEFAULT_INIT_OVERRIDE_KEY,null);
+        String override = OptionConverter.getSystemProperty(DEFAULT_INIT_OVERRIDE_KEY,null);
 
         // if there is no default init override, then get the resource specified by the user or the default config file.
-        // 如果操作系统没有配置环境变量log4j.defaultInitOverride，那么这里会进入
+        // 如果操作系统没有配置环境变量log4j.defaultInitOverride，或者 有配置系统环境变量但是配置的值为false
         if(override == null || "false".equalsIgnoreCase(override)) {
-            //读取操作系统配置的环境变量log4j.configuration的值
+            //读取操作系统配置的环境变量 log4j.configuration 的值
             String configurationOptionStr = OptionConverter.getSystemProperty( DEFAULT_CONFIGURATION_KEY,null);
-            //读取操作系统配置的环境变量log4j.configuratorClass的值
+            //读取操作系统配置的环境变量 log4j.configuratorClass 的值
             String configuratorClassName = OptionConverter.getSystemProperty( CONFIGURATOR_CLASS_KEY,null);
             URL url;
             // if the user has not specified the log4j.configuration  property, we search first for the file "log4j.xml" and then "log4j.properties"
             //如果没有配置环境变量log4j.configuration，那么就去寻找用户是否配置了文件log4j.xml，如果log4j.xml也找不到那么就加载默认配置文件log4j.properties
             if(configurationOptionStr == null) {
+                // 尝试加载 log4j.xml  配置文件
                 url = Loader.getResource(DEFAULT_XML_CONFIGURATION_FILE);
+                // 如果没有 log4j.xml 配置文件
                 if(url == null) {
+                    // 尝试加载 log4j.properties  配置文件
                     url = Loader.getResource(DEFAULT_CONFIGURATION_FILE);
                 }
             } else {

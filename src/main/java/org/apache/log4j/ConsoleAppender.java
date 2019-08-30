@@ -126,7 +126,6 @@ public class ConsoleAppender extends WriterAppender {
                setWriter(createWriter(System.out));
             }
         }
-
         super.activateOptions();
   }
   
@@ -178,6 +177,7 @@ public class ConsoleAppender extends WriterAppender {
      *
      */
     private static class SystemOutStream extends OutputStream {
+
         public SystemOutStream() {
         }
 

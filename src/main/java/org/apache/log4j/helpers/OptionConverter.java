@@ -73,19 +73,16 @@ public class OptionConverter {
 
 
     /**
-     Very similar to <code>System.getProperty</code> except
-     that the {@link SecurityException} is hidden.
-
+     Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
      @param key The key to search for.
      @param def The default value to return.
-     @return the string value of the system property, or the default
-     value if there is no property with that key.
-
+     @return the string value of the system property, or the default value if there is no property with that key.
      @since 1.1 */
     public
     static
     String getSystemProperty(String key, String def) {
         try {
+            // 根据key 获取特定系统属性  key不存在时  返回指定的默认值 def
             return System.getProperty(key, def);
         } catch(Throwable e) { // MS-Java throws com.ms.security.SecurityExceptionEx
             LogLog.debug("Was not allowed to read system property \""+key+"\".");

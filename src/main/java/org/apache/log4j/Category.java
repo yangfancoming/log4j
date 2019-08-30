@@ -84,7 +84,7 @@ public class Category implements AppenderAttachable {
     /**
      The name of this category.
      */
-    protected String   name;
+    protected String name;
 
     /**
      The assigned level of this category.  The
@@ -106,7 +106,6 @@ public class Category implements AppenderAttachable {
 
     // Categories need to know what Hierarchy they are in
     protected LoggerRepository repository;
-
 
     AppenderAttachableImpl aai;
 

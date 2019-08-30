@@ -218,7 +218,6 @@ public class WriterAppender extends AppenderSkeleton {
     protected
     OutputStreamWriter createWriter(OutputStream os) {
         OutputStreamWriter retval = null;
-
         String enc = getEncoding();
         if(enc != null) {
             try {

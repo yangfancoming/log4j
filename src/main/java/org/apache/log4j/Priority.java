@@ -13,7 +13,6 @@ public class Priority {
     transient String levelStr;
     transient int syslogEquivalent;
 
-
     // 该类封装一系列日志等级的名字和数字，然后内容封装多个等级的相关枚举
     public final static int OFF_INT = Integer.MAX_VALUE;
     public final static int FATAL_INT = 50000;
@@ -72,6 +71,7 @@ public class Priority {
      Two priorities are equal if their level fields are equal.
      @since 1.2
      */
+    @Override
     public boolean equals(Object o) {
         if(o instanceof Priority) {
             Priority r = (Priority) o;
@@ -116,6 +116,7 @@ public class Priority {
     /**
      Returns the string representation of this priority.
      */
+    @Override
     public final String toString() {
         return levelStr;
     }
