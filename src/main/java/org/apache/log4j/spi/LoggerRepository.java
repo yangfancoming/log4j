@@ -24,7 +24,6 @@ import org.apache.log4j.Logger;
   /**
      Add a {@link HierarchyEventListener} event to the repository.
   */
-  
   void addHierarchyEventListener(HierarchyEventListener listener);
 
   /**

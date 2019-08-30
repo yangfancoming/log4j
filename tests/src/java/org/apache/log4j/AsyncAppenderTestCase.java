@@ -226,9 +226,7 @@ public class AsyncAppenderTestCase extends TestCase {
         this.repetitions = repetitions;
       }
 
-      /**
-       * {@inheritDoc}
-       */
+
       public void run() {
         try {
           for (int i = 0; i < repetitions; i++) {
@@ -260,9 +258,7 @@ public class AsyncAppenderTestCase extends TestCase {
         super();
       }
 
-      /**
-       * {@inheritDoc}
-       */
+
       public void append(final LoggingEvent event) {
         synchronized (monitor) {
           super.append(event);

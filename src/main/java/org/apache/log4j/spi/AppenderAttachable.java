@@ -7,8 +7,6 @@ import java.util.Enumeration;
 
 /**
    Interface for attaching appenders to objects.
-
-   @author Ceki G&uuml;lc&uuml;
    @since 0.9.1 */
 public interface AppenderAttachable {
   
