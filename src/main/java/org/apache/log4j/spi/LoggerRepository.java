@@ -17,8 +17,10 @@ import org.apache.log4j.Logger;
    <p>In addition to the creational methods, a
    <code>LoggerRepository</code> can be queried for existing loggers,
    can act as a point of registry for events related to loggers.
-
-   @since 1.2 */
+   @since 1.2
+   // 常见的Hierarchy就是该接口实现，里面封装了框架一堆默认配置，还有Logger工厂。
+   // 可以理解该类就是事件源，该类内部封装了以系列的事件
+ */
  public interface LoggerRepository {
 
   /**
@@ -46,7 +48,6 @@ import org.apache.log4j.Logger;
   
   void setThreshold(String val);
 
-  
   void emitNoAppenderWarning(Category cat);
 
   /**
@@ -54,24 +55,16 @@ import org.apache.log4j.Logger;
      #setThreshold(Level)} for an explanation. */
   Level getThreshold();
 
-  
   Logger getLogger(String name);
 
-  
   Logger getLogger(String name, LoggerFactory factory);
 
-  
   Logger getRootLogger();
 
-  
-  abstract
   Logger exists(String name);
 
-  
-  abstract
   void shutdown();
 
-  
   Enumeration getCurrentLoggers();
 
   /**
@@ -79,13 +72,8 @@ import org.apache.log4j.Logger;
   
   Enumeration getCurrentCategories();
 
-
-  
-  abstract
   void fireAddAppenderEvent(Category logger, Appender appender);
 
-  
-  abstract
   void resetConfiguration();
 
 }

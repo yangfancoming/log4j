@@ -15,8 +15,8 @@ public class App {
 
     public static void main(String[] args) {
         logger.debug("debug");
-        logger.info("info");
-        logger.error("error");
+//        logger.info("info");
+//        logger.error("error");
     }
 
 }

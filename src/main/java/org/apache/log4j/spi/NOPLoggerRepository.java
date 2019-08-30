@@ -16,68 +16,69 @@ import java.util.Vector;
  */
 public final class NOPLoggerRepository implements LoggerRepository {
 
+    @Override
     public void addHierarchyEventListener(final HierarchyEventListener listener) {
     }
-
+    @Override
     public boolean isDisabled(final int level) {
         return true;
     }
 
-
+    @Override
     public void setThreshold(final Level level) {
     }
 
-
+    @Override
     public void setThreshold(final String val) {
     }
 
-
+    @Override
     public void emitNoAppenderWarning(final Category cat) {
     }
 
-
+    @Override
     public Level getThreshold() {
         return Level.OFF;
     }
 
-
+    @Override
     public Logger getLogger(final String name) {
         return new NOPLogger(this, name);
     }
 
-
+    @Override
     public Logger getLogger(final String name, final LoggerFactory factory) {
         return new NOPLogger(this, name);
     }
 
-
+    @Override
     public Logger getRootLogger() {
         return new NOPLogger(this, "root");
     }
 
-
+    @Override
     public Logger exists(final String name) {
         return null;
     }
 
-
+    @Override
     public void shutdown() {
     }
 
-
+    @Override
     public Enumeration getCurrentLoggers() {
         return new Vector().elements();
     }
 
-
+    @Override
     public Enumeration getCurrentCategories() {
         return getCurrentLoggers();
     }
 
-
+    @Override
     public  void fireAddAppenderEvent(Category logger, Appender appender) {
     }
-
+    @Override
     public void resetConfiguration() {
     }
 }

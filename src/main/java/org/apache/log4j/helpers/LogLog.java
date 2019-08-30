@@ -28,7 +28,6 @@ public class LogLog {
      <p>Note that the search for all option names is case sensitive.  */
     public static final String DEBUG_KEY="log4j.debug";
 
-
     /**
      Defining this value makes log4j components print log4j-internal
      debug statements to <code>System.out</code>.

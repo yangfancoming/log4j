@@ -28,24 +28,18 @@ import org.apache.log4j.spi.ThrowableRendererSupport;
 import org.apache.log4j.spi.ThrowableRenderer;
 
 /**
- This class is specialized in retrieving loggers by name and also
- maintaining the logger hierarchy.
+ This class is specialized in retrieving loggers by name and also  maintaining the logger hierarchy.
 
- <p><em>The casual user does not have to deal with this class
- directly.</em>
+ <p><em>The casual user does not have to deal with this class directly.</em>
 
- <p>The structure of the logger hierarchy is maintained by the
- {@link #getLogger} method. The hierarchy is such that children link
- to their parent but parents do not have any pointers to their
- children. Moreover, loggers can be instantiated in any order, in
- particular descendant before ancestor.
+ <p>The structure of the logger hierarchy is maintained by the {@link #getLogger} method.
+ The hierarchy is such that children link to their parent but parents do not have any pointers to their children.
+ Moreover, loggers can be instantiated in any order, in  particular descendant before ancestor.
 
  <p>In case a descendant is created before a particular ancestor,
  then it creates a provision node for the ancestor and adds itself
  to the provision node. Other descendants of the same ancestor add
  themselves to the previously created provision node.
-
- @author Ceki G&uuml;lc&uuml;
 
  */
 public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRendererSupport {
@@ -243,33 +237,47 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
 
      @param name The name of the logger to retrieve.
      @param factory The factory that will make the new logger instance.
-
+     传入Logger名字，获取真对该名字唯一的一个Logger，只会在第一次创建，第二次是直接返回第一次创建的Logger对象
      */
     @Override
     public
     Logger getLogger(String name, LoggerFactory factory) {
+        //CategoryKey是一个对String的包装类，这里传入了name=com.log4jtest.LoggerTest
         //System.out.println("getInstance("+name+") called.");
         CategoryKey key = new CategoryKey(name);
-        // Synchronize to prevent write conflicts. Read conflicts (in
-        // getChainedLevel method) are possible only if variable
-        // assignments are non-atomic.
+        // Synchronize to prevent write conflicts. Read conflicts (in getChainedLevel method) are possible only if variable assignments are non-atomic.
+        //Logger只会创建一次，创建完毕立即放入类型为Hashtable的变量ht中存储，后续直接取出返回
         Logger logger;
-
+        //这里防止多线程重复创建，先对类型为Hashtable的变量ht上锁，避免多线程相互竞争
         synchronized(ht) {
+            //从类型为Hashtable的变量ht中查找之前是否已经创建过该Logger
             Object o = ht.get(key);
+            //如果从类型为Hashtable的变量ht中找不到名字为com.log4jtest.LoggerTest的Logger，这里会执行
             if(o == null) {
+                //调用工厂类DefaultCategoryFactory创建一个全新的Logger对象
                 logger = factory.makeNewLoggerInstance(name);
+                //设置新建的Logger对象的parent属性指向log4j-1.2.17名字为root的全局根节点RootLogger
                 logger.setHierarchy(this);
+                //创建完毕立即放入类型为Hashtable的变量ht中存储，后续直接取出返回
                 ht.put(key, logger);
+                //更新刚才的名字com.log4jtest.LoggerTest的Logger对应的包名，往类型为Hashtable的变量ht中丢入如下信息
+                //com.log4jtest.LoggerTest  -->  Logger[name=com.log4jtest.LoggerTest]
+                //com.log4jtest                  -->  ProvisionNode{Logger[name=com.log4jtest.LoggerTest]}
+                //com                               -->  ProvisionNode{Logger[name=com.log4jtest.LoggerTest]}
                 updateParents(logger);
                 return logger;
             } else if(o instanceof Logger) {
+                //如果从类型为Hashtable的变量ht中能找到对应名字的Logger，这里会执行，直接返回该Logge
                 return (Logger) o;
             } else if (o instanceof ProvisionNode) {
                 //System.out.println("("+name+") ht.get(this) returned ProvisionNode");
+                //如果从类型为Hashtable的变量ht中能找到对应名字ProvisionNode
+                //说明之前是子类里创建了Logger，包名的父包名被指向了ProvisionNode，那么这里就创建一个新的Logger，然后把类型为Hashtable的变量ht的记录更新掉
                 logger = factory.makeNewLoggerInstance(name);
+                //设置新建的Logger对象的parent属性指向log4j-1.2.17名字为root的全局根节点RootLogger
                 logger.setHierarchy(this);
                 ht.put(key, logger);
+                //说明之前是子类里创建了Logger，包名的父包名被指向了ProvisionNode，那么这里就创建一个新的Logger，然后把类型为Hashtable的变量ht的记录更新掉
                 updateChildren((ProvisionNode) o, logger);
                 updateParents(logger);
                 return logger;

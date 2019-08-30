@@ -16,12 +16,13 @@ public class ReloadingPropertyConfigurator implements Configurator {
     public ReloadingPropertyConfigurator() {
     }
 
-   /**
-    * @since 1.2.17
-    */
+    /**
+     * @since 1.2.17
+     */
+    @Override
     public void doConfigure(InputStream inputStream, LoggerRepository repository) {
     }
-
+    @Override
     public void doConfigure(URL url, LoggerRepository repository) {
     }
 

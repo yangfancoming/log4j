@@ -27,168 +27,168 @@ public final class NOPLogger extends Logger {
         this.parent = this;
     }
 
-    /** {@inheritDoc} */
+    @Override
+
     public void addAppender(final Appender newAppender) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void assertLog(final boolean assertion, final String msg) {
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void callAppenders(final LoggingEvent event) {
     }
 
-    /** {@inheritDoc} */
     void closeNestedAppenders() {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void debug(final Object message) {
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void debug(final Object message, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final Object message) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final Object message, final Throwable t) {
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void fatal(final Object message) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void fatal(final Object message, final Throwable t) {
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public Enumeration getAllAppenders() {
-      return new Vector().elements();
+        return new Vector().elements();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Appender getAppender(final String name) {
-       return null;
+        return null;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Level getEffectiveLevel() {
-      return Level.OFF;
+        return Level.OFF;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Priority getChainedPriority() {
-      return getEffectiveLevel();
+        return getEffectiveLevel();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public ResourceBundle getResourceBundle() {
-      return null;
+        return null;
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void info(final Object message) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void info(final Object message, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isAttached(Appender appender) {
-      return false;
+        return false;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isDebugEnabled() {
-      return false;
+        return false;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isEnabledFor(final Priority level) {
-      return false;
+        return false;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isInfoEnabled() {
-      return false;
+        return false;
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void l7dlog(final Priority priority, final String key, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void l7dlog(final Priority priority, final String key,  final Object[] params, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void log(final Priority priority, final Object message, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void log(final Priority priority, final Object message) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void log(final String callerFQCN, final Priority level, final Object message, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void removeAllAppenders() {
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void removeAppender(Appender appender) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void removeAppender(final String name) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setLevel(final Level level) {
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void setPriority(final Priority priority) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setResourceBundle(final ResourceBundle bundle) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void warn(final Object message) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void warn(final Object message, final Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void trace(Object message) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void trace(Object message, Throwable t) {
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isTraceEnabled() {
         return false;
     }

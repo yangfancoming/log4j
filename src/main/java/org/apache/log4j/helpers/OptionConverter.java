@@ -96,9 +96,7 @@ public class OptionConverter {
 
     public
     static
-    Object instantiateByKey(Properties props, String key, Class superClass,
-                            Object defaultValue) {
-
+    Object instantiateByKey(Properties props, String key, Class superClass,  Object defaultValue) {
         // Get the value of the property in string form
         String className = findAndSubst(key, props);
         if(className == null) {
@@ -106,8 +104,7 @@ public class OptionConverter {
             return defaultValue;
         }
         // Trim className to avoid trailing spaces that cause problems.
-        return OptionConverter.instantiateByClassName(className.trim(), superClass,
-                defaultValue);
+        return OptionConverter.instantiateByClassName(className.trim(), superClass, defaultValue);
     }
 
     /**
@@ -117,9 +114,9 @@ public class OptionConverter {
      returned.
 
      <p>Case of value is unimportant.  */
-    public
-    static
-    boolean toBoolean(String value, boolean dEfault) {
+
+
+    public static boolean toBoolean(String value, boolean dEfault) {
         if(value == null)
             return dEfault;
         String trimmedVal = value.trim();
@@ -171,9 +168,7 @@ public class OptionConverter {
     Level toLevel(String value, Level defaultValue) {
         if(value == null)
             return defaultValue;
-
         value = value.trim();
-
         int hashIndex = value.indexOf('#');
         if (hashIndex == -1) {
             if("NULL".equalsIgnoreCase(value)) {
@@ -183,17 +178,13 @@ public class OptionConverter {
                 return Level.toLevel(value, defaultValue);
             }
         }
-
         Level result = defaultValue;
-
         String clazz = value.substring(hashIndex+1);
         String levelName = value.substring(0, hashIndex);
-
         // This is degenerate case but you never know.
         if("NULL".equalsIgnoreCase(levelName)) {
             return null;
         }
-
         LogLog.debug("toLevel" + ":class=[" + clazz + "]" + ":pri=[" + levelName + "]");
 
         try {

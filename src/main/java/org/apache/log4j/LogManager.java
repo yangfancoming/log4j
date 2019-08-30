@@ -57,8 +57,8 @@ public class LogManager {
      */
     public static final String DEFAULT_INIT_OVERRIDE_KEY =  "log4j.defaultInitOverride";
 
-
     static private Object guard = null;
+
     static private RepositorySelector repositorySelector;
 
     static {
@@ -168,9 +168,8 @@ public class LogManager {
         return msg.indexOf("org.apache.catalina.loader.WebappClassLoader.stop") != -1;
     }
 
-    static
-    public
-    LoggerRepository getLoggerRepository() {
+
+    public static LoggerRepository getLoggerRepository() {
         if (repositorySelector == null) {
             repositorySelector = new DefaultRepositorySelector(new NOPLoggerRepository());
             guard = null;
@@ -188,29 +187,26 @@ public class LogManager {
     /**
      Retrieve the appropriate root logger.
      */
-    public
-    static
-    Logger getRootLogger() {
+    public static Logger getRootLogger() {
         // Delegate the actual manufacturing of the logger to the logger repository.
         return getLoggerRepository().getRootLogger();
     }
 
     /**
      Retrieve the appropriate {@link Logger} instance.
+     获取最适当的实例
+     repositorySelector在LogManager的静态代码块已经创建，默认实现为DefaultRepositorySelector
      */
-    public
-    static
-    Logger getLogger(final String name) {
+    public static Logger getLogger(final String name) {
         // Delegate the actual manufacturing of the logger to the logger repository.
-        return getLoggerRepository().getLogger(name);
+        LoggerRepository loggerRepository = getLoggerRepository();
+        return loggerRepository.getLogger(name);
     }
 
     /**
      Retrieve the appropriate {@link Logger} instance.
      */
-    public
-    static
-    Logger getLogger(final Class clazz) {
+    public static Logger getLogger(final Class clazz) {
         // Delegate the actual manufacturing of the logger to the logger repository.
         return getLoggerRepository().getLogger(clazz.getName());
     }
@@ -219,34 +215,24 @@ public class LogManager {
     /**
      Retrieve the appropriate {@link Logger} instance.
      */
-    public
-    static
-    Logger getLogger(final String name, final LoggerFactory factory) {
+    public static  Logger getLogger(final String name, final LoggerFactory factory) {
         // Delegate the actual manufacturing of the logger to the logger repository.
         return getLoggerRepository().getLogger(name, factory);
     }
 
-    public
-    static
-    Logger exists(final String name) {
+    public static Logger exists(final String name) {
         return getLoggerRepository().exists(name);
     }
 
-    public
-    static
-    Enumeration getCurrentLoggers() {
+    public static Enumeration getCurrentLoggers() {
         return getLoggerRepository().getCurrentLoggers();
     }
 
-    public
-    static
-    void shutdown() {
+    public static void shutdown() {
         getLoggerRepository().shutdown();
     }
 
-    public
-    static
-    void resetConfiguration() {
+    public static void resetConfiguration() {
         getLoggerRepository().resetConfiguration();
     }
 }

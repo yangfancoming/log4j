@@ -76,6 +76,7 @@ public class PropertyConfigurator implements Configurator {
 
     /**
      Used internally to keep track of configured appenders.
+     内部用于跟踪已配置的附加程序
      */
     protected Hashtable registry = new Hashtable(11);
     private LoggerRepository repository;
@@ -607,13 +608,13 @@ public class PropertyConfigurator implements Configurator {
 
     void configureRootCategory(Properties props, LoggerRepository hierarchy) {
         // 从配置文件log4j.properties中读取log4j.rootLogger配置的值
-        String effectiveFrefix = ROOT_LOGGER_PREFIX;
+        String effectivePrefix = ROOT_LOGGER_PREFIX;
         String value = OptionConverter.findAndSubst(ROOT_LOGGER_PREFIX, props);
 
         if(value == null) {
             // 如果配置文件log4j.properties中log4j.rootLogger找不到，从配置文件log4j.properties中读取log4j.rootCategory配置的值
             value = OptionConverter.findAndSubst(ROOT_CATEGORY_PREFIX, props);
-            effectiveFrefix = ROOT_CATEGORY_PREFIX;
+            effectivePrefix = ROOT_CATEGORY_PREFIX;
         }
 
         if(value == null)
@@ -625,7 +626,7 @@ public class PropertyConfigurator implements Configurator {
             Logger root = hierarchy.getRootLogger();
             synchronized(root) {
                 // 开始解析根节点Logger父类Category
-                parseCategory(props, root, effectiveFrefix, INTERNAL_ROOT_NAME, value);
+                parseCategory(props, root, effectivePrefix, INTERNAL_ROOT_NAME, value);
             }
         }
     }
@@ -697,26 +698,20 @@ public class PropertyConfigurator implements Configurator {
      This method must work for the root category as well.
      */
     void parseCategory(Properties props, Logger logger, String optionKey, String loggerName, String value) {
-
         LogLog.debug("Parsing for [" +loggerName +"] with value=[" + value+"].");
         // We must skip over ',' but not white space
         StringTokenizer st = new StringTokenizer(value, ",");
-
         // If value is not in the form ", appender.." or "", then we should set
         // the level of the loggeregory.
-
         if(!(value.startsWith(",") || value.equals(""))) {
-
             // just to be on the safe side...
             if(!st.hasMoreTokens())
                 return;
-
             String levelStr = st.nextToken();
             LogLog.debug("Level token is [" + levelStr + "].");
 
-            // If the level value is inherited, set category level value to
-            // null. We also check that the user has not specified inherited for the
-            // root category.
+            // If the level value is inherited, set category level value to null.
+            // We also check that the user has not specified inherited for the root category.
             if(INHERITED.equalsIgnoreCase(levelStr) ||  NULL.equalsIgnoreCase(levelStr)) {
                 if(loggerName.equals(INTERNAL_ROOT_NAME)) {
                     LogLog.warn("The root logger cannot be set to null.");
@@ -755,9 +750,7 @@ public class PropertyConfigurator implements Configurator {
         // Appender was not previously initialized.
         String prefix = APPENDER_PREFIX + appenderName;
         String layoutPrefix = prefix + ".layout";
-
         appender = (Appender) OptionConverter.instantiateByKey(props, prefix, org.apache.log4j.Appender.class,null);
-
         if(appender == null) {
             LogLog.error("Could not instantiate appender named \"" + appenderName+"\".");
             return null;

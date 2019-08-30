@@ -9,8 +9,8 @@ public class DefaultRepositorySelector implements RepositorySelector {
 
     final LoggerRepository repository;
 
-    public
-    DefaultRepositorySelector(LoggerRepository repository) {
+
+    public DefaultRepositorySelector(LoggerRepository repository) {
         this.repository = repository;
     }
 

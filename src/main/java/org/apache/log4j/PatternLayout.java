@@ -476,6 +476,7 @@ public class PatternLayout extends Layout {
 
   /**
      Produces a formatted string as specified by the conversion pattern.
+   生成转换模式指定的格式化字符串
   */
   public String format(LoggingEvent event) {
     // Reset working stringbuffer
@@ -484,9 +485,7 @@ public class PatternLayout extends Layout {
     } else {
       sbuf.setLength(0);
     }
-
     PatternConverter c = head;
-
     while(c != null) {
       c.format(sbuf, event);
       c = c.next;

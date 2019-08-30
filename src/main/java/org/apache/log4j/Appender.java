@@ -7,16 +7,14 @@ import org.apache.log4j.spi.ErrorHandler;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
-   Implement this interface for your own strategies for outputting log
-   statements.
-
-   @author Ceki G&uuml;lc&uuml; 
+   Implement this interface for your own strategies for outputting log  statements.
+  Appender抽象成了接口，然后主要的实现是WriterAppender，常用的ConsoleAppender，FileAppender都继承了该类。
+  实际编码中经常会遇到DailyRollingFileAppender，RollingFileAppender都继承于FileAppender
 */
 public interface Appender {
 
   /**
      Add a filter to the end of the filter list.
-
      @since 0.9.0
    */
   void addFilter(Filter newFilter);
@@ -24,30 +22,23 @@ public interface Appender {
   /**
      Returns the head Filter. The Filters are organized in a linked list
      and so all Filters on this Appender are available through the result.
-     
      @return the head Filter or null, if no Filters are present
      @since 1.1
   */
-  public
   Filter getFilter();
 
   /**
      Clear the list of filters by removing all the filters in it.
-     
      @since 0.9.0
    */
-  public
   void clearFilters();
 
   /**
      Release any resources allocated within the appender such as file
      handles, network connections, etc.
-
      <p>It is a programming error to append to a closed appender.
-
      @since 0.8.4
   */
-  public
   void close();
   
   /**
@@ -61,7 +52,6 @@ public interface Appender {
   /**
      Get the name of this appender.
      @return name, may be null.*/
-  public
   String getName();
 
 
@@ -70,41 +60,31 @@ public interface Appender {
 
      @since 0.9.0
    */
-  public
   void setErrorHandler(ErrorHandler errorHandler);
 
   /**
      Returns the {@link ErrorHandler} for this appender.
-
      @since 1.1
    */
-  public
   ErrorHandler getErrorHandler();
 
   /**
      Set the {@link Layout} for this appender.
-
      @since 0.8.1
   */
-  public
   void setLayout(Layout layout);
 
   /**
      Returns this appenders layout.
-     
      @since 1.1
   */
-  public
   Layout getLayout();
   
 
   /**
-     Set the name of this appender. The name is used by other
-     components to identify this appender.
-
+     Set the name of this appender. The name is used by other components to identify this appender.
      @since 0.8.1
   */
-  public
   void setName(String name);
 
   /**
@@ -122,6 +102,5 @@ public interface Appender {
      the appender should return <code>true</code>.
      
      @since 0.8.4 */
-  public
   boolean requiresLayout();
 }
