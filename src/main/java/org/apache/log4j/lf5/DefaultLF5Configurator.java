@@ -11,16 +11,12 @@ import org.apache.log4j.spi.Configurator;
 import org.apache.log4j.spi.LoggerRepository;
 
 /**
- * The <code>DefaultLF5Configurator</code> provides a default
- * configuration for the <code>LF5Appender</code>.
+ * The DefaultLF5Configuratorprovides a default configuration for the LF5Appender.
+ * 
  *
- * Note: The preferred method for configuring a <code>LF5Appender</code>
- * is to use the <code>LF5Manager</code> class. This class ensures
- * that configuration does not occur multiple times, and improves system
- * performance. Reconfiguring the monitor multiple times can result in
- * unexpected behavior.
- *
- * @author Brent Sprecher
+ * Note: The preferred method for configuring a LF5Appender is to use the LF5Managerclass.
+ * This class ensures that configuration does not occur multiple times, and improves system performance.
+ * Reconfiguring the monitor multiple times can result in unexpected behavior.
  */
 
 // Contributed by ThoughtWorks Inc.
@@ -42,8 +38,8 @@ public class DefaultLF5Configurator implements Configurator {
   // Constructors:
   //--------------------------------------------------------------------------
   /**
-   * This class should never be instantiated! It implements the <code>
-   * Configurator</code>
+   * This class should never be instantiated! It implements the 
+   * Configurator
    * interface, but does not provide the same functionality as full
    * configurator class.
    */
@@ -55,30 +51,25 @@ public class DefaultLF5Configurator implements Configurator {
   // Public Methods:
   //--------------------------------------------------------------------------
   /**
-   * This method configures the <code>LF5Appender</code> using a
+   * This method configures the LF5Appenderusing a
    * default configuration file. The default configuration file is
    * <bold>defaultconfig.properties</bold>.
    * @throws java.io.IOException
    */
   public static void configure() throws IOException {
-    String resource =
-        "/org/apache/log4j/lf5/config/defaultconfig.properties";
-    URL configFileResource =
-        DefaultLF5Configurator.class.getResource(resource);
-
+    String resource = "/org/apache/log4j/lf5/config/defaultconfig.properties";
+    URL configFileResource = DefaultLF5Configurator.class.getResource(resource);
     if (configFileResource != null) {
       PropertyConfigurator.configure(configFileResource);
     } else {
-      throw new IOException("Error: Unable to open the resource" +
-          resource);
+      throw new IOException("Error: Unable to open the resource" +  resource);
     }
 
   }
 
   /**
-   * This is a dummy method that will throw an
-   * <code>IllegalStateException</code> if used.
-   * 
+   * This is a dummy method that will throw an IllegalStateExceptionif used.
+   * 这是一个虚拟方法，如果使用它，将引发IllegalstateException
    * @since 1.2.17
    */
   public void doConfigure(InputStream inputStream, LoggerRepository repository) {
@@ -86,8 +77,8 @@ public class DefaultLF5Configurator implements Configurator {
   }
 
   /**
-   * This is a dummy method that will throw an
-   * <code>IllegalStateException</code> if used.
+   * This is a dummy method that will throw an IllegalStateExceptionif used.
+   * 这是一个虚拟方法，如果使用它，将引发IllegalstateException
    */
   public void doConfigure(URL configURL, LoggerRepository repository) {
     throw new IllegalStateException("This class should NOT be instantiated!");

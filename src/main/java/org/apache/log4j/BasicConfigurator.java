@@ -29,8 +29,7 @@ public class BasicConfigurator {
   public
   void configure() {
     Logger root = Logger.getRootLogger();
-    root.addAppender(new ConsoleAppender(
-           new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+    root.addAppender(new ConsoleAppender( new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
   }
 
   /**

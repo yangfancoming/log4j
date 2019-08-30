@@ -180,7 +180,7 @@ public class OptionConverter {
                 return null;
             } else {
                 // no class name specified : use standard Level class
-                return(Level) Level.toLevel(value, defaultValue);
+                return Level.toLevel(value, defaultValue);
             }
         }
 
@@ -194,19 +194,14 @@ public class OptionConverter {
             return null;
         }
 
-        LogLog.debug("toLevel" + ":class=[" + clazz + "]"
-                + ":pri=[" + levelName + "]");
+        LogLog.debug("toLevel" + ":class=[" + clazz + "]" + ":pri=[" + levelName + "]");
 
         try {
             Class customLevel = Loader.loadClass(clazz);
-
             // get a ref to the specified class' static method
             // toLevel(String, org.apache.log4j.Level)
-            Class[] paramTypes = new Class[] { String.class,
-                    org.apache.log4j.Level.class
-            };
-            java.lang.reflect.Method toLevelMethod =
-                    customLevel.getMethod("toLevel", paramTypes);
+            Class[] paramTypes = new Class[] { String.class, org.apache.log4j.Level.class  };
+            java.lang.reflect.Method toLevelMethod = customLevel.getMethod("toLevel", paramTypes);
 
             // now call the toLevel method, passing level string + default
             Object[] params = new Object[] {levelName, defaultValue};
@@ -216,24 +211,19 @@ public class OptionConverter {
         } catch(ClassNotFoundException e) {
             LogLog.warn("custom level class [" + clazz + "] not found.");
         } catch(NoSuchMethodException e) {
-            LogLog.warn("custom level class [" + clazz + "]"
-                    + " does not have a class function toLevel(String, Level)", e);
+            LogLog.warn("custom level class [" + clazz + "]"+ " does not have a class function toLevel(String, Level)", e);
         } catch(java.lang.reflect.InvocationTargetException e) {
-            if (e.getTargetException() instanceof InterruptedException
-                    || e.getTargetException() instanceof InterruptedIOException) {
+            if (e.getTargetException() instanceof InterruptedException || e.getTargetException() instanceof InterruptedIOException) {
                 Thread.currentThread().interrupt();
             }
-            LogLog.warn("custom level class [" + clazz + "]"
-                    + " could not be instantiated", e);
+            LogLog.warn("custom level class [" + clazz + "]" + " could not be instantiated", e);
+
         } catch(ClassCastException e) {
-            LogLog.warn("class [" + clazz
-                    + "] is not a subclass of org.apache.log4j.Level", e);
+            LogLog.warn("class [" + clazz + "] is not a subclass of org.apache.log4j.Level", e);
         } catch(IllegalAccessException e) {
-            LogLog.warn("class ["+clazz+
-                    "] cannot be instantiated due to access restrictions", e);
+            LogLog.warn("class ["+clazz+ "] cannot be instantiated due to access restrictions", e);
         } catch(RuntimeException e) {
-            LogLog.warn("class ["+clazz+"], level ["+levelName+
-                    "] conversion failed.", e);
+            LogLog.warn("class ["+clazz+"], level ["+levelName+ "] conversion failed.", e);
         }
         return result;
     }
@@ -305,18 +295,15 @@ public class OptionConverter {
      */
     public
     static
-    Object instantiateByClassName(String className, Class superClass,
-                                  Object defaultValue) {
+    Object instantiateByClassName(String className, Class superClass, Object defaultValue) {
         if(className != null) {
             try {
                 Class classObj = Loader.loadClass(className);
                 if(!superClass.isAssignableFrom(classObj)) {
-                    LogLog.error("A \""+className+"\" object is not assignable to a \""+
-                            superClass.getName() + "\" variable.");
+                    LogLog.error("A \""+className+"\" object is not assignable to a \"" + superClass.getName() + "\" variable.");
                     LogLog.error("The class \""+ superClass.getName()+"\" was loaded by ");
                     LogLog.error("["+superClass.getClassLoader()+"] whereas object of type ");
-                    LogLog.error("\"" +classObj.getName()+"\" was loaded by ["
-                            +classObj.getClassLoader()+"].");
+                    LogLog.error("\"" +classObj.getName()+"\" was loaded by [" +classObj.getClassLoader()+ "].");
                     return defaultValue;
                 }
                 return classObj.newInstance();
@@ -371,14 +358,10 @@ public class OptionConverter {
 
      */
     public static
-    String substVars(String val, Properties props) throws
-            IllegalArgumentException {
-
+    String substVars(String val, Properties props) throws  IllegalArgumentException {
         StringBuffer sbuf = new StringBuffer();
-
         int i = 0;
         int j, k;
-
         while(true) {
             j=val.indexOf(DELIM_START, i);
             if(j == -1) {
@@ -393,9 +376,7 @@ public class OptionConverter {
                 sbuf.append(val.substring(i, j));
                 k = val.indexOf(DELIM_STOP, j);
                 if(k == -1) {
-                    throw new IllegalArgumentException('"'+val+
-                            "\" has no closing brace. Opening brace at position " + j
-                            + '.');
+                    throw new IllegalArgumentException('"'+val+ "\" has no closing brace. Opening brace at position " + j + '.');
                 } else {
                     j += DELIM_START_LEN;
                     String key = val.substring(j, k);
@@ -445,13 +426,10 @@ public class OptionConverter {
     static
     public
     void selectAndConfigure(InputStream inputStream, String clazz, LoggerRepository hierarchy) {
-        Configurator configurator = null;
-
+        Configurator configurator;
         if(clazz != null) {
             LogLog.debug("Preferred configurator class: " + clazz);
-            configurator = (Configurator) instantiateByClassName(clazz,
-                    Configurator.class,
-                    null);
+            configurator = (Configurator) instantiateByClassName(clazz,Configurator.class,null);
             if(configurator == null) {
                 LogLog.error("Could not instantiate configurator ["+clazz+"].");
                 return;
@@ -459,7 +437,6 @@ public class OptionConverter {
         } else {
             configurator = new PropertyConfigurator();
         }
-
         configurator.doConfigure(inputStream, hierarchy);
     }
 

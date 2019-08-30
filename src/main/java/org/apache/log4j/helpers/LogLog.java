@@ -14,9 +14,8 @@ package org.apache.log4j.helpers;
  where as internal error messages are sent to
  <code>System.err</code>. All internal messages are prepended with
  the string "log4j: ".
-
  @since 0.8.2
- @author Ceki G&uuml;lc&uuml;
+
  */
 public class LogLog {
 

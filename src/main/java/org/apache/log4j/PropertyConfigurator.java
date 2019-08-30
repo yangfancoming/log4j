@@ -37,8 +37,7 @@ import org.apache.log4j.spi.ErrorHandler;
 
 /**
  Allows the configuration of log4j from an external file.  See
- <b>{@link #doConfigure(String, LoggerRepository)}</b> for the
- expected format.
+ <b>{@link #doConfigure(String, LoggerRepository)}</b> for the  expected format.
 
  <p>It is sometimes useful to see how log4j is reading configuration
  files. You can enable log4j internal logging by defining the
@@ -60,20 +59,18 @@ AsyncAppender}, etc.
  <p>All option <em>values</em> admit variable substitution. The
  syntax of variable substitution is similar to that of Unix
  shells. The string between an opening <b>&quot;${&quot;</b> and
- closing <b>&quot;}&quot;</b> is interpreted as a key. The value of
- the substituted variable can be defined as a system property or in
- the configuration file itself. The value of the key is first
- searched in the system properties, and if not found there, it is
- then searched in the configuration file being parsed.  The
- corresponding value replaces the ${variableName} sequence. For
- example, if <code>java.home</code> system property is set to
+ closing <b>&quot;}&quot;</b> is interpreted as a key.
+ The value of the substituted variable can be defined as a system property or in  the configuration file itself.
+
+ The value of the key is first searched in the system properties,
+ and if not found there, it is then searched in the configuration file being parsed.
+ The corresponding value replaces the ${variableName} sequence.
+ For example, if <code>java.home</code> system property is set to
  <code>/home/xyz</code>, then every occurrence of the sequence
  <code>${java.home}</code> will be interpreted as
  <code>/home/xyz</code>.
 
 
- @author Ceki G&uuml;lc&uuml;
- @author Anders Kristensen
  @since 0.8.1 */
 public class PropertyConfigurator implements Configurator {
 
@@ -456,15 +453,14 @@ public class PropertyConfigurator implements Configurator {
         pdog.start();
     }
 
-
     /**
      Read configuration options from <code>properties</code>.
-
      See {@link #doConfigure(String, LoggerRepository)} for the expected format.
      */
-    public
-    void doConfigure(Properties properties, LoggerRepository hierarchy) {
+
+    public void doConfigure(Properties properties, LoggerRepository hierarchy) {
         repository = hierarchy;
+        // 如果log4j.properties中配置了log4j.debug=true或者log4j.configDebug=true，其值非空且非false就置默认值true开启log4j-1.2.17自己的日志打印，否则不开启
         String value = properties.getProperty(LogLog.DEBUG_KEY);
         if(value == null) {
             value = properties.getProperty("log4j.configDebug");
@@ -476,25 +472,25 @@ public class PropertyConfigurator implements Configurator {
             LogLog.setInternalDebugging(OptionConverter.toBoolean(value, true));
         }
 
-        //
-        //   if log4j.reset=true then
-        //        reset hierarchy
+        // 如果log4j.properties中配置了log4j.reset=true，其值非空且为true就重置Hierarchy
         String reset = properties.getProperty(RESET_KEY);
         if (reset != null && OptionConverter.toBoolean(reset, false)) {
             hierarchy.resetConfiguration();
         }
 
         String thresholdStr = OptionConverter.findAndSubst(THRESHOLD_PREFIX, properties);
-
+        // 如果log4j.properties中配置了log4j.threshold，其值非空且为值(TRACE、DEBUG、INFO、WARN、ERROR、FATAL、OFF、ALL)之一，就设置Hierarchy的thresholdInt和Threshold，非空且不是上述值时候默认设置为ALL
         if(thresholdStr != null) {
             hierarchy.setThreshold(OptionConverter.toLevel(thresholdStr, Level.ALL));
             LogLog.debug("Hierarchy threshold set to ["+hierarchy.getThreshold()+"].");
         }
-
+        // 开始解析根节点RootLogger
         configureRootCategory(properties, hierarchy);
+        // 读取log4j.properties中log4j.loggerFactory配置的值，默认的Logger工厂类为DefaultCategoryFactory，这里会进行覆盖
         configureLoggerFactory(properties);
+        // 开始解析非根节点Logger，默认设置非根节点Logger的父节点为RootLogger，从log4j.properties读取log4j.additivity.Appendername值设置Logger的日志传播属性additive
         parseCatsAndRenderers(properties, hierarchy);
-
+        // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
         LogLog.debug("Finished configuring.");
         // We don't want to hold references to appenders preventing their
         // garbage collection.
@@ -506,6 +502,7 @@ public class PropertyConfigurator implements Configurator {
      *
      * @since 1.2.17
      */
+    @Override
     public void doConfigure(InputStream inputStream, LoggerRepository hierarchy) {
         Properties props = new Properties();
         try {
@@ -526,15 +523,18 @@ public class PropertyConfigurator implements Configurator {
      */
     public
     void doConfigure(java.net.URL configURL, LoggerRepository hierarchy) {
+        // 创建Properties对象，用于加载log4j.properties
         Properties props = new Properties();
+        // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
         LogLog.debug("Reading configuration from URL " + configURL);
         InputStream istream = null;
         URLConnection uConn;
         try {
+            // 打开文件log4j.properties，创建文件流istream，然后用Properties进行加载
             uConn = configURL.openConnection();
             uConn.setUseCaches(false);
             istream = uConn.getInputStream();
-            props.load(istream);
+            props.load(istream); // 解析 properties  配置文件
         }
         catch (Exception e) {
             if (e instanceof InterruptedIOException || e instanceof InterruptedException) {
@@ -555,6 +555,7 @@ public class PropertyConfigurator implements Configurator {
                 }
             }
         }
+        //  正确解析完成后
         doConfigure(props, hierarchy);
     }
 
@@ -570,18 +571,13 @@ public class PropertyConfigurator implements Configurator {
      exists, an attempt is made to create an instance using the default
      constructor.  This instance is used for subsequent Category creations
      within this configurator.
-
      @see #parseCatsAndRenderers
      */
     protected void configureLoggerFactory(Properties props) {
-        String factoryClassName = OptionConverter.findAndSubst(LOGGER_FACTORY_KEY,
-                props);
+        String factoryClassName = OptionConverter.findAndSubst(LOGGER_FACTORY_KEY, props);
         if(factoryClassName != null) {
             LogLog.debug("Setting category factory to ["+factoryClassName+"].");
-            loggerFactory = (LoggerFactory)
-                    OptionConverter.instantiateByClassName(factoryClassName,
-                            LoggerFactory.class,
-                            loggerFactory);
+            loggerFactory = (LoggerFactory)  OptionConverter.instantiateByClassName(factoryClassName,LoggerFactory.class, loggerFactory);
             PropertySetter.setProperties(loggerFactory, props, FACTORY_PREFIX + ".");
         }
     }
@@ -610,19 +606,25 @@ public class PropertyConfigurator implements Configurator {
 
 
     void configureRootCategory(Properties props, LoggerRepository hierarchy) {
+        // 从配置文件log4j.properties中读取log4j.rootLogger配置的值
         String effectiveFrefix = ROOT_LOGGER_PREFIX;
         String value = OptionConverter.findAndSubst(ROOT_LOGGER_PREFIX, props);
 
         if(value == null) {
+            // 如果配置文件log4j.properties中log4j.rootLogger找不到，从配置文件log4j.properties中读取log4j.rootCategory配置的值
             value = OptionConverter.findAndSubst(ROOT_CATEGORY_PREFIX, props);
             effectiveFrefix = ROOT_CATEGORY_PREFIX;
         }
 
         if(value == null)
+        // 如果配置文件log4j.properties中log4j.rootLogger找不到并且log4j.rootCategory配置找不到
+        // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
             LogLog.debug("Could not find root logger information. Is this OK?");
         else {
+            // 从Hierarchy中取得默认的实现RootLogger
             Logger root = hierarchy.getRootLogger();
             synchronized(root) {
+                // 开始解析根节点Logger父类Category
                 parseCategory(props, root, effectiveFrefix, INTERNAL_ROOT_NAME, value);
             }
         }
@@ -631,6 +633,10 @@ public class PropertyConfigurator implements Configurator {
 
     /**
      Parse non-root elements, such non-root categories and renderers.
+     */
+    /**
+     * 开始解析非根节点Logger，默认设置非根节点Logger的父节点为RootLogger，
+     * 从log4j.properties读取log4j.additivity.Appendername值设置Logger的日志传播属性additive
      */
     protected
     void parseCatsAndRenderers(Properties props, LoggerRepository hierarchy) {
@@ -647,31 +653,26 @@ public class PropertyConfigurator implements Configurator {
                 String value =  OptionConverter.findAndSubst(key, props);
                 Logger logger = hierarchy.getLogger(loggerName, loggerFactory);
                 synchronized(logger) {
+                    // 开始解析根节点Logger父类Category
                     parseCategory(props, logger, key, loggerName, value);
+                    // 解析logger的父类Category传播属性additive,additive决定着叶子节点的logger是否将日志输出转发给根节点的logger也打印输出一次
                     parseAdditivityForLogger(props, logger, loggerName);
                 }
-            } else if(key.startsWith(RENDERER_PREFIX)) {
+            } else if(key.startsWith(RENDERER_PREFIX)) {// 配置文件中配置以log4j.renderer.打头,这里会执行
                 String renderedClass = key.substring(RENDERER_PREFIX.length());
                 String renderingClass = OptionConverter.findAndSubst(key, props);
                 if(hierarchy instanceof RendererSupport) {
-                    RendererMap.addRenderer((RendererSupport) hierarchy, renderedClass,
-                            renderingClass);
+                    RendererMap.addRenderer((RendererSupport) hierarchy, renderedClass,renderingClass);
                 }
-            } else if (key.equals(THROWABLE_RENDERER_PREFIX)) {
+            } else if (key.equals(THROWABLE_RENDERER_PREFIX)) { // 配置文件中配置以log4j.throwableRenderer打头,这里会执行
                 if (hierarchy instanceof ThrowableRendererSupport) {
-                    ThrowableRenderer tr = (ThrowableRenderer)
-                            OptionConverter.instantiateByKey(props,
-                                    THROWABLE_RENDERER_PREFIX,
-                                    org.apache.log4j.spi.ThrowableRenderer.class,
-                                    null);
+                    ThrowableRenderer tr = (ThrowableRenderer) OptionConverter.instantiateByKey(props,THROWABLE_RENDERER_PREFIX,org.apache.log4j.spi.ThrowableRenderer.class,null);
                     if(tr == null) {
-                        LogLog.error(
-                                "Could not instantiate throwableRenderer.");
+                        LogLog.error("Could not instantiate throwableRenderer.");
                     } else {
                         PropertySetter setter = new PropertySetter(tr);
                         setter.setProperties(props, THROWABLE_RENDERER_PREFIX + ".");
                         ((ThrowableRendererSupport) hierarchy).setThrowableRenderer(tr);
-
                     }
                 }
             }
@@ -681,16 +682,13 @@ public class PropertyConfigurator implements Configurator {
     /**
      Parse the additivity option for a non-root category.
      */
-    void parseAdditivityForLogger(Properties props, Logger cat,
-                                  String loggerName) {
-        String value = OptionConverter.findAndSubst(ADDITIVITY_PREFIX + loggerName,
-                props);
+    void parseAdditivityForLogger(Properties props, Logger cat, String loggerName) {
+        String value = OptionConverter.findAndSubst(ADDITIVITY_PREFIX + loggerName, props);
         LogLog.debug("Handling "+ADDITIVITY_PREFIX + loggerName+"=["+value+"]");
         // touch additivity only if necessary
         if((value != null) && (!value.equals(""))) {
             boolean additivity = OptionConverter.toBoolean(value, true);
-            LogLog.debug("Setting additivity for \""+loggerName+"\" to "+
-                    additivity);
+            LogLog.debug("Setting additivity for \""+loggerName+"\" to "+ additivity);
             cat.setAdditivity(additivity);
         }
     }
@@ -698,8 +696,7 @@ public class PropertyConfigurator implements Configurator {
     /**
      This method must work for the root category as well.
      */
-    void parseCategory(Properties props, Logger logger, String optionKey,
-                       String loggerName, String value) {
+    void parseCategory(Properties props, Logger logger, String optionKey, String loggerName, String value) {
 
         LogLog.debug("Parsing for [" +loggerName +"] with value=[" + value+"].");
         // We must skip over ',' but not white space
@@ -720,15 +717,14 @@ public class PropertyConfigurator implements Configurator {
             // If the level value is inherited, set category level value to
             // null. We also check that the user has not specified inherited for the
             // root category.
-            if(INHERITED.equalsIgnoreCase(levelStr) ||
-                    NULL.equalsIgnoreCase(levelStr)) {
+            if(INHERITED.equalsIgnoreCase(levelStr) ||  NULL.equalsIgnoreCase(levelStr)) {
                 if(loggerName.equals(INTERNAL_ROOT_NAME)) {
                     LogLog.warn("The root logger cannot be set to null.");
                 } else {
                     logger.setLevel(null);
                 }
             } else {
-                logger.setLevel(OptionConverter.toLevel(levelStr, (Level) Level.DEBUG));
+                logger.setLevel(OptionConverter.toLevel(levelStr, Level.DEBUG));
             }
             LogLog.debug("Category " + loggerName + " set to " + logger.getLevel());
         }
@@ -760,22 +756,17 @@ public class PropertyConfigurator implements Configurator {
         String prefix = APPENDER_PREFIX + appenderName;
         String layoutPrefix = prefix + ".layout";
 
-        appender = (Appender) OptionConverter.instantiateByKey(props, prefix,
-                org.apache.log4j.Appender.class,
-                null);
+        appender = (Appender) OptionConverter.instantiateByKey(props, prefix, org.apache.log4j.Appender.class,null);
+
         if(appender == null) {
-            LogLog.error(
-                    "Could not instantiate appender named \"" + appenderName+"\".");
+            LogLog.error("Could not instantiate appender named \"" + appenderName+"\".");
             return null;
         }
         appender.setName(appenderName);
 
         if(appender instanceof OptionHandler) {
             if(appender.requiresLayout()) {
-                Layout layout = (Layout) OptionConverter.instantiateByKey(props,
-                        layoutPrefix,
-                        Layout.class,
-                        null);
+                Layout layout = (Layout) OptionConverter.instantiateByKey(props, layoutPrefix,Layout.class,null);
                 if(layout != null) {
                     appender.setLayout(layout);
                     LogLog.debug("Parsing layout options for \"" + appenderName +"\".");
