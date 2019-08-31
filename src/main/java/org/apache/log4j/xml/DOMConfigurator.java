@@ -722,12 +722,10 @@ public class DOMConfigurator implements Configurator {
     }
 
     /**
-     Configure log4j by reading in a log4j.dtd compliant XML
-     configuration file.
-
+     Configure log4j by reading in a log4j.dtd compliant XML configuration file.
      */
-    public
-    void doConfigure(final InputStream inputStream, LoggerRepository repository) throws FactoryConfigurationError {
+    @Override
+    public void doConfigure(final InputStream inputStream, LoggerRepository repository) throws FactoryConfigurationError {
         ParseAction action = new ParseAction() {
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 InputSource inputSource = new InputSource(inputStream);
@@ -742,12 +740,9 @@ public class DOMConfigurator implements Configurator {
     }
 
     /**
-     Configure log4j by reading in a log4j.dtd compliant XML
-     configuration file.
-
+     Configure log4j by reading in a log4j.dtd compliant XML configuration file.
      */
-    public
-    void doConfigure(final Reader reader, LoggerRepository repository)  throws FactoryConfigurationError {
+    public void doConfigure(final Reader reader, LoggerRepository repository)  throws FactoryConfigurationError {
         ParseAction action = new ParseAction() {
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 InputSource inputSource = new InputSource(reader);
@@ -764,10 +759,8 @@ public class DOMConfigurator implements Configurator {
     /**
      Configure log4j by reading in a log4j.dtd compliant XML
      configuration file.
-
      */
-    protected
-    void doConfigure(final InputSource inputSource, LoggerRepository repository)  throws FactoryConfigurationError {
+    protected void doConfigure(final InputSource inputSource, LoggerRepository repository)  throws FactoryConfigurationError {
         if (inputSource.getSystemId() == null) {
             inputSource.setSystemId("dummy://log4j.dtd");
         }
@@ -955,9 +948,7 @@ public class DOMConfigurator implements Configurator {
         }
     }
 
-
-    protected
-    String subst(final String value) {
+    protected String subst(final String value) {
         return subst(value, props);
     }
 
@@ -1035,7 +1026,6 @@ public class DOMConfigurator implements Configurator {
         }
         return null;
     }
-
 }
 
 
@@ -1048,8 +1038,9 @@ class XMLWatchdog extends FileWatchdog {
     /**
      Call {@link DOMConfigurator#configure(String)} with the
      <code>filename</code> to reconfigure log4j. */
-    public
-    void doOnChange() {
+
+    @Override
+    public void doOnChange() {
         new DOMConfigurator().doConfigure(filename,LogManager.getLoggerRepository());
     }
 }

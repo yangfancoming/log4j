@@ -378,45 +378,32 @@ public class PropertyConfigurator implements Configurator {
         doConfigure(props, hierarchy);
     }
 
-    /**
-     */
-    static
-    public
-    void configure(String configFilename) {
+    public static void configure(String configFilename) {
         new PropertyConfigurator().doConfigure(configFilename, LogManager.getLoggerRepository());
     }
 
     /**
      Read configuration options from url <code>configURL</code>.
-
      @since 0.8.2
      */
-    public
-    static
-    void configure(java.net.URL configURL) {
+    public static  void configure(java.net.URL configURL) {
         new PropertyConfigurator().doConfigure(configURL,LogManager.getLoggerRepository());
     }
 
     /**
      Reads configuration options from an InputStream.
-
      @since 1.2.17
      */
-    public
-    static
-    void configure(InputStream inputStream) {
+    public static  void configure(InputStream inputStream) {
         new PropertyConfigurator().doConfigure(inputStream, LogManager.getLoggerRepository());
     }
 
 
     /**
      Read configuration options from <code>properties</code>.
-
      See {@link #doConfigure(String, LoggerRepository)} for the expected format.
      */
-    static
-    public
-    void configure(Properties properties) {
+    public static void configure(Properties properties) {
         new PropertyConfigurator().doConfigure(properties, LogManager.getLoggerRepository());
     }
 
@@ -424,13 +411,9 @@ public class PropertyConfigurator implements Configurator {
      Like {@link #configureAndWatch(String, long)} except that the
      default delay as defined by {@link FileWatchdog#DEFAULT_DELAY} is
      used.
-
      @param configFilename A file in key=value format.
-
      */
-    static
-    public
-    void configureAndWatch(String configFilename) {
+    public static void configureAndWatch(String configFilename) {
         configureAndWatch(configFilename, FileWatchdog.DEFAULT_DELAY);
     }
 
@@ -446,9 +429,7 @@ public class PropertyConfigurator implements Configurator {
      @param configFilename A file in key=value format.
      @param delay The delay in milliseconds to wait between each check.
      */
-    static
-    public
-    void configureAndWatch(String configFilename, long delay) {
+    public static void configureAndWatch(String configFilename, long delay) {
         PropertyWatchdog pdog = new PropertyWatchdog(configFilename);
         pdog.setDelay(delay);
         pdog.start();
@@ -905,6 +886,7 @@ class PropertyWatchdog extends FileWatchdog {
     /**
      Call {@link PropertyConfigurator#configure(String)} with the
      <code>filename</code> to reconfigure log4j. */
+    @Override
     public
     void doOnChange() {
         new PropertyConfigurator().doConfigure(filename, LogManager.getLoggerRepository());

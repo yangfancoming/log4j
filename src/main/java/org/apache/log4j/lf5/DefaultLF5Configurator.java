@@ -72,6 +72,7 @@ public class DefaultLF5Configurator implements Configurator {
    * 这是一个虚拟方法，如果使用它，将引发IllegalstateException
    * @since 1.2.17
    */
+  @Override
   public void doConfigure(InputStream inputStream, LoggerRepository repository) {
     throw new IllegalStateException("This class should NOT be instantiated!");
   }
