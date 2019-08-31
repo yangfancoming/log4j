@@ -522,8 +522,9 @@ public class PropertyConfigurator implements Configurator {
     /**
      Read configuration options from url <code>configURL</code>.
      */
-    public
-    void doConfigure(java.net.URL configURL, LoggerRepository hierarchy) {
+
+    @Override
+    public void doConfigure(java.net.URL configURL, LoggerRepository hierarchy) {
         // 创建Properties对象，用于加载log4j.properties
         Properties props = new Properties();
         // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程

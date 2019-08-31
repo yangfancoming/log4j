@@ -80,6 +80,7 @@ public class DefaultLF5Configurator implements Configurator {
    * This is a dummy method that will throw an IllegalStateExceptionif used.
    * 这是一个虚拟方法，如果使用它，将引发IllegalstateException
    */
+  @Override
   public void doConfigure(URL configURL, LoggerRepository repository) {
     throw new IllegalStateException("This class should NOT be instantiated!");
   }

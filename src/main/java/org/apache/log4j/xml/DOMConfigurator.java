@@ -698,8 +698,9 @@ public class DOMConfigurator implements Configurator {
     }
 
 
-    public
-    void doConfigure(final URL url, LoggerRepository repository) {
+
+    @Override
+    public void doConfigure(final URL url, LoggerRepository repository) {
         ParseAction action = new ParseAction() {
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 URLConnection uConn = url.openConnection();

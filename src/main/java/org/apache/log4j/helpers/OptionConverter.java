@@ -18,10 +18,7 @@ import org.apache.log4j.spi.LoggerRepository;
 
 /**
  A convenience class to convert property values to specific types.
-
- @author Ceki G&uuml;lc&uuml;
- @author Simon Kitching;
- @author Anders Kristensen
+ 用于将属性值转换为特定类型的便利类
  */
 public class OptionConverter {
 
@@ -33,21 +30,17 @@ public class OptionConverter {
     /** OptionConverter is a static class. */
     private OptionConverter() {}
 
-    public
-    static
-    String[] concatanateArrays(String[] l, String[] r) {
+
+
+    public static String[] concatanateArrays(String[] l, String[] r) {
         int len = l.length + r.length;
         String[] a = new String[len];
-
         System.arraycopy(l, 0, a, 0, l.length);
         System.arraycopy(r, 0, a, l.length, r.length);
-
         return a;
     }
 
-    public
-    static
-    String convertSpecialChars(String s) {
+    public static String convertSpecialChars(String s) {
         char c;
         int len = s.length();
         StringBuffer sbuf = new StringBuffer(len);
@@ -78,9 +71,7 @@ public class OptionConverter {
      @param def The default value to return.
      @return the string value of the system property, or the default value if there is no property with that key.
      @since 1.1 */
-    public
-    static
-    String getSystemProperty(String key, String def) {
+    public static String getSystemProperty(String key, String def) {
         try {
             // 根据key 获取特定系统属性  key不存在时  返回指定的默认值 def
             return System.getProperty(key, def);
@@ -90,10 +81,7 @@ public class OptionConverter {
         }
     }
 
-
-    public
-    static
-    Object instantiateByKey(Properties props, String key, Class superClass,  Object defaultValue) {
+    public static Object instantiateByKey(Properties props, String key, Class superClass,  Object defaultValue) {
         // Get the value of the property in string form
         String className = findAndSubst(key, props);
         if(className == null) {
@@ -124,9 +112,7 @@ public class OptionConverter {
         return dEfault;
     }
 
-    public
-    static
-    int toInt(String value, int dEfault) {
+    public static int toInt(String value, int dEfault) {
         if(value != null) {
             String s = value.trim();
             try {
@@ -160,9 +146,7 @@ public class OptionConverter {
      significant for the class name part, if present.
 
      @since 1.1 */
-    public
-    static
-    Level toLevel(String value, Level defaultValue) {
+    public static Level toLevel(String value, Level defaultValue) {
         if(value == null)
             return defaultValue;
         value = value.trim();
@@ -205,7 +189,6 @@ public class OptionConverter {
                 Thread.currentThread().interrupt();
             }
             LogLog.warn("custom level class [" + clazz + "]" + " could not be instantiated", e);
-
         } catch(ClassCastException e) {
             LogLog.warn("class [" + clazz + "] is not a subclass of org.apache.log4j.Level", e);
         } catch(IllegalAccessException e) {
@@ -216,9 +199,7 @@ public class OptionConverter {
         return result;
     }
 
-    public
-    static
-    long toFileSize(String value, long dEfault) {
+    public static long toFileSize(String value, long dEfault) {
         if(value == null)
             return dEfault;
 
@@ -252,13 +233,9 @@ public class OptionConverter {
 
     /**
      Find the value corresponding to <code>key</code> in
-     <code>props</code>. Then perform variable substitution on the
-     found value.
-
+     <code>props</code>. Then perform variable substitution on the found value.
      */
-    public
-    static
-    String findAndSubst(String key, Properties props) {
+    public static  String findAndSubst(String key, Properties props) {
         String value = props.getProperty(key);
         if(value == null)
             return null;
@@ -281,9 +258,7 @@ public class OptionConverter {
      @param superClass The class to which the new object should belong.
      @param defaultValue The object to return in case of non-fulfillment
      */
-    public
-    static
-    Object instantiateByClassName(String className, Class superClass, Object defaultValue) {
+    public static Object instantiateByClassName(String className, Class superClass, Object defaultValue) {
         if(className != null) {
             try {
                 Class classObj = Loader.loadClass(className);
@@ -343,10 +318,8 @@ public class OptionConverter {
 
      @param val The string on which variable substitution is performed.
      @throws IllegalArgumentException if <code>val</code> is malformed.
-
      */
-    public static
-    String substVars(String val, Properties props) throws  IllegalArgumentException {
+    public static String substVars(String val, Properties props) throws  IllegalArgumentException {
         StringBuffer sbuf = new StringBuffer();
         int i = 0;
         int j, k;
@@ -410,10 +383,7 @@ public class OptionConverter {
      *            The {@link org.apache.log4j.Hierarchy} to act on.
      * @since 1.2.17
      */
-
-    static
-    public
-    void selectAndConfigure(InputStream inputStream, String clazz, LoggerRepository hierarchy) {
+    public static void selectAndConfigure(InputStream inputStream, String clazz, LoggerRepository hierarchy) {
         Configurator configurator;
         if(clazz != null) {
             LogLog.debug("Preferred configurator class: " + clazz);
