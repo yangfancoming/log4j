@@ -686,23 +686,18 @@ public class Category implements AppenderAttachable {
      *  @return boolean - <code>true</code> if this category is debug
      *  enabled, <code>false</code> otherwise.
      *   */
-    public
-    boolean isDebugEnabled() {
+    public boolean isDebugEnabled() {
         if(repository.isDisabled( Level.DEBUG_INT))
             return false;
         return Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel());
     }
 
     /**
-     Check whether this category is enabled for a given {@link
-    Level} passed as parameter.
-
+     Check whether this category is enabled for a given {@link Level} passed as parameter.
      See also {@link #isDebugEnabled}.
-
      @return boolean True if this category is enabled for <code>level</code>.
      */
-    public
-    boolean isEnabledFor(Priority level) {
+    public boolean isEnabledFor(Priority level) {
         if(repository.isDisabled(level.level))
             return false;
         return level.isGreaterOrEqual(this.getEffectiveLevel());
@@ -711,28 +706,20 @@ public class Category implements AppenderAttachable {
     /**
      Check whether this category is enabled for the info Level.
      See also {@link #isDebugEnabled}.
-
      @return boolean - <code>true</code> if this category is enabled
      for level info, <code>false</code> otherwise.
      */
-    public
-    boolean isInfoEnabled() {
+    public boolean isInfoEnabled() {
         if(repository.isDisabled(Level.INFO_INT))
             return false;
         return Level.INFO.isGreaterOrEqual(this.getEffectiveLevel());
     }
 
-
     /**
-     Log a localized message. The user supplied parameter
-     <code>key</code> is replaced by its localized version from the
-     resource bundle.
-
+     Log a localized message. The user supplied parameter <code>key</code> is replaced by its localized version from the resource bundle.
      @see #setResourceBundle
-
      @since 0.8.4 */
-    public
-    void l7dlog(Priority priority, String key, Throwable t) {
+    public void l7dlog(Priority priority, String key, Throwable t) {
         if(repository.isDisabled(priority.level)) {
             return;
         }
@@ -752,11 +739,9 @@ public class Category implements AppenderAttachable {
      bundle. Next, the resulting pattern is formatted using
      {@link java.text.MessageFormat#format(String,Object[])} method with the
      user supplied object array <code>params</code>.
-
      @since 0.8.4
      */
-    public
-    void l7dlog(Priority priority, String key,  Object[] params, Throwable t) {
+    public void l7dlog(Priority priority, String key,  Object[] params, Throwable t) {
         if(repository.isDisabled(priority.level)) {
             return;
         }
@@ -786,8 +771,7 @@ public class Category implements AppenderAttachable {
     /**
      This generic form is intended to be used by wrappers.
      */
-    public
-    void log(Priority priority, Object message) {
+    public void log(Priority priority, Object message) {
         if(repository.isDisabled(priority.level)) {
             return;
         }
@@ -796,7 +780,6 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-
      This is the most generic printing method. It is intended to be
      invoked by <b>wrapper</b> classes.
 
@@ -804,8 +787,7 @@ public class Category implements AppenderAttachable {
      @param level The level of the logging request.
      @param message The message of the logging request.
      @param t The throwable of the logging request, may be null.  */
-    public
-    void log(String callerFQCN, Priority level, Object message, Throwable t) {
+    public void log(String callerFQCN, Priority level, Object message, Throwable t) {
         if(repository.isDisabled(level.level)) {
             return;
         }
@@ -835,8 +817,6 @@ public class Category implements AppenderAttachable {
      Remove all previously added appenders from this Category instance.
      <p>This is useful when re-reading configuration information.
      */
-
-
     public synchronized void removeAllAppenders() {
         if(aai != null) {
             Vector appenders = new Vector();
@@ -916,8 +896,8 @@ public class Category implements AppenderAttachable {
      <p>Null values are admitted.
      @deprecated Please use {@link #setLevel} instead.
      */
-    public
-    void setPriority(Priority priority) {
+
+    public void setPriority(Priority priority) {
         this.level = (Level) priority;
     }
 
@@ -972,10 +952,8 @@ public class Category implements AppenderAttachable {
      method will print the name of the Throwable but no stack trace. To
      print a stack trace use the {@link #warn(Object, Throwable)} form
      instead.  <p>
-
      @param message the message object to log.  */
-    public
-    void warn(Object message) {
+    public void warn(Object message) {
         if(repository.isDisabled( Level.WARN_INT))
             return;
         if(Level.WARN.isGreaterOrEqual(this.getEffectiveLevel()))
@@ -991,8 +969,8 @@ public class Category implements AppenderAttachable {
 
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
-    public
-    void warn(Object message, Throwable t) {
+
+    public void warn(Object message, Throwable t) {
         if(repository.isDisabled(Level.WARN_INT))
             return;
         if(Level.WARN.isGreaterOrEqual(this.getEffectiveLevel()))

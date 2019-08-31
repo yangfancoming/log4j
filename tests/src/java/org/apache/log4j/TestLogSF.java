@@ -178,6 +178,7 @@ public class TestLogSF extends TestCase {
         logger.setLevel(TRACE);
         char val = 'C';
         LogSF.trace(logger, "Iteration {}", val);
+        System.out.println(capture.getMessage());
         assertEquals("Iteration C", capture.getMessage());
     }
 

@@ -32,9 +32,7 @@ public class PatternLayoutTest extends LayoutTest {
    */
   public void testFormat() {
     Logger logger = Logger.getLogger("org.apache.log4j.LayoutTest");
-    LoggingEvent event =
-      new LoggingEvent(
-        "org.apache.log4j.Logger", logger, Level.INFO, "Hello, World", null);
+    LoggingEvent event = new LoggingEvent("org.apache.log4j.Logger", logger, Level.INFO, "Hello, World", null);
     PatternLayout layout = (PatternLayout) createLayout();
     String result = layout.format(event);
     StringBuffer buf = new StringBuffer(100);

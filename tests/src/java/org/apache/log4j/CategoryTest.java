@@ -9,8 +9,6 @@ import java.lang.reflect.Method;
 
 /**
  * Tests of Category.
- *
- * @author Curt Arnold
  * @since 1.2.14
  */
 public class CategoryTest extends TestCase {

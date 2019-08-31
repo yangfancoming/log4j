@@ -30,8 +30,8 @@ public class LevelTest extends TestCase {
    */
   public void testSerializeINFO() throws Exception {
     int[] skip = new int[] {  };
-    SerializationTestHelper.assertSerializationEquals(
-      "witness/serialization/info.bin", Level.INFO, skip, Integer.MAX_VALUE);
+    SerializationTestHelper.assertSerializationEquals("witness/serialization/info.bin", Level.INFO, skip, Integer.MAX_VALUE);
+
   }
 
   /**

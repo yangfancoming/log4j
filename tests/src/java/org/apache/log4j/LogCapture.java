@@ -2,10 +2,6 @@
 package org.apache.log4j;
 
 import junit.framework.Assert;
-
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.VectorAppender;
 import org.apache.log4j.spi.LoggingEvent;
 
 import java.util.Vector;
@@ -48,16 +44,12 @@ public class LogCapture {
         switch (vector.size()) {
         case 0:
             break;
-
         case 1:
-
             LoggingEvent event = (LoggingEvent) vector.elementAt(0);
             Assert.assertNotNull(event);
             Assert.assertEquals(level, event.getLevel());
             msg = event.getRenderedMessage();
-
             break;
-
         default:
             Assert.fail("More than one request captured");
         }

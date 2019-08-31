@@ -439,7 +439,6 @@ public class PropertyConfigurator implements Configurator {
      Read configuration options from <code>properties</code>.
      See {@link #doConfigure(String, LoggerRepository)} for the expected format.
      */
-
     public void doConfigure(Properties properties, LoggerRepository hierarchy) {
         repository = hierarchy;
         // 如果log4j.properties中配置了log4j.debug=true或者log4j.configDebug=true，其值非空且非false就置默认值true开启log4j-1.2.17自己的日志打印，否则不开启
@@ -621,8 +620,7 @@ public class PropertyConfigurator implements Configurator {
      * 开始解析非根节点Logger，默认设置非根节点Logger的父节点为RootLogger，
      * 从log4j.properties读取log4j.additivity.Appendername值设置Logger的日志传播属性additive
      */
-    protected
-    void parseCatsAndRenderers(Properties props, LoggerRepository hierarchy) {
+    protected void parseCatsAndRenderers(Properties props, LoggerRepository hierarchy) {
         Enumeration enumeration = props.propertyNames();
         while(enumeration.hasMoreElements()) {
             String key = (String) enumeration.nextElement();

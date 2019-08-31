@@ -78,7 +78,6 @@ public class SerializationTestHelper {
     ObjectOutputStream objOut = new ObjectOutputStream(memOut);
     objOut.writeObject(obj);
     objOut.close();
-
     assertStreamEquals(witness, memOut.toByteArray(), skip, endCompare);
   }
 

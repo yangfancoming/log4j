@@ -10,9 +10,6 @@ import org.apache.log4j.helpers.LogLog;
   * ConsoleAppender appends log events to <code>System.out</code> or
   * <code>System.err</code> using a layout specified by the user. The
   * default target is <code>System.out</code>.
-  *
-  * @author Ceki G&uuml;lc&uuml; 
-  * @author Curt Arnold
   * @since 1.1 */
 public class ConsoleAppender extends WriterAppender {
 
@@ -161,11 +158,9 @@ public class ConsoleAppender extends WriterAppender {
             System.err.write(b);
         }
 
-        public void write(final byte[] b, final int off, final int len)
-            throws IOException {
+        public void write(final byte[] b, final int off, final int len)  throws IOException {
             System.err.write(b, off, len);
         }
-
         public void write(final int b) throws IOException {
             System.err.write(b);
         }
