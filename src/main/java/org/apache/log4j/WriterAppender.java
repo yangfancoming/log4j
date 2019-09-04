@@ -75,8 +75,8 @@ public class WriterAppender extends AppenderSkeleton {
 
      <p>The <code>writer</code> must have been previously opened by
      the user.  */
-    public
-    WriterAppender(Layout layout, Writer writer) {
+
+    public WriterAppender(Layout layout, Writer writer) {
         this.layout = layout;
         this.setWriter(writer);
     }
@@ -95,24 +95,23 @@ public class WriterAppender extends AppenderSkeleton {
      be recorded on disk when the application exits. This is a high
      price to pay even for a 20% performance gain.
      */
-    public
-    void setImmediateFlush(boolean value) {
+
+    public void setImmediateFlush(boolean value) {
         immediateFlush = value;
     }
 
     /**
      Returns value of the <b>ImmediateFlush</b> option.
      */
-    public
-    boolean getImmediateFlush() {
+    public boolean getImmediateFlush() {
         return immediateFlush;
     }
 
     /**
      Does nothing.
      */
-    public
-    void activateOptions() {
+    @Override
+    public void activateOptions() {
     }
 
 
@@ -128,9 +127,8 @@ public class WriterAppender extends AppenderSkeleton {
      layout.
 
      */
-    public
-    void append(LoggingEvent event) {
-
+    @Override
+    public void append(LoggingEvent event) {
         // Reminder: the nesting of calls is:
         //
         //    doAppend()
@@ -152,16 +150,13 @@ public class WriterAppender extends AppenderSkeleton {
      <p>It checks whether there is a set output target and also if
      there is a set layout. If these checks fail, then the boolean
      value <code>false</code> is returned. */
-    protected
-    boolean checkEntryConditions() {
+    protected boolean checkEntryConditions() {
         if(this.closed) {
             LogLog.warn("Not allowed to write to a closed appender.");
             return false;
         }
-
         if(this.qw == null) {
-            errorHandler.error("No output stream or file set for the appender named ["+
-                    name+"].");
+            errorHandler.error("No output stream or file set for the appender named ["+name+"].");
             return false;
         }
 
@@ -174,16 +169,13 @@ public class WriterAppender extends AppenderSkeleton {
 
 
     /**
-     Close this appender instance. The underlying stream or writer is
-     also closed.
-
+     Close this appender instance. The underlying stream or writer is also closed.
      <p>Closed appenders cannot be reused.
-
      @see #setWriter
      @since 0.8.4 */
-    public
-    synchronized
-    void close() {
+
+    @Override
+    public synchronized void close() {
         if(this.closed)
             return;
         this.closed = true;
@@ -202,21 +194,19 @@ public class WriterAppender extends AppenderSkeleton {
                 if (e instanceof InterruptedIOException) {
                     Thread.currentThread().interrupt();
                 }
-                // There is do need to invoke an error handler at this late
-                // stage.
+                // There is do need to invoke an error handler at this late  stage.
                 LogLog.error("Could not close " + qw, e);
             }
         }
     }
 
     /**
-     Returns an OutputStreamWriter when passed an OutputStream.  The
-     encoding used will depend on the value of the
-     <code>encoding</code> property.  If the encoding value is
-     specified incorrectly the writer will be opened using the default
-     system encoding (an error message will be printed to the loglog.  */
-    protected
-    OutputStreamWriter createWriter(OutputStream os) {
+     Returns an OutputStreamWriter when passed an OutputStream.
+     The  encoding used will depend on the value of the <code>encoding</code> property.
+     If the encoding value is  specified incorrectly the writer will be opened using the default
+     system encoding (an error message will be printed to the loglog.
+     */
+    protected OutputStreamWriter createWriter(OutputStream os) {
         OutputStreamWriter retval = null;
         String enc = getEncoding();
         if(enc != null) {
@@ -250,6 +240,7 @@ public class WriterAppender extends AppenderSkeleton {
     /**
      Set the {@link ErrorHandler} for this WriterAppender and also the
      underlying {@link QuietWriter} if any. */
+    @Override
     public synchronized void setErrorHandler(ErrorHandler eh) {
         if(eh == null) {
             LogLog.warn("You have tried to set a null error-handler.");
@@ -312,18 +303,17 @@ public class WriterAppender extends AppenderSkeleton {
      The WriterAppender requires a layout. Hence, this method returns
      <code>true</code>.
      */
-    public
-    boolean requiresLayout() {
+
+    @Override
+    public boolean requiresLayout() {
         return true;
     }
 
     /**
      Clear internal references to the writer and other variables.
-
-     Subclasses can override this method for an alternate closing
-     behavior.  */
-    protected
-    void reset() {
+     Subclasses can override this method for an alternate closing behavior.
+     */
+    protected void reset() {
         closeWriter();
         this.qw = null;
         //this.tp = null;
@@ -331,10 +321,9 @@ public class WriterAppender extends AppenderSkeleton {
 
 
     /**
-     Write a footer as produced by the embedded layout's {@link
-    Layout#getFooter} method.  */
-    protected
-    void writeFooter() {
+     Write a footer as produced by the embedded layout's {@link Layout#getFooter} method.
+     */
+    protected void writeFooter() {
         if(layout != null) {
             String f = layout.getFooter();
             if(f != null && this.qw != null) {
@@ -345,10 +334,9 @@ public class WriterAppender extends AppenderSkeleton {
     }
 
     /**
-     Write a header as produced by the embedded layout's {@link
-    Layout#getHeader} method.  */
-    protected
-    void writeHeader() {
+     Write a header as produced by the embedded layout's {@link  Layout#getHeader} method.
+     */
+    protected void writeHeader() {
         if(layout != null) {
             String h = layout.getHeader();
             if(h != null && this.qw != null)
@@ -357,9 +345,7 @@ public class WriterAppender extends AppenderSkeleton {
     }
 
     /**
-     * Determines whether the writer should be flushed after
-     * this event is written.
-     *
+     * Determines whether the writer should be flushed after this event is written.
      * @since 1.2.16
      */
     protected boolean shouldFlush(final LoggingEvent event) {

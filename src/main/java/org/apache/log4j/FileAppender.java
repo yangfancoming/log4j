@@ -321,6 +321,7 @@ public class FileAppender extends WriterAppender {
     /**
      Close any previously opened file and call the parent's
      <code>reset</code>.  */
+    @Override
     protected
     void reset() {
         closeFile();

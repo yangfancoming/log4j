@@ -5,9 +5,6 @@ package org.apache.log4j.spi;
 
 /**
    A string based interface to configure package components.
-
-   @author Ceki G&uuml;lc&uuml;
-   @author Anders Kristensen
    @since 0.8.1
  */
 public interface OptionHandler {
