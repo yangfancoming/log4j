@@ -221,6 +221,7 @@ public class SMTPAppender extends AppenderSkeleton
      Perform SMTPAppender specific appending actions, mainly adding
      the event to a cyclic buffer and checking if the event triggers
      an e-mail to be sent. */
+  @Override
   public
   void append(LoggingEvent event) {
 

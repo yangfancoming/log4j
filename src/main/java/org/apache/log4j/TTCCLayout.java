@@ -195,6 +195,7 @@ public class TTCCLayout extends DateLayout {
      <code>true</code>.
 
      @since version 0.8.4 */
+  @Override
   public
   boolean ignoresThrowable() {
     return true;

@@ -195,6 +195,7 @@ public class XMLLayout extends Layout {
      The XMLLayout prints and does not ignore exceptions. Hence the
      return value <code>false</code>.
   */
+  @Override
   public boolean ignoresThrowable() {
     return false;
   }

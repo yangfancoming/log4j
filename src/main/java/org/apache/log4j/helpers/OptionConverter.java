@@ -19,6 +19,7 @@ import org.apache.log4j.spi.LoggerRepository;
 /**
  A convenience class to convert property values to specific types.
  用于将属性值转换为特定类型的便利类
+ 所有的读取配置并封装成对象均以此类作为入口
  */
 public class OptionConverter {
 

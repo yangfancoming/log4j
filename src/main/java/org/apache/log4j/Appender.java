@@ -10,6 +10,8 @@ import org.apache.log4j.spi.LoggingEvent;
    Implement this interface for your own strategies for outputting log  statements.
   Appender抽象成了接口，然后主要的实现是WriterAppender，常用的ConsoleAppender，FileAppender都继承了该类。
   实际编码中经常会遇到DailyRollingFileAppender，RollingFileAppender都继承于FileAppender
+
+ Appender是对记录日志形式的抽象，标示了日志打印的目的地
 */
 public interface Appender {
 

@@ -146,6 +146,7 @@ public class LayoutTest extends TestCase {
     /**
      * @{inheritDoc}
      */
+    @Override
     public boolean ignoresThrowable() {
       return true;
     }

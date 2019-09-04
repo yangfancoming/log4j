@@ -43,6 +43,7 @@ public final class RootLogger extends Logger {
      Setting a null value to the level of the root logger may have catastrophic  results.
     We prevent this here.
      @since 0.8.3 */
+  @Override
   public final void setLevel(Level level) {
     if (level == null) {
       LogLog.error("You have tried to set a null level to root.", new Throwable());

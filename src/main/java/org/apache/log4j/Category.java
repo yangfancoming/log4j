@@ -67,9 +67,7 @@ import java.util.Vector;
  * <p>
  * See the document entitled <a href="http://www.qos.ch/logging/preparingFor13.html">preparing
  *  for log4j 1.3</a> for a more detailed discussion.
- *
- * @author Ceki G&uuml;lc&uuml;
- * @author Anders Kristensen
+
  */
 public class Category implements AppenderAttachable {
 
@@ -121,27 +119,20 @@ public class Category implements AppenderAttachable {
     /**
      This constructor created a new <code>Category</code> instance and
      sets its name.
-
      <p>It is intended to be used by sub-classes only. You should not
      create categories directly.
-
      @param name The name of the category.
      */
-    protected
-    Category(String name) {
+    protected Category(String name) {
         this.name = name;
     }
 
     /**
-     Add <code>newAppender</code> to the list of appenders of this
-     Category instance.
-
+     Add <code>newAppender</code> to the list of appenders of this Category instance.
      <p>If <code>newAppender</code> is already in the list of
      appenders, then it won't be added again.
      */
-    synchronized
-    public
-    void addAppender(Appender newAppender) {
+    public synchronized void addAppender(Appender newAppender) {
         if(aai == null) {
             aai = new AppenderAttachableImpl();
         }
@@ -152,18 +143,13 @@ public class Category implements AppenderAttachable {
     /**
      If <code>assertion</code> parameter is <code>false</code>, then
      logs <code>msg</code> as an {@link #error(Object) error} statement.
-
      <p>The <code>assert</code> method has been renamed to
-     <code>assertLog</code> because <code>assert</code> is a language
-     reserved word in JDK 1.4.
-
+     <code>assertLog</code> because <code>assert</code> is a language  reserved word in JDK 1.4.
      @param assertion
-     @param msg The message to print if <code>assertion</code> is
-     false.
-
+     @param msg The message to print if <code>assertion</code> is false.
      @since 1.2 */
-    public
-    void assertLog(boolean assertion, String msg) {
+
+    public void assertLog(boolean assertion, String msg) {
         if(!assertion)
             this.error(msg);
     }
@@ -177,8 +163,8 @@ public class Category implements AppenderAttachable {
      to log the particular log request.
 
      @param event the event to log.  */
-    public
-    void callAppenders(LoggingEvent event) {
+
+    public void callAppenders(LoggingEvent event) {
         int writes = 0;
         for(Category c = this; c != null; c=c.parent) {
             // Protected against simultaneous call to addAppender, removeAppender,...
@@ -191,19 +177,16 @@ public class Category implements AppenderAttachable {
                 }
             }
         }
-
         if(writes == 0) {
             repository.emitNoAppenderWarning(this);
         }
     }
 
     /**
-     Close all attached appenders implementing the AppenderAttachable
-     interface.
+     Close all attached appenders implementing the AppenderAttachable  interface.
      @since 1.0
      */
-    synchronized
-    void closeNestedAppenders() {
+    synchronized void closeNestedAppenders() {
         Enumeration enumeration = this.getAllAppenders();
         if(enumeration != null) {
             while(enumeration.hasMoreElements()) {
@@ -231,8 +214,7 @@ public class Category implements AppenderAttachable {
      method will print the name of the <code>Throwable</code> but no
      stack trace. To print a stack trace use the {@link #debug(Object,Throwable)} form instead.
      @param message the message object to log. */
-    public
-    void debug(Object message) {
+    public void debug(Object message) {
         if(repository.isDisabled(Level.DEBUG_INT))
             return;
         if(Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel())) {
@@ -240,18 +222,13 @@ public class Category implements AppenderAttachable {
         }
     }
 
-
     /**
      Log a message object with the <code>DEBUG</code> level including
-     the stack trace of the {@link Throwable} <code>t</code> passed as
-     parameter.
-
+     the stack trace of the {@link Throwable} <code>t</code> passed as parameter.
      <p>See {@link #debug(Object)} form for more detailed information.
-
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
-    public
-    void debug(Object message, Throwable t) {
+    public void debug(Object message, Throwable t) {
         if(repository.isDisabled(Level.DEBUG_INT))
             return;
         if(Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel()))
@@ -272,12 +249,9 @@ public class Category implements AppenderAttachable {
 
      <p><b>WARNING</b> Note that passing a {@link Throwable} to this
      method will print the name of the <code>Throwable</code> but no
-     stack trace. To print a stack trace use the {@link #error(Object,
-            Throwable)} form instead.
-
+     stack trace. To print a stack trace use the {@link #error(Object,Throwable)} form instead.
      @param message the message object to log */
-    public
-    void error(Object message) {
+    public void error(Object message) {
         if(repository.isDisabled(Level.ERROR_INT))
             return;
         if(Level.ERROR.isGreaterOrEqual(this.getEffectiveLevel()))
@@ -293,13 +267,11 @@ public class Category implements AppenderAttachable {
 
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
-    public
-    void error(Object message, Throwable t) {
+    public void error(Object message, Throwable t) {
         if(repository.isDisabled(Level.ERROR_INT))
             return;
         if(Level.ERROR.isGreaterOrEqual(this.getEffectiveLevel()))
             forcedLog(FQCN, Level.ERROR, message, t);
-
     }
 
 
@@ -307,13 +279,9 @@ public class Category implements AppenderAttachable {
      If the named category exists (in the default hierarchy) then it
      returns a reference to the category, otherwise it returns
      <code>null</code>.
-
      @deprecated Please use {@link LogManager#exists} instead.
-
      @since 0.8.5 */
-    public
-    static
-    Logger exists(String name) {
+    public static Logger exists(String name) {
         return LogManager.exists(name);
     }
 
@@ -336,8 +304,8 @@ public class Category implements AppenderAttachable {
      instead.
 
      @param message the message object to log */
-    public
-    void fatal(Object message) {
+
+    public void fatal(Object message) {
         if(repository.isDisabled(Level.FATAL_INT))
             return;
         if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel()))
@@ -353,14 +321,12 @@ public class Category implements AppenderAttachable {
 
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
-    public
-    void fatal(Object message, Throwable t) {
+    public void fatal(Object message, Throwable t) {
         if(repository.isDisabled(Level.FATAL_INT))
             return;
         if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel()))
             forcedLog(FQCN, Level.FATAL, message, t);
     }
-
 
     /**  This method creates a new logging event and logs the event  without further checks.  */
     protected
@@ -378,14 +344,11 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-     Get the appenders contained in this category as an {@link
-    Enumeration}. If no appenders can be found, then a {@link NullEnumeration}
-     is returned.
-
-     @return Enumeration An enumeration of the appenders in this category.  */
-    synchronized
-    public
-    Enumeration getAllAppenders() {
+     Get the appenders contained in this category as an {@link  Enumeration}.
+    If no appenders can be found, then a {@link NullEnumeration} is returned.
+     @return Enumeration An enumeration of the appenders in this category.
+     */
+    public synchronized Enumeration getAllAppenders() {
         if(aai == null)
             return NullEnumeration.getInstance();
         else
@@ -397,12 +360,9 @@ public class Category implements AppenderAttachable {
 
      <p>Return the appender with that name if in the list. Return
      <code>null</code> otherwise.  */
-    synchronized
-    public
-    Appender getAppender(String name) {
+    public synchronized Appender getAppender(String name) {
         if(aai == null || name == null)
             return null;
-
         return aai.getAppender(name);
     }
 
@@ -428,8 +388,8 @@ public class Category implements AppenderAttachable {
      * @deprecated Please use the the {@link #getEffectiveLevel} method
      * instead.
      * */
-    public
-    Priority getChainedPriority() {
+
+    public Priority getChainedPriority() {
         for(Category c = this; c != null; c=c.parent) {
             if(c.level != null)
                 return c.level;
@@ -441,10 +401,8 @@ public class Category implements AppenderAttachable {
     /**
      Returns all the currently defined categories in the default
      hierarchy as an {@link java.util.Enumeration Enumeration}.
-
      <p>The root category is <em>not</em> included in the returned
      {@link Enumeration}.
-
      @deprecated Please use {@link LogManager#getCurrentLoggers()} instead.
      */
     public static Enumeration getCurrentCategories() {
@@ -464,11 +422,8 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-     Return the the {@link Hierarchy} where this <code>Category</code>
-     instance is attached.
-
+     Return the the {@link Hierarchy} where this <code>Category</code> instance is attached.
      @deprecated Please use {@link #getLoggerRepository} instead.
-
      @since 1.1 */
 
     public  LoggerRepository  getHierarchy() {
@@ -537,10 +492,7 @@ public class Category implements AppenderAttachable {
     /**
      *  @deprecated Please use {@link Logger#getRootLogger()} instead.
      */
-    final
-    public
-    static
-    Category getRoot() {
+    public static final Category getRoot() {
         return LogManager.getRootLogger();
     }
 
@@ -555,8 +507,8 @@ public class Category implements AppenderAttachable {
      hierarchy then <code>null</code> is returned.
 
      @since 0.9.0 */
-    public
-    ResourceBundle getResourceBundle() {
+
+    public ResourceBundle getResourceBundle() {
         for(Category c = this; c != null; c=c.parent) {
             if(c.resourceBundle != null)
                 return c.resourceBundle;
@@ -567,14 +519,11 @@ public class Category implements AppenderAttachable {
 
     /**
      Returns the string resource coresponding to <code>key</code> in
-     this category's inherited resource bundle. See also {@link
-    #getResourceBundle}.
-
+     this category's inherited resource bundle. See also {@link #getResourceBundle}.
      <p>If the resource cannot be found, then an {@link #error error}
      message will be logged complaining about the missing resource.
      */
-    protected
-    String getResourceBundleString(String key) {
+    protected String getResourceBundleString(String key) {
         ResourceBundle rb = getResourceBundle();
         // This is one of the rare cases where we can use logging in order
         // to report errors from within log4j.
@@ -611,12 +560,10 @@ public class Category implements AppenderAttachable {
 
      <p><b>WARNING</b> Note that passing a {@link Throwable} to this
      method will print the name of the Throwable but no stack trace. To
-     print a stack trace use the {@link #info(Object, Throwable)} form
-     instead.
-
+     print a stack trace use the {@link #info(Object, Throwable)} form instead.
      @param message the message object to log */
-    public
-    void info(Object message) {
+
+    public void info(Object message) {
         if(repository.isDisabled(Level.INFO_INT))
             return;
         if(Level.INFO.isGreaterOrEqual(this.getEffectiveLevel()))
@@ -632,8 +579,8 @@ public class Category implements AppenderAttachable {
 
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
-    public
-    void info(Object message, Throwable t) {
+
+    public void info(Object message, Throwable t) {
         if(repository.isDisabled(Level.INFO_INT))
             return;
         if(Level.INFO.isGreaterOrEqual(this.getEffectiveLevel()))
@@ -643,8 +590,8 @@ public class Category implements AppenderAttachable {
     /**
      Is the appender passed as parameter attached to this category?
      */
-    public
-    boolean isAttached(Appender appender) {
+    @Override
+    public boolean isAttached(Appender appender) {
         if(appender == null || aai == null)
             return false;
         else {
@@ -759,8 +706,8 @@ public class Category implements AppenderAttachable {
     /**
      This generic form is intended to be used by wrappers.
      */
-    public
-    void log(Priority priority, Object message, Throwable t) {
+
+    public void log(Priority priority, Object message, Throwable t) {
         if(repository.isDisabled(priority.level)) {
             return;
         }
@@ -817,6 +764,7 @@ public class Category implements AppenderAttachable {
      Remove all previously added appenders from this Category instance.
      <p>This is useful when re-reading configuration information.
      */
+    @Override
     public synchronized void removeAllAppenders() {
         if(aai != null) {
             Vector appenders = new Vector();
@@ -836,6 +784,7 @@ public class Category implements AppenderAttachable {
      Remove the appender passed as parameter form the list of appenders.
      @since 0.8.2
      */
+    @Override
     public synchronized void removeAppender(Appender appender) {
         if(appender == null || aai == null)
             return;
@@ -847,12 +796,10 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-     Remove the appender with the name passed as parameter form the
-     list of appenders.
-
-     @since 0.8.2 */
-
-
+     Remove the appender with the name passed as parameter form the list of appenders.
+     @since 0.8.2
+     */
+    @Override
     public synchronized  void removeAppender(String name) {
         if(name == null || aai == null) return;
         Appender appender = aai.getAppender(name);

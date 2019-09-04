@@ -13,11 +13,9 @@ import org.apache.log4j.spi.LoggingEvent;
 
 public abstract class Layout implements OptionHandler {
 
-    // Note that the line.separator property can be looked up even by
-    // applets.
+    // Note that the line.separator property can be looked up even by  applets.
     public final static String LINE_SEP = System.getProperty("line.separator");
     public final static int LINE_SEP_LEN  = LINE_SEP.length();
-
 
     /**
      Implement this method to create your own layout format.
@@ -28,7 +26,6 @@ public abstract class Layout implements OptionHandler {
      Returns the content type output by this layout. The base class
      returns "text/plain".
      */
-
     public String getContentType() {
         return "text/plain";
     }

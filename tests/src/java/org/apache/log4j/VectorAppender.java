@@ -25,6 +25,7 @@ public class VectorAppender extends AppenderSkeleton {
     /**
      This method is called by the {@link AppenderSkeleton#doAppend}  method.
      */
+    @Override
     public void append(LoggingEvent event) {
         //System.out.println("---Vector appender called with message ["+event.getRenderedMessage()+"].");
         //System.out.flush();

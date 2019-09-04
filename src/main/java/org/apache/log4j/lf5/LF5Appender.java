@@ -79,6 +79,7 @@ public class LF5Appender extends AppenderSkeleton {
    * @param event The <code>LoggingEvent</code>
    * to be appended.
    */
+  @Override
   public void append(LoggingEvent event) {
     // Retrieve the information from the log4j LoggingEvent.
     String category = event.getLoggerName();

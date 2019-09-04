@@ -155,6 +155,7 @@ public class JDBCAppender extends org.apache.log4j.AppenderSkeleton
   /**
    * Adds the event to the buffer.  When full the buffer is flushed.
    */
+  @Override
   public void append(LoggingEvent event) {
     event.getNDC();
     event.getThreadName();

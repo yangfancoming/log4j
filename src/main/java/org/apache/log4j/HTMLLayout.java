@@ -98,6 +98,7 @@ public class HTMLLayout extends Layout {
     /**
      Returns the content type output by this layout, i.e "text/html".
      */
+    @Override
     public
     String getContentType() {
         return "text/html";
@@ -198,6 +199,7 @@ public class HTMLLayout extends Layout {
     /**
      Returns appropriate HTML headers.
      */
+    @Override
     public
     String getHeader() {
         StringBuffer sbuf = new StringBuffer();
@@ -233,6 +235,7 @@ public class HTMLLayout extends Layout {
     /**
      Returns the appropriate HTML footers.
      */
+    @Override
     public
     String getFooter() {
         StringBuffer sbuf = new StringBuffer();
@@ -245,6 +248,7 @@ public class HTMLLayout extends Layout {
     /**
      The HTML layout handles the throwable contained in logging
      events. Hence, this method return <code>false</code>.  */
+    @Override
     public
     boolean ignoresThrowable() {
         return false;

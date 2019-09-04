@@ -50,6 +50,7 @@ public class SocketAppenderTest extends TestCase {
      * Inner-class For debugging purposes only Saves last LoggerEvent
      */
     static public class LastOnlyAppender extends AppenderSkeleton {
+        @Override
         protected void append(LoggingEvent event) {
             this.lastEvent = event;
         }

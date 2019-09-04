@@ -284,6 +284,7 @@ public class JMSAppender extends AppenderSkeleton {
   /**
      This method called by {@link AppenderSkeleton#doAppend} method to
      do most of the real appending work.  */
+  @Override
   public void append(LoggingEvent event) {
     if(!checkEntryConditions()) {
       return;

@@ -263,6 +263,7 @@ public class DateLayoutTest extends LayoutTest {
     /**
      * @{inheritDoc}
      */
+    @Override
     public boolean ignoresThrowable() {
       return true;
     }

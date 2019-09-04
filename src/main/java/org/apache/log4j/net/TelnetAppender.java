@@ -98,6 +98,7 @@ public class TelnetAppender extends AppenderSkeleton {
 
   /** Handles a log event.  For this appender, that means writing the
     message to each connected client.  */
+  @Override
   protected void append(LoggingEvent event) {
       if(sh != null) {
         sh.send(layout.format(event));

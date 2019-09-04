@@ -37,6 +37,7 @@ public class RewriteAppender extends AppenderSkeleton
     }
 
 
+    @Override
     protected void append(final LoggingEvent event) {
         LoggingEvent rewritten = event;
         if (policy != null) {

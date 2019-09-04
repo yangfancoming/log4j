@@ -442,6 +442,7 @@ public class PropertyConfigurator implements Configurator {
     public void doConfigure(Properties properties, LoggerRepository hierarchy) {
         repository = hierarchy;
         // 如果log4j.properties中配置了log4j.debug=true或者log4j.configDebug=true，其值非空且非false就置默认值true开启log4j-1.2.17自己的日志打印，否则不开启
+        // 读取log4j.debug配置，值为boolean型，表明内部log是否支持debug模式
         String value = properties.getProperty(LogLog.DEBUG_KEY);
         if(value == null) {
             value = properties.getProperty("log4j.configDebug");
@@ -454,33 +455,35 @@ public class PropertyConfigurator implements Configurator {
         }
 
         // 如果log4j.properties中配置了log4j.reset=true，其值非空且为true就重置Hierarchy
+        //读取log4j.reset的boolean值，true代表使用默认的配置
         String reset = properties.getProperty(RESET_KEY);
         if (reset != null && OptionConverter.toBoolean(reset, false)) {
             hierarchy.resetConfiguration();
         }
-
+        //log4j.threshold阈值配置，也就是告警级别配置
         String thresholdStr = OptionConverter.findAndSubst(THRESHOLD_PREFIX, properties);
         // 如果log4j.properties中配置了log4j.threshold，其值非空且为值(TRACE、DEBUG、INFO、WARN、ERROR、FATAL、OFF、ALL)之一，就设置Hierarchy的thresholdInt和Threshold，非空且不是上述值时候默认设置为ALL
         if(thresholdStr != null) {
             hierarchy.setThreshold(OptionConverter.toLevel(thresholdStr, Level.ALL));
             LogLog.debug("Hierarchy threshold set to ["+hierarchy.getThreshold()+"].");
         }
-        // 开始解析根节点RootLogger
+        // 开始解析根节点RootLogger    // 配置根分类，也就是rootLogger
         configureRootCategory(properties, hierarchy);
         // 读取log4j.properties中log4j.loggerFactory配置的值，默认的Logger工厂类为DefaultCategoryFactory，这里会进行覆盖
+        // 配置Logger工厂
         configureLoggerFactory(properties);
         // 开始解析非根节点Logger，默认设置非根节点Logger的父节点为RootLogger，从log4j.properties读取log4j.additivity.Appendername值设置Logger的日志传播属性additive
+        // 解析非root的其他配置
         parseCatsAndRenderers(properties, hierarchy);
         // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
         LogLog.debug("Finished configuring.");
-        // We don't want to hold references to appenders preventing their
-        // garbage collection.
+        // We don't want to hold references to appenders preventing their  garbage collection.
+        // 清空下缓存
         registry.clear();
     }
 
     /**
      * Read configuration options from url <code>configURL</code>.
-     *
      * @since 1.2.17
      */
     @Override
@@ -508,6 +511,7 @@ public class PropertyConfigurator implements Configurator {
         // 创建Properties对象，用于加载log4j.properties
         Properties props = new Properties();
         // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
+        // 读取log4j.debug配置，值为boolean型，表明内部log是否支持debug模式
         LogLog.debug("Reading configuration from URL " + configURL);
         InputStream istream = null;
         URLConnection uConn;
@@ -589,6 +593,7 @@ public class PropertyConfigurator implements Configurator {
 
     void configureRootCategory(Properties props, LoggerRepository hierarchy) {
         // 从配置文件log4j.properties中读取log4j.rootLogger配置的值
+        // log4j.rootLogger或者log4j.rootCategory,支持${}系统变量取值
         String effectivePrefix = ROOT_LOGGER_PREFIX;
         String value = OptionConverter.findAndSubst(ROOT_LOGGER_PREFIX, props);
 
@@ -678,11 +683,11 @@ public class PropertyConfigurator implements Configurator {
      This method must work for the root category as well.
      */
     void parseCategory(Properties props, Logger logger, String optionKey, String loggerName, String value) {
-        LogLog.debug("Parsing for [" +loggerName +"] with value=[" + value+"].");
+        LogLog.debug("Parsing for [" +loggerName +"] with value=[" + value + "].");
         // We must skip over ',' but not white space
+        // ,分隔符解析
         StringTokenizer st = new StringTokenizer(value, ",");
-        // If value is not in the form ", appender.." or "", then we should set
-        // the level of the loggeregory.
+        // If value is not in the form ", appender.." or "", then we should set  the level of the loggeregory.
         if(!(value.startsWith(",") || value.equals(""))) {
             // just to be on the safe side...
             if(!st.hasMoreTokens())
@@ -705,6 +710,7 @@ public class PropertyConfigurator implements Configurator {
         }
 
         // Begin by removing all existing appenders.
+        // 删除所有的输出源对象
         logger.removeAllAppenders();
 
         Appender appender;

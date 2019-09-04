@@ -277,6 +277,7 @@ public class SyslogAppender extends AppenderSkeleton {
       }      
   }
 
+  @Override
   public
   void append(LoggingEvent event) {
 

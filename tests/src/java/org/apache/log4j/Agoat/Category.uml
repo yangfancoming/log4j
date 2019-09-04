@@ -4,8 +4,13 @@
   <OriginalElement>org.apache.log4j.Category</OriginalElement>
   <nodes>
     <node x="38.5" y="160.0">org.apache.log4j.Logger</node>
+    <node x="172.0" y="315.0">org.apache.log4j.Appender</node>
     <node x="24.5" y="240.0">org.apache.log4j.spi.RootLogger</node>
+    <node x="0.0" y="390.0">org.apache.log4j.Level</node>
+    <node x="0.0" y="315.0">org.apache.log4j.spi.LoggingEvent</node>
     <node x="0.0" y="0.0">org.apache.log4j.spi.AppenderAttachable</node>
+    <node x="323.0" y="315.0">org.apache.log4j.Layout</node>
+    <node x="212.0" y="0.0">org.apache.log4j.helpers.OptionConverter</node>
     <node x="33.0" y="80.0">org.apache.log4j.Category</node>
   </nodes>
   <notes />
@@ -14,16 +19,16 @@
       <point x="0.0" y="-15.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="org.apache.log4j.spi.RootLogger" target="org.apache.log4j.Logger">
-      <point x="0.0" y="-15.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
     <edge source="org.apache.log4j.Category" target="org.apache.log4j.spi.AppenderAttachable">
       <point x="0.0" y="-15.0" />
       <point x="0.0" y="15.0" />
     </edge>
+    <edge source="org.apache.log4j.spi.RootLogger" target="org.apache.log4j.Logger">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="83.5" y="55.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="84.0" y="-91.5" />
   <SelectedNodes />
   <Categories />
   <SCOPE>All</SCOPE>

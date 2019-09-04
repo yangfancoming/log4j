@@ -225,6 +225,7 @@ public class SocketAppender extends AppenderSkeleton {
   }
 
 
+  @Override
   public void append(LoggingEvent event) {
     if(event == null)
       return;

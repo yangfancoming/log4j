@@ -287,6 +287,7 @@ public class PropertyConfiguratorTest extends TestCase {
             return true;
         }
 
+        @Override
         public void append(final LoggingEvent event) {
 
         }

@@ -184,6 +184,7 @@ public class SocketHubAppender extends AppenderSkeleton {
 
   /**
     Append an event to all of current connections. */
+  @Override
   public
   void append(LoggingEvent event) {
     if (event != null) {

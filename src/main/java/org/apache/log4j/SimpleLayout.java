@@ -56,6 +56,7 @@ public class SimpleLayout extends Layout {
      <code>true</code>.
 
      @since version 0.8.4 */
+  @Override
   public
   boolean ignoresThrowable() {
     return true;

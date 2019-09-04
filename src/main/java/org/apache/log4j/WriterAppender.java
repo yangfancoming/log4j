@@ -52,27 +52,26 @@ public class WriterAppender extends AppenderSkeleton {
 
     /**
      This default constructor does nothing.  */
-    public
-    WriterAppender() {
+
+    public WriterAppender() {
+        System.out.println("WriterAppender 无参构造函数实例化。。。。。");
     }
 
     /**
      Instantiate a WriterAppender and set the output destination to a
-     new {@link OutputStreamWriter} initialized with <code>os</code>
-     as its {@link OutputStream}.  */
-    public
-    WriterAppender(Layout layout, OutputStream os) {
+     new {@link OutputStreamWriter} initialized with <code>os</code> as its {@link OutputStream}.
+     */
+    public WriterAppender(Layout layout, OutputStream os) {
         this(layout, new OutputStreamWriter(os));
     }
 
     /**
      Instantiate a WriterAppender and set the output destination to
      <code>writer</code>.
-
-     <p>The <code>writer</code> must have been previously opened by
-     the user.  */
-
+     <p>The <code>writer</code> must have been previously opened by the user.
+     */
     public WriterAppender(Layout layout, Writer writer) {
+        System.out.println("WriterAppender 双参构造函数实例化。。。。。");
         this.layout = layout;
         this.setWriter(writer);
     }

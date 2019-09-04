@@ -471,6 +471,7 @@ public class LoggerTestCase extends TestCase {
     public void close() {
     }
 
+    @Override
     public
     void append(LoggingEvent event) {
       counter++;

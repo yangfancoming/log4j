@@ -39,7 +39,8 @@ final public class RootCategory extends Logger {
      results. We prevent this here.
 
      @since 0.8.3 */
-  final  
+  @Override
+  final
   public
   void setLevel(Level level) {
     if(level == null) {

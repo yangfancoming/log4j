@@ -538,6 +538,7 @@ public class EnhancedPatternLayout extends Layout {
    * handles {@link Exception Exceptions}.
    * @return true if the pattern formats any information from exceptions.
    */
+  @Override
   public boolean ignoresThrowable() {
     return !handlesExceptions;
   }

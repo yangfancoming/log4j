@@ -95,6 +95,7 @@ public class AsyncAppenderTestCase extends TestCase {
              method.
 
           */
+          @Override
           public void append(org.apache.log4j.spi.LoggingEvent event) {
               throw new NullPointerException();
           }
@@ -259,6 +260,7 @@ public class AsyncAppenderTestCase extends TestCase {
       }
 
 
+      @Override
       public void append(final LoggingEvent event) {
         synchronized (monitor) {
           super.append(event);

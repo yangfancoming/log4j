@@ -86,6 +86,7 @@ public class NTEventLogAppender extends AppenderSkeleton {
   }
 
 
+  @Override
   public void append(LoggingEvent event) {
 
     StringBuffer sbuf = new StringBuffer();

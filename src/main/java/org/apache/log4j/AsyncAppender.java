@@ -121,6 +121,7 @@ public class AsyncAppender extends AppenderSkeleton
   /**
    * {@inheritDoc}
    */
+  @Override
   public void append(final LoggingEvent event) {
     //
     //   if dispatcher thread has died then

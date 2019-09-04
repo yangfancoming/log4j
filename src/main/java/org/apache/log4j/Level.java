@@ -16,6 +16,7 @@ import java.io.Serializable;
  <code>WARN</code>, <code>INFO</code, <code>DEBUG</code> and
  <code>ALL</code>.
  <p>The <code>Level</code> class may be subclassed to define a larger level set.
+ Level对日志级别的抽象；
  */
 public class Level extends Priority implements Serializable {
 

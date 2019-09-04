@@ -46,12 +46,14 @@ public class NullAppender extends AppenderSkeleton {
   /**
    * Does not do anything. 
    * */
+  @Override
   public void doAppend(LoggingEvent event) {
   }
 
   /**
    * Does not do anything. 
    * */
+  @Override
   protected void append(LoggingEvent event) {
   }
 

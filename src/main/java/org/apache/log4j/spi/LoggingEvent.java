@@ -32,6 +32,7 @@ import org.apache.log4j.helpers.LogLog;
  <p>This class is of concern to those wishing to extend log4j.
  @since 0.8.2
  该类定义了一堆堆属性，封装了所有的日志信息
+ LoggingEvent是对一次日志记录过程中所需要的信息的抽象,可以理解成一个上下文；
  */
 public class LoggingEvent implements java.io.Serializable {
 
@@ -50,8 +51,7 @@ public class LoggingEvent implements java.io.Serializable {
     /**
      * <p>The category (logger) name.
      * @deprecated This field will be marked as private in future
-     * releases. Please do not access it directly. Use the {@link
-     * #getLoggerName} method instead.
+     * releases. Please do not access it directly. Use the {@link #getLoggerName} method instead.
      * */
     final public String categoryName;
 
@@ -294,8 +294,7 @@ public class LoggingEvent implements java.io.Serializable {
     public
     Object getMDC(String key) {
         Object r;
-        // Note the mdcCopy is used if it exists. Otherwise we use the MDC
-        // that is associated with the thread.
+        // Note the mdcCopy is used if it exists. Otherwise we use the MDC that is associated with the thread.
         if(mdcCopy != null) {
             r = mdcCopy.get(key);
             if(r != null) {
@@ -313,8 +312,7 @@ public class LoggingEvent implements java.io.Serializable {
     void getMDCCopy() {
         if(mdcCopyLookupRequired) {
             mdcCopyLookupRequired = false;
-            // the clone call is required for asynchronous logging.
-            // See also bug #5932.
+            // the clone call is required for asynchronous logging.See also bug #5932.
             Hashtable t = MDC.getContext();
             if(t != null) {
                 mdcCopy = (Hashtable) t.clone();
@@ -322,8 +320,7 @@ public class LoggingEvent implements java.io.Serializable {
         }
     }
 
-    public
-    String getRenderedMessage() {
+    public String getRenderedMessage() {
         if(renderedMessage == null && message != null) {
             if(message instanceof String)
                 renderedMessage = (String) message;
@@ -348,8 +345,7 @@ public class LoggingEvent implements java.io.Serializable {
         return startTime;
     }
 
-    public
-    String getThreadName() {
+    public String getThreadName() {
         if(threadName == null)
             threadName = (Thread.currentThread()).getName();
         return threadName;
@@ -358,32 +354,26 @@ public class LoggingEvent implements java.io.Serializable {
     /**
      Returns the throwable information contained within this
      event. May be <code>null</code> if there is no such information.
-
      <p>Note that the {@link Throwable} object contained within a
      {@link ThrowableInformation} does not survive serialization.
-
      @since 1.1 */
-    public
-    ThrowableInformation getThrowableInformation() {
+
+    public ThrowableInformation getThrowableInformation() {
         return throwableInfo;
     }
 
     /**
      Return this event's throwable's string[] representaion.
      */
-    public
-    String[] getThrowableStrRep() {
+
+    public String[] getThrowableStrRep() {
         if(throwableInfo ==  null)
             return null;
         else
             return throwableInfo.getThrowableStrRep();
     }
 
-
-    private
-    void readLevel(ObjectInputStream ois)
-            throws java.io.IOException, ClassNotFoundException {
-
+    private void readLevel(ObjectInputStream ois) throws java.io.IOException, ClassNotFoundException {
         int p = ois.readInt();
         try {
             String className = (String) ois.readObject();
@@ -405,8 +395,7 @@ public class LoggingEvent implements java.io.Serializable {
                 level = (Level) m.invoke(null,  new Integer[] { new Integer(p) } );
             }
         } catch(InvocationTargetException e) {
-            if (e.getTargetException() instanceof InterruptedException
-                    || e.getTargetException() instanceof InterruptedIOException) {
+            if (e.getTargetException() instanceof InterruptedException  || e.getTargetException() instanceof InterruptedIOException) {
                 Thread.currentThread().interrupt();
             }
             LogLog.warn("Level deserialization failed, reverting to default.", e);
@@ -423,18 +412,15 @@ public class LoggingEvent implements java.io.Serializable {
         }
     }
 
-    private void readObject(ObjectInputStream ois)
-            throws java.io.IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream ois)  throws java.io.IOException, ClassNotFoundException {
         ois.defaultReadObject();
         readLevel(ois);
-
         // Make sure that no location info is available to Layouts
         if(locationInfo == null)
             locationInfo = new LocationInfo(null, null);
     }
 
-    private
-    void writeObject(ObjectOutputStream oos) throws java.io.IOException {
+    private void writeObject(ObjectOutputStream oos) throws java.io.IOException {
         // Aside from returning the current thread name the wgetThreadName
         // method sets the threadName variable.
         this.getThreadName();
@@ -459,11 +445,8 @@ public class LoggingEvent implements java.io.Serializable {
         writeLevel(oos);
     }
 
-    private
-    void writeLevel(ObjectOutputStream oos) throws java.io.IOException {
-
+    private void writeLevel(ObjectOutputStream oos) throws java.io.IOException {
         oos.writeInt(level.toInt());
-
         Class clazz = level.getClass();
         if(clazz == Level.class) {
             oos.writeObject(null);
@@ -485,8 +468,7 @@ public class LoggingEvent implements java.io.Serializable {
      * @param propName
      * @param propValue
      */
-    public final void setProperty(final String propName,
-                                  final String propValue) {
+    public final void setProperty(final String propName, final String propValue) {
         if (mdcCopy == null) {
             getMDCCopy();
         }

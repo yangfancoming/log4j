@@ -12,23 +12,24 @@ import org.apache.log4j.helpers.LogLog;
 
 /**
  * Abstract superclass of the other appenders in the package.
- *
- *  This class provides the code for common functionality, such as
- *  support for threshold filtering and support for general filters.
+ *  This class provides the code for common functionality,
+ *  such as support for threshold filtering and support for general filters.
  *
  * @since 0.8.1
  * */
 public abstract class AppenderSkeleton implements Appender, OptionHandler {
 
-    /** The layout variable does not need to be set if the appender
-     implementation has its own layout. */
+    /**
+     * The layout variable does not need to be set if the appender implementation has its own layout.
+     */
     protected Layout layout;
 
     /** Appenders are named. */
     protected String name;
 
     /**
-     There is no level threshold filtering by default.  */
+     There is no level threshold filtering by default.
+     */
     protected Priority threshold;
 
     /**
@@ -36,9 +37,12 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      */
     protected ErrorHandler errorHandler = new OnlyOnceErrorHandler();
 
-    /** The first filter in the filter chain. Set to <code>null</code>
-     initially. */
+    /**
+     * The first filter in the filter chain. Set to <code>null</code> initially.
+     */
+
     protected Filter headFilter;
+
     /** The last filter in the filter chain. */
     protected Filter tailFilter;
 
@@ -70,6 +74,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
     /**
      Derived appenders should override this method if option structure requires it.
      */
+    @Override
     public void activateOptions() {
     }
 
@@ -78,6 +83,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
 
      @since 0.9.0
      */
+    @Override
     public
     void addFilter(Filter newFilter) {
         if(headFilter == null) {
@@ -100,6 +106,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      Clear the filters chain.
      @since 0.9.0 */
 
+    @Override
     public  void clearFilters() {
         headFilter = tailFilter = null;
     }
@@ -121,11 +128,10 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
 
 
     /**
-     Return the currently set {@link ErrorHandler} for this
-     Appender.
-
-     @since 0.9.0 */
-
+     Return the currently set {@link ErrorHandler} for this  Appender.
+     @since 0.9.0
+     */
+    @Override
     public  ErrorHandler getErrorHandler() {
         return this.errorHandler;
     }
@@ -133,10 +139,9 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
 
     /**
      Returns the head Filter.
-
      @since 1.1
      */
-
+    @Override
     public Filter getFilter() {
         return headFilter;
     }
@@ -160,6 +165,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      Returns the name of this appender.
      @return name, may be null.
      */
+    @Override
     public final String getName() {
         return this.name;
     }
@@ -187,6 +193,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      * This method performs threshold checks and invokes filters before
      * delegating actual logging to the subclasses specific {@link  AppenderSkeleton#append} method.
      * */
+    @Override
     public synchronized void doAppend(LoggingEvent event) {
         if(closed) {
             LogLog.error("Attempted to append to closed appender named ["+name+"].");
@@ -211,6 +218,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      Set the {@link ErrorHandler} for this Appender.
      @since 0.9.0
      */
+    @Override
     public synchronized void setErrorHandler(ErrorHandler eh) {
         if(eh == null) {
             // We do not throw exception here since the cause is probably a
@@ -227,6 +235,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      {@link org.apache.log4j.net.SocketAppender} ignores the layout set
      here.
      */
+    @Override
     public void setLayout(Layout layout) {
         this.layout = layout;
     }
@@ -235,6 +244,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
     /**
      Set the name of this Appender.
      */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
