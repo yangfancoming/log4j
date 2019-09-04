@@ -13,14 +13,10 @@ import org.apache.log4j.helpers.QuietWriter;
 import org.apache.log4j.spi.ErrorHandler;
 import org.apache.log4j.spi.LoggingEvent;
 
-// Contibutors: Jens Uwe Pipka <jens.pipka@gmx.de>
-//              Ben Sandee
-
+// Contibutors: Jens Uwe Pipka <jens.pipka@gmx.de>   Ben Sandee
 /**
  WriterAppender appends log events to a {@link java.io.Writer} or an
  {@link java.io.OutputStream} depending on the user's choice.
-
- @author Ceki G&uuml;lc&uuml;
  @since 1.1 */
 public class WriterAppender extends AppenderSkeleton {
 
