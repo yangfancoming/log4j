@@ -32,7 +32,6 @@ public class ConsoleAppender extends WriterAppender {
 
     /**
      * Creates a configured appender.
-     *
      * @param layout layout, may not be null.
      */
   public ConsoleAppender(Layout layout) {
@@ -52,8 +51,7 @@ public class ConsoleAppender extends WriterAppender {
 
   /**
    *  Sets the value of the <b>Target</b> option. Recognized values
-   *  are "System.out" and "System.err". Any other value will be
-   *  ignored.  
+   *  are "System.out" and "System.err". Any other value will be ignored.
    * */
   public
   void setTarget(String value) {
@@ -69,19 +67,14 @@ public class ConsoleAppender extends WriterAppender {
   }
 
   /**
-   * Returns the current value of the <b>Target</b> property. The
-   * default value of the option is "System.out".
-   *
-   * See also {@link #setTarget}.
+   * Returns the current value of the <b>Target</b> property. The default value of the option is "System.out". See also {@link #setTarget}.
    * */
-  public
-  String getTarget() {
+  public String getTarget() {
     return target;
   }
   
   /**
-   *  Sets whether the appender honors reassignments of System.out
-   *  or System.err made after configuration.
+   *  Sets whether the appender honors reassignments of System.out or System.err made after configuration.
    *  @param newValue if true, appender will use value of System.out or
    *  System.err in force at the time when logging events are appended.
    *  @since 1.2.13
@@ -91,8 +84,7 @@ public class ConsoleAppender extends WriterAppender {
   }
   
   /**
-   *  Gets whether the appender honors reassignments of System.out
-   *  or System.err made after configuration.
+   *  Gets whether the appender honors reassignments of System.out or System.err made after configuration.
    *  @return true if appender will use value of System.out or
    *  System.err in force at the time when logging events are appended.
    *  @since 1.2.13
@@ -126,22 +118,15 @@ public class ConsoleAppender extends WriterAppender {
         super.activateOptions();
   }
   
-  /**
-   *  {@inheritDoc}
-   */
-  protected
-  final
-  void closeWriter() {
+
+  protected final void closeWriter() {
      if (follow) {
         super.closeWriter();
      }
   }
-  
 
     /**
-     * An implementation of OutputStream that redirects to the
-     * current System.err.
-     *
+     * An implementation of OutputStream that redirects to the current System.err.
      */
     private static class SystemErrStream extends OutputStream {
         public SystemErrStream() {
@@ -167,9 +152,7 @@ public class ConsoleAppender extends WriterAppender {
     }
 
     /**
-     * An implementation of OutputStream that redirects to the
-     * current System.out.
-     *
+     * An implementation of OutputStream that redirects to the  current System.out.
      */
     private static class SystemOutStream extends OutputStream {
 

@@ -302,7 +302,7 @@ public class WriterAppender extends AppenderSkeleton {
             }
         }
         if(shouldFlush(event)) {
-            this.qw.flush(); //最终： 控制台输出日志
+            this.qw.flush(); //最终： 控制台输出日志 真正打印
         }
     }
 
