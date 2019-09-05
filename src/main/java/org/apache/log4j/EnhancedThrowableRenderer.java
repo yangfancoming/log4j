@@ -14,7 +14,6 @@ import java.util.Map;
  * Enhanced implementation of ThrowableRenderer.  Uses Throwable.getStackTrace
  * if running on JDK 1.4 or later and delegates to DefaultThrowableRenderer.render
  * on earlier virtual machines.
- *
  * @since 1.2.16
  */
 public final class EnhancedThrowableRenderer implements ThrowableRenderer {
@@ -83,24 +82,17 @@ public final class EnhancedThrowableRenderer implements ThrowableRenderer {
                     if (source != null) {
                         URL locationURL = source.getLocation();
                         if (locationURL != null) {
-                            //
                             //   if a file: URL
-                            //
                             if ("file".equals(locationURL.getProtocol())) {
                                 String path = locationURL.getPath();
                                 if (path != null) {
-                                    //
                                     //  find the last file separator character
-                                    //
                                     int lastSlash = path.lastIndexOf('/');
                                     int lastBack = path.lastIndexOf(File.separatorChar);
                                     if (lastBack > lastSlash) {
                                         lastSlash = lastBack;
                                     }
-                                    //
-                                    //  if no separator or ends with separator (a directory)
-                                    //     then output the URL, otherwise just the file name.
-                                    //
+                                    //  if no separator or ends with separator (a directory) then output the URL, otherwise just the file name.
                                     if (lastSlash <= 0 || lastSlash == path.length() - 1) {
                                         buf.append(locationURL);
                                     } else {

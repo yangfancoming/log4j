@@ -9,13 +9,11 @@ package org.apache.log4j;
 
 /**
    Use this class to quickly configure the package.
-
    <p>For file based configuration see {@link
    PropertyConfigurator}. For XML based configuration see {@link
    org.apache.log4j.xml.DOMConfigurator DOMConfigurator}.
-
    @since 0.8.1
-   @author Ceki G&uuml;lc&uuml; */
+*/
 public class BasicConfigurator {
 
   protected BasicConfigurator() {

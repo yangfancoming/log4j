@@ -179,7 +179,6 @@ public class DOMConfigurator implements Configurator {
      * should be abandoned.
      */
     private static void parseUnrecognizedElement(final Object instance,final Element element,final Properties props) throws Exception {
-
         boolean recognized = false;
         if (instance instanceof UnrecognizedElementHandler) {
             recognized = ((UnrecognizedElementHandler) instance).parseUnrecognizedElement( element, props);
@@ -266,8 +265,7 @@ public class DOMConfigurator implements Configurator {
             propSetter.activate();
             return appender;
         }
-    /* Yes, it's ugly.  But all of these exceptions point to the same
-       problem: we can't create an Appender */
+    /* Yes, it's ugly.  But all of these exceptions point to the same  problem: we can't create an Appender */
         catch (Exception oops) {
             if (oops instanceof InterruptedException || oops instanceof InterruptedIOException) {
                 Thread.currentThread().interrupt();
@@ -814,22 +812,16 @@ public class DOMConfigurator implements Configurator {
         parse(element);
     }
 
-
     /**
      A static version of {@link #doConfigure(String, LoggerRepository)}.  */
-    static
-    public
-    void configure(String filename) throws FactoryConfigurationError {
+    public static void configure(String filename) throws FactoryConfigurationError {
         new DOMConfigurator().doConfigure(filename, LogManager.getLoggerRepository());
-
     }
 
     /**
      A static version of {@link #doConfigure(URL, LoggerRepository)}.
      */
-    static
-    public
-    void configure(URL url) throws FactoryConfigurationError {
+    public static void configure(URL url) throws FactoryConfigurationError {
         new DOMConfigurator().doConfigure(url, LogManager.getLoggerRepository());
     }
 
@@ -837,13 +829,10 @@ public class DOMConfigurator implements Configurator {
      Used internally to configure the log4j framework by parsing a DOM
      tree of XML elements based on <a
      href="doc-files/log4j.dtd">log4j.dtd</a>.
-
      */
-    protected
-    void parse(Element element) {
 
+    protected void parse(Element element) {
         String rootElementName = element.getTagName();
-
         if (!rootElementName.equals(CONFIGURATION_TAG)) {
             if(rootElementName.equals(OLD_CONFIGURATION_TAG)) {
                 LogLog.warn("The <"+OLD_CONFIGURATION_TAG+ "> element has been deprecated.");
@@ -854,9 +843,7 @@ public class DOMConfigurator implements Configurator {
             }
         }
 
-
         String debugAttrib = subst(element.getAttribute(INTERNAL_DEBUG_ATTR));
-
         LogLog.debug("debug attribute= \"" + debugAttrib +"\".");
         // if the log4j.dtd is not specified in the XML file, then the
         // "debug" attribute is returned as the empty string.
@@ -865,11 +852,7 @@ public class DOMConfigurator implements Configurator {
         } else {
             LogLog.debug("Ignoring " + INTERNAL_DEBUG_ATTR + " attribute.");
         }
-
-        //
-        //   reset repository before configuration if reset="true"
-        //       on configuration element.
-        //
+        //   reset repository before configuration if reset="true" on configuration element.
         String resetAttrib = subst(element.getAttribute(RESET_ATTR));
         LogLog.debug("reset attribute= \"" + resetAttrib +"\".");
         if(!("".equals(resetAttrib))) {
@@ -877,8 +860,6 @@ public class DOMConfigurator implements Configurator {
                 repository.resetConfiguration();
             }
         }
-
-
 
         String confDebug = subst(element.getAttribute(CONFIG_DEBUG_ATTR));
         if(!confDebug.equals("") && !confDebug.equals("null")) {
@@ -939,9 +920,7 @@ public class DOMConfigurator implements Configurator {
                             ((ThrowableRendererSupport) repository).setThrowableRenderer(tr);
                         }
                     }
-                } else if (!(tagName.equals(APPENDER_TAG)
-                        || tagName.equals(CATEGORY_FACTORY_TAG)
-                        || tagName.equals(LOGGER_FACTORY_TAG))) {
+                } else if (!(tagName.equals(APPENDER_TAG) || tagName.equals(CATEGORY_FACTORY_TAG) || tagName.equals(LOGGER_FACTORY_TAG))) {
                     quietParseUnrecognizedElement(repository, currentElement, props);
                 }
             }

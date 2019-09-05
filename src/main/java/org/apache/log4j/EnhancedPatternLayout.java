@@ -390,17 +390,10 @@ import org.apache.log4j.spi.LoggingEvent;
    less than 15 characters and truncated if longer and the category
    name is left padded if shorter than 30 characters and truncated if
    longer.
-
-  </dl>
-
    <p>The above text is largely inspired from Peter A. Darnell and
    Philip E. Margolis' highly recommended book "C -- a Software
    Engineering Approach", ISBN 0-387-97389-3.
-
    @author <a href="mailto:cakalijp@Maritz.com">James P. Cakalic</a>
-   @author Ceki G&uuml;lc&uuml;
-
-
    @since 1.2.16 */
 public class EnhancedPatternLayout extends Layout {
   /** Default pattern string for log output. Currently set to the
@@ -462,8 +455,7 @@ public class EnhancedPatternLayout extends Layout {
   */
   public EnhancedPatternLayout(final String pattern) {
     this.conversionPattern = pattern;
-    head = createPatternParser(
-            (pattern == null) ? DEFAULT_CONVERSION_PATTERN : pattern).parse();
+    head = createPatternParser( (pattern == null) ? DEFAULT_CONVERSION_PATTERN : pattern).parse();
     if (head instanceof BridgePatternConverter) {
         handlesExceptions = !((BridgePatternConverter) head).ignoresThrowable();
     } else {

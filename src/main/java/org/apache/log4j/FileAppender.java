@@ -70,9 +70,8 @@ public class FileAppender extends WriterAppender {
      then buffered IO will be used to write to the output file.
 
      */
-    public
-    FileAppender(Layout layout, String filename, boolean append, boolean bufferedIO,
-                 int bufferSize) throws IOException {
+
+    public FileAppender(Layout layout, String filename, boolean append, boolean bufferedIO, int bufferSize) throws IOException {
         this.layout = layout;
         this.setFile(filename, append, bufferedIO, bufferSize);
     }
@@ -86,33 +85,29 @@ public class FileAppender extends WriterAppender {
      appended to. Otherwise, the file designated by
      <code>filename</code> will be truncated before being opened.
      */
-    public
-    FileAppender(Layout layout, String filename, boolean append)
-            throws IOException {
+
+    public FileAppender(Layout layout, String filename, boolean append) throws IOException {
         this.layout = layout;
         this.setFile(filename, append, false, bufferSize);
     }
 
     /**
      Instantiate a FileAppender and open the file designated by
-     <code>filename</code>. The opened filename will become the output
-     destination for this appender.
-
+     <code>filename</code>. The opened filename will become the output  destination for this appender.
      <p>The file will be appended to.  */
-    public
-    FileAppender(Layout layout, String filename) throws IOException {
+
+    public FileAppender(Layout layout, String filename) throws IOException {
         this(layout, filename, true);
     }
 
     /**
      The <b>File</b> property takes a string value which should be the
      name of the file to append to.
-
      <p><font color="#DD0044"><b>Note that the special values
      "System.out" or "System.err" are no longer honored.</b></font>
-
      <p>Note: Actual opening of the file is made when {@link
-    #activateOptions} is called, not when the options are set.  */
+    #activateOptions} is called, not when the options are set.
+     */
     public void setFile(String file) {
         // Trim spaces from both ends. The users probably does not want
         // trailing spaces in file names.
@@ -123,15 +118,13 @@ public class FileAppender extends WriterAppender {
     /**
      Returns the value of the <b>Append</b> option.
      */
-    public
-    boolean getAppend() {
+    public boolean getAppend() {
         return fileAppend;
     }
 
 
     /** Returns the value of the <b>File</b> option. */
-    public
-    String getFile() {
+    public String getFile() {
         return fileName;
     }
 
@@ -141,15 +134,14 @@ public class FileAppender extends WriterAppender {
      <b>Append</b> properties.
 
      @since 0.8.1 */
-    public
-    void activateOptions() {
+
+    public void activateOptions() {
         if(fileName != null) {
             try {
                 setFile(fileName, fileAppend, bufferedIO, bufferSize);
             }
             catch(java.io.IOException e) {
-                errorHandler.error("setFile("+fileName+","+fileAppend+") call failed.",
-                        e, ErrorCode.FILE_OPEN_FAILURE);
+                errorHandler.error("setFile("+fileName+","+fileAppend+") call failed.", e, ErrorCode.FILE_OPEN_FAILURE);
             }
         } else {
             //LogLog.error("File option not set for appender ["+name+"].");
@@ -161,8 +153,8 @@ public class FileAppender extends WriterAppender {
     /**
      Closes the previously opened file.
      */
-    protected
-    void closeFile() {
+
+    protected void closeFile() {
         if(this.qw != null) {
             try {
                 this.qw.close();
@@ -180,13 +172,10 @@ public class FileAppender extends WriterAppender {
 
     /**
      Get the value of the <b>BufferedIO</b> option.
-
      <p>BufferedIO will significatnly increase performance on heavily
      loaded systems.
-
      */
-    public
-    boolean getBufferedIO() {
+    public boolean getBufferedIO() {
         return this.bufferedIO;
     }
 
@@ -194,8 +183,7 @@ public class FileAppender extends WriterAppender {
     /**
      Get the size of the IO buffer.
      */
-    public
-    int getBufferSize() {
+    public int getBufferSize() {
         return this.bufferSize;
     }
 
@@ -211,8 +199,8 @@ public class FileAppender extends WriterAppender {
      <p>Note: Actual opening of the file is made when {@link
     #activateOptions} is called, not when the options are set.
      */
-    public
-    void setAppend(boolean flag) {
+
+    public void setAppend(boolean flag) {
         fileAppend = flag;
     }
 
@@ -221,13 +209,10 @@ public class FileAppender extends WriterAppender {
      <code>false</code> by default. If true, then <code>File</code>
      will be opened and the resulting {@link java.io.Writer} wrapped
      around a {@link BufferedWriter}.
-
      BufferedIO will significatnly increase performance on heavily
      loaded systems.
-
      */
-    public
-    void setBufferedIO(boolean bufferedIO) {
+    public void setBufferedIO(boolean bufferedIO) {
         this.bufferedIO = bufferedIO;
         if(bufferedIO) {
             immediateFlush = false;
@@ -238,8 +223,7 @@ public class FileAppender extends WriterAppender {
     /**
      Set the size of the IO buffer.
      */
-    public
-    void setBufferSize(int bufferSize) {
+    public void setBufferSize(int bufferSize) {
         this.bufferSize = bufferSize;
     }
 
@@ -257,30 +241,19 @@ public class FileAppender extends WriterAppender {
      @param fileName The path to the log file.
      @param append   If true will append to fileName. Otherwise will
      truncate fileName.  */
-    public
-    synchronized
-    void setFile(String fileName, boolean append, boolean bufferedIO, int bufferSize)
-            throws IOException {
+    public synchronized void setFile(String fileName, boolean append, boolean bufferedIO, int bufferSize)  throws IOException {
         LogLog.debug("setFile called: "+fileName+", "+append);
-
         // It does not make sense to have immediate flush and bufferedIO.
         if(bufferedIO) {
             setImmediateFlush(false);
         }
-
         reset();
         FileOutputStream ostream = null;
         try {
-            //
             //   attempt to create file
-            //
             ostream = new FileOutputStream(fileName, append);
         } catch(FileNotFoundException ex) {
-            //
-            //   if parent directory does not exist then
-            //      attempt to create it and try to create file
-            //      see bug 9150
-            //
+            //   if parent directory does not exist then attempt to create it and try to create file  see bug 9150
             String parentName = new File(fileName).getParent();
             if (parentName != null) {
                 File parentDir = new File(parentName);

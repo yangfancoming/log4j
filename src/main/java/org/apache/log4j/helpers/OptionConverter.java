@@ -366,22 +366,14 @@ public class OptionConverter {
 
     /**
      * Configure log4j given an {@link InputStream}.
-     *
-     * <p>
      * The InputStream will be interpreted by a new instance of a log4j configurator.
-     * </p>
-     * <p>
      * All configurations steps are taken on the <code>hierarchy</code> passed as a parameter.
-     * </p>
-     *
-     * @param inputStream
-     *            The configuration input stream.
+     * @param inputStream  The configuration input stream.
      * @param clazz
      *            The class name, of the log4j configurator which will parse the <code>inputStream</code>. This must be a
      *            subclass of {@link Configurator}, or null. If this value is null then a default configurator of
      *            {@link PropertyConfigurator} is used.
-     * @param hierarchy
-     *            The {@link org.apache.log4j.Hierarchy} to act on.
+     * @param hierarchy  The {@link org.apache.log4j.Hierarchy} to act on.
      * @since 1.2.17
      */
     public static void selectAndConfigure(InputStream inputStream, String clazz, LoggerRepository hierarchy) {
@@ -402,13 +394,9 @@ public class OptionConverter {
 
     /**
      Configure log4j given a URL.
-
-     <p>The url must point to a file or resource which will be interpreted by
-     a new instance of a log4j configurator.
-
+     <p>The url must point to a file or resource which will be interpreted by  a new instance of a log4j configurator.
      <p>All configurations steps are taken on the
      <code>hierarchy</code> passed as a parameter.
-
      <p>
      @param url The location of the configuration file or resource.
      @param clazz The classname, of the log4j configurator which will parse
