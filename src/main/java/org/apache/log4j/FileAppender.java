@@ -195,7 +195,6 @@ public class FileAppender extends WriterAppender {
      will be opened in append mode by {@link #setFile setFile} (see
      above). Otherwise, {@link #setFile setFile} will open
      <code>File</code> in truncate mode.
-
      <p>Note: Actual opening of the file is made when {@link
     #activateOptions} is called, not when the options are set.
      */
@@ -282,21 +281,17 @@ public class FileAppender extends WriterAppender {
 
     /**
      Sets the quiet writer being used.
-
      This method is overriden by {@link RollingFileAppender}.
      */
-    protected
-    void setQWForFiles(Writer writer) {
+    protected void setQWForFiles(Writer writer) {
         this.qw = new QuietWriter(writer, errorHandler);
     }
-
 
     /**
      Close any previously opened file and call the parent's
      <code>reset</code>.  */
     @Override
-    protected
-    void reset() {
+    protected void reset() {
         closeFile();
         this.fileName = null;
         super.reset();

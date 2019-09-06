@@ -5,8 +5,7 @@ import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * This is a base class for LogMF and LogSF parameterized logging classes.
- *
- *
+
  * @see org.apache.log4j.LogMF
  * @see org.apache.log4j.LogSF
  * @since 1.2.16
@@ -166,13 +165,8 @@ public abstract class LogXF {
      * @param param4 parameter 4.
      * @return new array.
      */
-    protected static Object[] toArray(final Object param1,
-                                      final Object param2,
-                                      final Object param3,
-                                      final Object param4) {
-        return new Object[]{
-                param1, param2, param3, param4
-        };
+    protected static Object[] toArray(final Object param1,final Object param2,final Object param3,final Object param4) {
+        return new Object[]{ param1, param2, param3, param4 };
     }
 
     /**
@@ -182,12 +176,9 @@ public abstract class LogXF {
      * @param sourceClass  source class, may be null.
      * @param sourceMethod method, may be null.
      */
-    public static void entering(final Logger logger,
-                                final String sourceClass,
-                                final String sourceMethod) {
+    public static void entering(final Logger logger,final String sourceClass, final String sourceMethod) {
         if (logger.isDebugEnabled()) {
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    sourceClass + "." + sourceMethod + " ENTRY", null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,sourceClass + "." + sourceMethod + " ENTRY", null));
         }
     }
 
@@ -199,14 +190,10 @@ public abstract class LogXF {
      * @param sourceMethod method, may be null.
      * @param param        parameter, may be null.
      */
-    public static void entering(final Logger logger,
-                                final String sourceClass,
-                                final String sourceMethod,
-                                final String param) {
+    public static void entering(final Logger logger, final String sourceClass,final String sourceMethod,final String param) {
         if (logger.isDebugEnabled()) {
             String msg = sourceClass + "." + sourceMethod + " ENTRY " + param;
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    msg, null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,msg, null));
         }
     }
 
@@ -218,10 +205,7 @@ public abstract class LogXF {
      * @param sourceMethod method, may be null.
      * @param param        parameter, may be null.
      */
-    public static void entering(final Logger logger,
-                                final String sourceClass,
-                                final String sourceMethod,
-                                final Object param) {
+    public static void entering(final Logger logger, final String sourceClass,final String sourceMethod,final Object param) {
         if (logger.isDebugEnabled()) {
             String msg = sourceClass + "." + sourceMethod + " ENTRY ";
             if (param == null) {
@@ -233,8 +217,7 @@ public abstract class LogXF {
                     msg += "?";
                 }
             }
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    msg, null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG, msg, null));
         }
     }
 
@@ -246,10 +229,8 @@ public abstract class LogXF {
      * @param sourceMethod method, may be null.
      * @param params       parameters, may be null.
      */
-    public static void entering(final Logger logger,
-                                final String sourceClass,
-                                final String sourceMethod,
-                                final Object[] params) {
+    public static void entering(final Logger logger,final String sourceClass,final String sourceMethod, final Object[] params) {
+
         if (logger.isDebugEnabled()) {
             String msg = sourceClass + "." + sourceMethod + " ENTRY ";
             if (params != null && params.length > 0) {
@@ -266,8 +247,7 @@ public abstract class LogXF {
             } else {
                 msg += "{}";
             }
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    msg, null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG, msg, null));
         }
     }
 
@@ -278,12 +258,10 @@ public abstract class LogXF {
      * @param sourceClass  source class, may be null.
      * @param sourceMethod method, may be null.
      */
-    public static void exiting(final Logger logger,
-                               final String sourceClass,
-                               final String sourceMethod) {
+    public static void exiting(final Logger logger,final String sourceClass, final String sourceMethod) {
+
         if (logger.isDebugEnabled()) {
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    sourceClass + "." + sourceMethod + " RETURN", null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,sourceClass + "." + sourceMethod + " RETURN", null));
         }
     }
 
@@ -295,14 +273,9 @@ public abstract class LogXF {
      * @param sourceMethod method, may be null.
      * @param result       result, may be null.
      */
-    public static void exiting(
-            final Logger logger,
-            final String sourceClass,
-            final String sourceMethod,
-            final String result) {
+    public static void exiting(final Logger logger,final String sourceClass,final String sourceMethod, final String result) {
         if (logger.isDebugEnabled()) {
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    sourceClass + "." + sourceMethod + " RETURN " + result, null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,sourceClass + "." + sourceMethod + " RETURN " + result, null));
         }
     }
 
@@ -314,11 +287,7 @@ public abstract class LogXF {
      * @param sourceMethod method, may be null.
      * @param result       result, may be null.
      */
-    public static void exiting(
-            final Logger logger,
-            final String sourceClass,
-            final String sourceMethod,
-            final Object result) {
+    public static void exiting(final Logger logger, final String sourceClass, final String sourceMethod, final Object result) {
         if (logger.isDebugEnabled()) {
             String msg = sourceClass + "." + sourceMethod + " RETURN ";
             if (result == null) {
@@ -330,8 +299,7 @@ public abstract class LogXF {
                     msg += "?";
                 }
             }
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    msg, null));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,  msg, null));
         }
     }
 
@@ -343,14 +311,10 @@ public abstract class LogXF {
      * @param sourceMethod method, may be null.
      * @param thrown      throwable, may be null.
      */
-    public static void throwing(
-            final Logger logger,
-            final String sourceClass,
-            final String sourceMethod,
-            final Throwable thrown) {
+    public static void throwing( final Logger logger,final String sourceClass, final String sourceMethod,final Throwable thrown) {
+
         if (logger.isDebugEnabled()) {
-            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,
-                    sourceClass + "." + sourceMethod + " THROW", thrown));
+            logger.callAppenders(new LoggingEvent(FQCN, logger, Level.DEBUG,sourceClass + "." + sourceMethod + " THROW", thrown));
         }
     }
 }
