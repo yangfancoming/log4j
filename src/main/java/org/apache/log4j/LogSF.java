@@ -26,7 +26,7 @@ public final class LogSF extends LogXF {
     /**
      * Formats arguments using SLF4J-like formatter.
      * @param pattern pattern, may be malformed.
-     * @param arguments arguments.
+     * @param arguments    arguments.
      * @return Message string
      */
     private static String format(final String pattern,  final Object[] arguments) {
