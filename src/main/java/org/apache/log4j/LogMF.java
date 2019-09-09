@@ -1129,13 +1129,10 @@ public final class LogMF extends LogXF {
       * @param pattern pattern, may be null.
      * @param parameters parameters to the log message.
       */
-    public static void log(final Logger logger,
-                             final Level level,
-                             final String pattern,
-                             final Object[] parameters) {
+    public static void log(final Logger logger, final Level level,final String pattern,final Object[] parameters) {
+
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(pattern, parameters));
+            forcedLog(logger, level,format(pattern, parameters));
         }
     }
 
@@ -1147,14 +1144,9 @@ public final class LogMF extends LogXF {
       * @param pattern pattern, may be null.
      * @param parameters parameters to the log message.
       */
-    public static void log(final Logger logger,
-                             final Level level,
-                             final Throwable t,
-                             final String pattern,
-                             final Object[] parameters) {
+    public static void log(final Logger logger,final Level level,final Throwable t,final String pattern,final Object[] parameters) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(pattern, parameters), t);
+            forcedLog(logger, level, format(pattern, parameters), t);
         }
     }
 
@@ -1235,13 +1227,10 @@ public final class LogMF extends LogXF {
       * @param pattern pattern, may be null.
      * @param param1 parameter to the log message.
       */
-    public static void log(final Logger logger,
-                             final Level level,
-                             final String pattern,
-                             final short param1) {
+    public static void log(final Logger logger, final Level level,final String pattern,final short param1) {
+
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(pattern, toArray(valueOf(param1))));
+            forcedLog(logger, level, format(pattern, toArray(valueOf(param1))));
         }
     }
 
