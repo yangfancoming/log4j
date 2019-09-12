@@ -116,16 +116,14 @@ public class DOMConfigurator implements Configurator {
     /**
      No argument constructor.
      */
-    public
-    DOMConfigurator () {
+    public DOMConfigurator () {
         appenderBag = new Hashtable();
     }
 
     /**
      Used internally to parse appenders by IDREF name.
      */
-    protected
-    Appender findAppenderByName(Document doc, String appenderName)  {
+    protected Appender findAppenderByName(Document doc, String appenderName)  {
         Appender appender = (Appender) appenderBag.get(appenderName);
 
         if(appender != null) {
@@ -265,7 +263,7 @@ public class DOMConfigurator implements Configurator {
             propSetter.activate();
             return appender;
         }
-    /* Yes, it's ugly.  But all of these exceptions point to the same  problem: we can't create an Appender */
+        /* Yes, it's ugly.  But all of these exceptions point to the same  problem: we can't create an Appender */
         catch (Exception oops) {
             if (oops instanceof InterruptedException || oops instanceof InterruptedIOException) {
                 Thread.currentThread().interrupt();
@@ -278,8 +276,7 @@ public class DOMConfigurator implements Configurator {
     /**
      Used internally to parse an {@link ErrorHandler} element.
      */
-    protected
-    void parseErrorHandler(Element element, Appender appender) {
+    protected void parseErrorHandler(Element element, Appender appender) {
         ErrorHandler eh = (ErrorHandler) OptionConverter.instantiateByClassName(subst(element.getAttribute(CLASS_ATTR)), org.apache.log4j.spi.ErrorHandler.class,null);
 
         if(eh != null) {
@@ -318,8 +315,7 @@ public class DOMConfigurator implements Configurator {
     /**
      Used internally to parse a filter element.
      */
-    protected
-    void parseFilters(Element element, Appender appender) {
+    protected void parseFilters(Element element, Appender appender) {
         String clazz = subst(element.getAttribute(CLASS_ATTR));
         Filter filter = (Filter) OptionConverter.instantiateByClassName(clazz, Filter.class, null);
 
@@ -349,8 +345,7 @@ public class DOMConfigurator implements Configurator {
     /**
      Used internally to parse an category element.
      */
-    protected
-    void parseCategory (Element loggerElement) {
+    protected void parseCategory (Element loggerElement) {
         // Create a new org.apache.log4j.Category object from the <category> element.
         String catName = subst(loggerElement.getAttribute(NAME_ATTR));
         Logger cat;
@@ -389,12 +384,10 @@ public class DOMConfigurator implements Configurator {
         }
     }
 
-
     /**
      Used internally to parse the category factory element.
      */
-    protected
-    void parseCategoryFactory(Element factoryElement) {
+    protected void parseCategoryFactory(Element factoryElement) {
         String className = subst(factoryElement.getAttribute(CLASS_ATTR));
 
         if(EMPTY_STR.equals(className)) {
@@ -434,8 +427,7 @@ public class DOMConfigurator implements Configurator {
     /**
      Used internally to parse the roor category element.
      */
-    protected
-    void parseRoot (Element rootElement) {
+    protected void parseRoot (Element rootElement) {
         Logger root = repository.getRootLogger();
         // category configuration needs to be atomic
         synchronized(root) {
@@ -447,9 +439,7 @@ public class DOMConfigurator implements Configurator {
     /**
      Used internally to parse the children of a category element.
      */
-    protected
-    void parseChildrenOfLoggerElement(Element catElement, Logger cat, boolean isRoot) {
-
+    protected void parseChildrenOfLoggerElement(Element catElement, Logger cat, boolean isRoot) {
         PropertySetter propSetter = new PropertySetter(cat);
 
         // Remove all existing appenders from cat. They will be
@@ -494,8 +484,7 @@ public class DOMConfigurator implements Configurator {
     /**
      Used internally to parse a layout element.
      */
-    protected
-    Layout parseLayout (Element layout_element) {
+    protected  Layout parseLayout (Element layout_element) {
         String className = subst(layout_element.getAttribute(CLASS_ATTR));
         LogLog.debug("Parsing layout of class: \""+className+"\"");
         try {
@@ -525,8 +514,7 @@ public class DOMConfigurator implements Configurator {
             if (oops instanceof InterruptedException || oops instanceof InterruptedIOException) {
                 Thread.currentThread().interrupt();
             }
-            LogLog.error("Could not create the Layout. Reported error follows.",
-                    oops);
+            LogLog.error("Could not create the Layout. Reported error follows.", oops);
             return null;
         }
     }
@@ -623,8 +611,8 @@ public class DOMConfigurator implements Configurator {
         LogLog.debug(catName + " level set to " + logger.getLevel());
     }
 
-    protected
-    void setParameter(Element elem, PropertySetter propSetter) {
+
+    protected void setParameter(Element elem, PropertySetter propSetter) {
         String name = subst(elem.getAttribute(NAME_ATTR));
         String value = (elem.getAttribute(VALUE_ATTR));
         value = subst(OptionConverter.convertSpecialChars(value));
@@ -635,11 +623,8 @@ public class DOMConfigurator implements Configurator {
     /**
      Configure log4j using a <code>configuration</code> element as
      defined in the log4j.dtd.
-
      */
-    static
-    public
-    void configure (Element element) {
+    public static void configure (Element element) {
         DOMConfigurator configurator = new DOMConfigurator();
         configurator.doConfigure(element,  LogManager.getLoggerRepository());
     }
@@ -669,9 +654,7 @@ public class DOMConfigurator implements Configurator {
      @param configFilename A log4j configuration file in XML format.
      @param delay The delay in milliseconds to wait between each check.
      */
-    static
-    public
-    void configureAndWatch(String configFilename, long delay) {
+    public static void configureAndWatch(String configFilename, long delay) {
         XMLWatchdog xdog = new XMLWatchdog(configFilename);
         xdog.setDelay(delay);
         xdog.start();
@@ -681,13 +664,13 @@ public class DOMConfigurator implements Configurator {
         Document parse(final DocumentBuilder parser) throws SAXException, IOException;
     }
 
-
-    public
-    void doConfigure(final String filename, LoggerRepository repository) {
+    public void doConfigure(final String filename, LoggerRepository repository) {
         ParseAction action = new ParseAction() {
+            @Override
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 return parser.parse(new File(filename));
             }
+            @Override
             public String toString() {
                 return "file [" + filename + "]";
             }
@@ -700,6 +683,7 @@ public class DOMConfigurator implements Configurator {
     @Override
     public void doConfigure(final URL url, LoggerRepository repository) {
         ParseAction action = new ParseAction() {
+            @Override
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 URLConnection uConn = url.openConnection();
                 uConn.setUseCaches(false);
@@ -712,6 +696,7 @@ public class DOMConfigurator implements Configurator {
                     stream.close();
                 }
             }
+            @Override
             public String toString() {
                 return "url [" + url.toString() + "]";
             }
@@ -725,11 +710,13 @@ public class DOMConfigurator implements Configurator {
     @Override
     public void doConfigure(final InputStream inputStream, LoggerRepository repository) throws FactoryConfigurationError {
         ParseAction action = new ParseAction() {
+            @Override
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 InputSource inputSource = new InputSource(inputStream);
                 inputSource.setSystemId("dummy://log4j.dtd");
                 return parser.parse(inputSource);
             }
+            @Override
             public String toString() {
                 return "input stream [" + inputStream.toString() + "]";
             }
@@ -742,11 +729,13 @@ public class DOMConfigurator implements Configurator {
      */
     public void doConfigure(final Reader reader, LoggerRepository repository)  throws FactoryConfigurationError {
         ParseAction action = new ParseAction() {
+            @Override
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 InputSource inputSource = new InputSource(reader);
                 inputSource.setSystemId("dummy://log4j.dtd");
                 return parser.parse(inputSource);
             }
+            @Override
             public String toString() {
                 return "reader [" + reader.toString() + "]";
             }
@@ -763,9 +752,11 @@ public class DOMConfigurator implements Configurator {
             inputSource.setSystemId("dummy://log4j.dtd");
         }
         ParseAction action = new ParseAction() {
+            @Override
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 return parser.parse(inputSource);
             }
+            @Override
             public String toString() {
                 return "input source [" + inputSource.toString() + "]";
             }

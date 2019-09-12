@@ -1,10 +1,5 @@
 
 
-
-// Contibutors: "Luke Blanshard" <Luke@quiq.com>
-//              "Mark DONSZELMANN" <Mark.Donszelmann@cern.ch>
-//               Anders Kristensen <akristensen@dynamicsoft.com>
-
 package org.apache.log4j;
 
 import java.io.FileInputStream;
@@ -347,8 +342,8 @@ public class PropertyConfigurator implements Configurator {
      configuration information is stored.
 
      */
-    public
-    void doConfigure(String configFileName, LoggerRepository hierarchy) {
+
+    public void doConfigure(String configFileName, LoggerRepository hierarchy) {
         Properties props = new Properties();
         FileInputStream istream = null;
         try {
@@ -604,8 +599,8 @@ public class PropertyConfigurator implements Configurator {
         }
 
         if(value == null)
-        // 如果配置文件log4j.properties中log4j.rootLogger找不到并且log4j.rootCategory配置找不到
-        // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
+            // 如果配置文件log4j.properties中log4j.rootLogger找不到并且log4j.rootCategory配置找不到
+            // 如果配置文件log4j.properties里配置了log4j.debug=true或者log4j.configDebug=true，就可以打印此日志来跟踪log4j的加载过程
             LogLog.debug("Could not find root logger information. Is this OK?");
         else {
             // 从Hierarchy中取得默认的实现RootLogger
@@ -891,8 +886,7 @@ class PropertyWatchdog extends FileWatchdog {
      Call {@link PropertyConfigurator#configure(String)} with the
      <code>filename</code> to reconfigure log4j. */
     @Override
-    public
-    void doOnChange() {
+    public void doOnChange() {
         new PropertyConfigurator().doConfigure(filename, LogManager.getLoggerRepository());
     }
 }
@@ -903,6 +897,7 @@ class NameValue {
         this.key = key;
         this.value = value;
     }
+    @Override
     public String toString() {
         return key + "=" + value;
     }
@@ -926,10 +921,12 @@ class SortedKeyEnumeration implements Enumeration {
         e = keys.elements();
     }
 
+    @Override
     public boolean hasMoreElements() {
         return e.hasMoreElements();
     }
 
+    @Override
     public Object nextElement() {
         return e.nextElement();
     }

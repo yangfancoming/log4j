@@ -387,7 +387,7 @@ public class DOMTestCase extends TestCase {
         File file = new File("output/xml.jar");
         ZipOutputStream zos =
             new ZipOutputStream(new FileOutputStream(file));
-        zos.putNextEntry(new ZipEntry("log4j.xml"));
+        zos.putNextEntry(new ZipEntry("Agoat/log4j.xml"));
         int len;
         byte[] buf = new byte[1024];
         while ((len = is.read(buf)) > 0) {

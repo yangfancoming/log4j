@@ -1,7 +1,4 @@
 
-
-// Contributors:  Kitching Simon <Simon.Kitching@orange.ch>
-
 package org.apache.log4j;
 
 /**
@@ -88,8 +85,6 @@ public class Priority {
         return syslogEquivalent;
     }
 
-
-
     /**
      Returns <code>true</code> if this level has a higher or equal
      level than the level passed as argument, <code>false</code> otherwise.
@@ -101,13 +96,9 @@ public class Priority {
     }
 
     /**
-     Return all possible priorities as an array of Level objects in
-     descending order.
-
+     Return all possible priorities as an array of Level objects in descending order.
      @deprecated This method will be removed with no replacement.
      */
-
-
     public static Priority[] getAllPossiblePriorities() {
         return new Priority[] {Priority.FATAL, Priority.ERROR, Level.WARN, Priority.INFO, Priority.DEBUG};
     }
@@ -138,8 +129,6 @@ public class Priority {
     /**
      * @deprecated Please use the {@link Level#toLevel(int)} method instead.
      */
-
-
     public static Priority toPriority(int val) {
         return toPriority(val, Priority.DEBUG);
     }

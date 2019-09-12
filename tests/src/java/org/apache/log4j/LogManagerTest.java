@@ -24,14 +24,14 @@ public class LogManagerTest extends TestCase {
    *  @deprecated since constant is deprecated
    */
   public void testDefaultConfigurationFile() {
-     assertEquals("log4j.properties", LogManager.DEFAULT_CONFIGURATION_FILE);
+     assertEquals("Agoat/log4j.properties", LogManager.DEFAULT_CONFIGURATION_FILE);
   }
 
   /**
    *  Check value of DEFAULT_XML_CONFIGURATION_FILE.
    */
   public void testDefaultXmlConfigurationFile() {
-     assertEquals("log4j.xml", LogManager.DEFAULT_XML_CONFIGURATION_FILE);
+     assertEquals("Agoat/log4j.xml", LogManager.DEFAULT_XML_CONFIGURATION_FILE);
   }
   
   /**

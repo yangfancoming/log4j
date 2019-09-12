@@ -82,7 +82,8 @@ public class Category implements AppenderAttachable {
     /** The name of this category.  */
     protected String name;
 
-    /** The assigned level of this category.  The  level variable need not be assigned a value in  which case it is inherited form the hierarchy.  */
+    /** The assigned level of this category.  The level variable need not be assigned a value in  which case it is inherited form the hierarchy.  */
+    // 此类别的指定级别。不需要为级别变量分配值，在这种情况下，它是从层次结构继承的。
     volatile protected Level level;
 
     /** The parent of this category. All categories have at least one ancestor which is the root category. */
@@ -98,18 +99,17 @@ public class Category implements AppenderAttachable {
 
     AppenderAttachableImpl aai;
 
-    /** Additivity is set to true by default, that is children inherit
-     the appenders of their ancestors by default. If this variable is
-     set to false then the appenders found in the
-     ancestors of this category are not used. However, the children
-     of this category will inherit its appenders, unless the children
-     have their additivity flag set to false too. See
-     the user manual for more details. */
+    /**
+     * Additivity is set to true by default, that is children inherit the appenders of their ancestors by default.
+     If this variable is set to false then the appenders found in the ancestors of this category are not used.
+     However, the children of this category will inherit its appenders,
+     unless the children have their additivity flag set to false too.
+     See the user manual for more details.
+      */
     protected boolean additive = true;
 
     /**
-     This constructor created a new Category instance and
-     sets its name.
+     This constructor created a new Category instance and sets its name.
      <p>It is intended to be used by sub-classes only. You should not
      create categories directly.
      @param name The name of the category.
