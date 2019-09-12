@@ -1273,13 +1273,9 @@ public final class LogMF extends LogXF {
       * @param pattern pattern, may be null.
      * @param param1 parameter to the log message.
       */
-    public static void log(final Logger logger,
-                             final Level level,
-                             final String pattern,
-                             final float param1) {
+    public static void log(final Logger logger,final Level level,final String pattern,final float param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(pattern, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(pattern, toArray(valueOf(param1))));
         }
     }
 
@@ -1409,11 +1405,7 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final Object param1) {
+    public static void logrb(final Logger logger,final Level level,final String bundleName,final String key, final Object param1) {
         if (logger.isEnabledFor(level)) {
             forcedLog(logger, level,
                     format(bundleName, key, toArray(param1)));
@@ -1428,14 +1420,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final boolean param1) {
+    public static void logrb(final Logger logger,final Level level,final String bundleName,final String key, final boolean param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
 
@@ -1447,14 +1434,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final char param1) {
+    public static void logrb(final Logger logger,final Level level,final String bundleName,final String key, final char param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
 
@@ -1466,14 +1448,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final byte param1) {
+    public static void logrb(final Logger logger,final Level level,final String bundleName,final String key, final byte param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
 
@@ -1485,14 +1462,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final short param1) {
+    public static void logrb(final Logger logger,final Level level,final String bundleName,final String key,final short param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
 
@@ -1504,14 +1476,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final int param1) {
+    public static void logrb(final Logger logger,final Level level, final String bundleName, final String key, final int param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
 
@@ -1523,14 +1490,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final long param1) {
+    public static void logrb(final Logger logger,final Level level, final String bundleName, final String key, final long param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
     /**
@@ -1541,14 +1503,9 @@ public final class LogMF extends LogXF {
      * @param key key, may be null.
      * @param param1 Parameter to the log message.
       */
-    public static void logrb(final Logger logger,
-                             final Level level,
-                             final String bundleName,
-                             final String key,
-                             final float param1) {
+    public static void logrb(final Logger logger,final Level level, final String bundleName, final String key, final float param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(valueOf(param1))));
+            forcedLog(logger, level,format(bundleName, key, toArray(valueOf(param1))));
         }
     }
 
