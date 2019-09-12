@@ -55,6 +55,7 @@ public class RewriteAppender extends AppenderSkeleton
      *
      * @param newAppender appender to add, may not be null.
      */
+    @Override
     public void addAppender(final Appender newAppender) {
       synchronized (appenders) {
         appenders.addAppender(newAppender);
@@ -65,6 +66,7 @@ public class RewriteAppender extends AppenderSkeleton
      * Get iterator over attached appenders.
      * @return iterator or null if no attached appenders.
      */
+    @Override
     public Enumeration getAllAppenders() {
       synchronized (appenders) {
         return appenders.getAllAppenders();
@@ -77,6 +79,7 @@ public class RewriteAppender extends AppenderSkeleton
      * @param name name, may not be null.
      * @return matching appender or null.
      */
+    @Override
     public Appender getAppender(final String name) {
       synchronized (appenders) {
         return appenders.getAppender(name);
@@ -113,6 +116,7 @@ public class RewriteAppender extends AppenderSkeleton
      * @param appender appender.
      * @return true if attached.
      */
+    @Override
     public boolean isAttached(final Appender appender) {
       synchronized (appenders) {
         return appenders.isAttached(appender);
@@ -127,6 +131,7 @@ public class RewriteAppender extends AppenderSkeleton
     /**
      * Removes and closes all attached appenders.
      */
+    @Override
     public void removeAllAppenders() {
       synchronized (appenders) {
         appenders.removeAllAppenders();
@@ -137,6 +142,7 @@ public class RewriteAppender extends AppenderSkeleton
      * Removes an appender.
      * @param appender appender to remove.
      */
+    @Override
     public void removeAppender(final Appender appender) {
       synchronized (appenders) {
         appenders.removeAppender(appender);
@@ -147,6 +153,7 @@ public class RewriteAppender extends AppenderSkeleton
      * Remove appender by name.
      * @param name name.
      */
+    @Override
     public void removeAppender(final String name) {
       synchronized (appenders) {
         appenders.removeAppender(name);

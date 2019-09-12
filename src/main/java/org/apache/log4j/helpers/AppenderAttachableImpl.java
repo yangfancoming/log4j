@@ -18,10 +18,9 @@ public class AppenderAttachableImpl implements AppenderAttachable {
     protected Vector  appenderList;
 
     /**
-     Attach an appender. If the appender is already in the list in
-     won't be added again.
+     Attach an appender. If the appender is already in the list in won't be added again.
      */
-
+    @Override
     public void addAppender(Appender newAppender) {
         // Null values for newAppender parameter are strictly forbidden.
         if(newAppender == null)
@@ -34,12 +33,10 @@ public class AppenderAttachableImpl implements AppenderAttachable {
             appenderList.addElement(newAppender);
     }
 
-    /**
-     Call the <code>doAppend</code> method on all attached appenders.  */
+    /**  Call the doAppend method on all attached appenders.  */
     public int appendLoopOnAppenders(LoggingEvent event) {
         int size = 0;
         Appender appender;
-
         if(appenderList != null) {
             size = appenderList.size();
             for(int i = 0; i < size; i++) {
@@ -53,12 +50,12 @@ public class AppenderAttachableImpl implements AppenderAttachable {
 
     /**
      Get all attached appenders as an Enumeration. If there are no
-     attached appenders <code>null</code> is returned.
+     attached appenders null is returned.
 
      @return Enumeration An enumeration of attached appenders.
      */
-    public
-    Enumeration getAllAppenders() {
+    @Override
+    public Enumeration getAllAppenders() {
         if(appenderList == null)
             return null;
         else
@@ -66,17 +63,15 @@ public class AppenderAttachableImpl implements AppenderAttachable {
     }
 
     /**
-     Look for an attached appender named as <code>name</code>.
-
+     Look for an attached appender named as name.
      <p>Return the appender with that name if in the list. Return null
      otherwise.
-
      */
-    public
-    Appender getAppender(String name) {
+
+    @Override
+    public Appender getAppender(String name) {
         if(appenderList == null || name == null)
             return null;
-
         int size = appenderList.size();
         Appender appender;
         for(int i = 0; i < size; i++) {
@@ -89,12 +84,12 @@ public class AppenderAttachableImpl implements AppenderAttachable {
 
 
     /**
-     Returns <code>true</code> if the specified appender is in the
-     list of attached appenders, <code>false</code> otherwise.
-
+     Returns true if the specified appender is in the
+     list of attached appenders, false otherwise.
      @since 1.2 */
-    public
-    boolean isAttached(Appender appender) {
+
+    @Override
+    public boolean isAttached(Appender appender) {
         if(appenderList == null || appender == null)
             return false;
 
@@ -113,8 +108,8 @@ public class AppenderAttachableImpl implements AppenderAttachable {
     /**
      * Remove and close all previously attached appenders.
      * */
-    public
-    void removeAllAppenders() {
+    @Override
+    public void removeAllAppenders() {
         if(appenderList != null) {
             int len = appenderList.size();
             for(int i = 0; i < len; i++) {
@@ -128,10 +123,10 @@ public class AppenderAttachableImpl implements AppenderAttachable {
 
 
     /**
-     Remove the appender passed as parameter form the list of attached
-     appenders.  */
-    public
-    void removeAppender(Appender appender) {
+     Remove the appender passed as parameter form the list of attached  appenders.
+    */
+    @Override
+    public void removeAppender(Appender appender) {
         if(appender == null || appenderList == null)
             return;
         appenderList.removeElement(appender);
@@ -139,11 +134,10 @@ public class AppenderAttachableImpl implements AppenderAttachable {
 
 
     /**
-     Remove the appender with the name passed as parameter form the
-     list of appenders.
+     Remove the appender with the name passed as parameter form the  list of appenders.
      */
-    public
-    void removeAppender(String name) {
+    @Override
+    public void removeAppender(String name) {
         if(name == null || appenderList == null) return;
         int size = appenderList.size();
         for(int i = 0; i < size; i++) {

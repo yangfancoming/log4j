@@ -12,6 +12,7 @@ package org.apache.log4j.spi;
 
    <p>It is the responsability of the @OverrideRepositorySelector@Override implementation to track the application context.
    Log4j makes no assumptions about the application context or on its management.
+   log4j对应用程序上下文或其管理没有任何假设
    <p>See also {@link org.apache.log4j.LogManager LogManager}.
    @since 1.2
  */
