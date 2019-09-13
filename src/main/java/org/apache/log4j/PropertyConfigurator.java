@@ -34,24 +34,24 @@ import org.apache.log4j.spi.ErrorHandler;
  Allows the configuration of log4j from an external file.  See
  <b>{@link #doConfigure(String, LoggerRepository)}</b> for the  expected format.
 
- <p>It is sometimes useful to see how log4j is reading configuration
+ It is sometimes useful to see how log4j is reading configuration
  files. You can enable log4j internal logging by defining the
  <b>log4j.debug</b> variable.
 
- <P>As of log4j version 0.8.5, at class initialization time class,
+ As of log4j version 0.8.5, at class initialization time class,
  the file <b>log4j.properties</b> will be searched from the search
  path used to load classes. If the file can be found, then it will
  be fed to the {@link PropertyConfigurator#configure(java.net.URL)}
  method.
 
- <p>The <code>PropertyConfigurator</code> does not handle the
+ The <code>PropertyConfigurator</code> does not handle the
  advanced configuration features supported by the {@link
 org.apache.log4j.xml.DOMConfigurator DOMConfigurator} such as
  support custom {@link org.apache.log4j.spi.ErrorHandler ErrorHandlers},
  nested appenders such as the {@link org.apache.log4j.AsyncAppender
 AsyncAppender}, etc.
 
- <p>All option <em>values</em> admit variable substitution. The
+ All option <em>values</em> admit variable substitution. The
  syntax of variable substitution is similar to that of Unix
  shells. The string between an opening <b>&quot;${&quot;</b> and
  closing <b>&quot;}&quot;</b> is interpreted as a key.
@@ -64,7 +64,6 @@ AsyncAppender}, etc.
  <code>/home/xyz</code>, then every occurrence of the sequence
  <code>${java.home}</code> will be interpreted as
  <code>/home/xyz</code>.
-
 
  @since 0.8.1 */
 public class PropertyConfigurator implements Configurator {
@@ -110,31 +109,28 @@ public class PropertyConfigurator implements Configurator {
     resetConfiguration} method before calling
      <code>doConfigure</code>.
 
-     <p>The configuration file consists of statements in the format
+     The configuration file consists of statements in the format
      <code>key=value</code>. The syntax of different configuration
      elements are discussed below.
 
      <h3>Repository-wide threshold</h3>
 
-     <p>The repository-wide threshold filters logging requests by level
+     The repository-wide threshold filters logging requests by level
      regardless of logger. The syntax is:
 
-     <pre>
      log4j.threshold=[level]
-     </pre>
 
-     <p>The level value can consist of the string values OFF, FATAL,
+     The level value can consist of the string values OFF, FATAL,
      ERROR, WARN, INFO, DEBUG, ALL or a <em>custom level</em> value. A
      custom level value can be specified in the form
      level#classname. By default the repository-wide threshold is set
      to the lowest possible value, namely the level <code>ALL</code>.
-     </p>
-
+ 
 
      <h3>Appender configuration</h3>
 
-     <p>Appender configuration syntax is:
-     <pre>
+     Appender configuration syntax is:
+
      # For appender named <i>appenderName</i>, set its class.
      # Note: The appender name can contain dots.
      log4j.appender.appenderName=fully.qualified.name.of.appender.class
@@ -143,31 +139,30 @@ public class PropertyConfigurator implements Configurator {
      log4j.appender.appenderName.option1=value1
      ...
      log4j.appender.appenderName.optionN=valueN
-     </pre>
+
 
      For each named appender you can configure its {@link Layout}. The
      syntax for configuring an appender's layout is:
-     <pre>
+
      log4j.appender.appenderName.layout=fully.qualified.name.of.layout.class
      log4j.appender.appenderName.layout.option1=value1
      ....
      log4j.appender.appenderName.layout.optionN=valueN
-     </pre>
 
      The syntax for adding {@link Filter}s to an appender is:
-     <pre>
+
      log4j.appender.appenderName.filter.ID=fully.qualified.name.of.filter.class
      log4j.appender.appenderName.filter.ID.option1=value1
      ...
      log4j.appender.appenderName.filter.ID.optionN=valueN
-     </pre>
+
      The first line defines the class name of the filter identified by ID;
      subsequent lines with the same ID specify filter option - value
      paris. Multiple filters are added to the appender in the lexicographic
      order of IDs.
 
      The syntax for adding an {@link ErrorHandler} to an appender is:
-     <pre>
+
      log4j.appender.appenderName.errorhandler=fully.qualified.name.of.filter.class
      log4j.appender.appenderName.errorhandler.root-ref={true|false}
      log4j.appender.appenderName.errorhandler.logger-ref=loggerName
@@ -175,56 +170,54 @@ public class PropertyConfigurator implements Configurator {
      log4j.appender.appenderName.errorhandler.option1=value1
      ...
      log4j.appender.appenderName.errorhandler.optionN=valueN
-     </pre>
+
 
      <h3>Configuring loggers</h3>
 
-     <p>The syntax for configuring the root logger is:
-     <pre>
+     The syntax for configuring the root logger is:
      log4j.rootLogger=[level], appenderName, appenderName, ...
-     </pre>
 
-     <p>This syntax means that an optional <em>level</em> can be
+     This syntax means that an optional <em>level</em> can be
      supplied followed by appender names separated by commas.
 
-     <p>The level value can consist of the string values OFF, FATAL,
+     The level value can consist of the string values OFF, FATAL,
      ERROR, WARN, INFO, DEBUG, ALL or a <em>custom level</em> value. A
      custom level value can be specified in the form
      <code>level#classname</code>.
 
-     <p>If a level value is specified, then the root level is set
+     If a level value is specified, then the root level is set
      to the corresponding level.  If no level value is specified,
      then the root level remains untouched.
 
-     <p>The root logger can be assigned multiple appenders.
+     The root logger can be assigned multiple appenders.
 
-     <p>Each <i>appenderName</i> (separated by commas) will be added to
+     Each <i>appenderName</i> (separated by commas) will be added to
      the root logger. The named appender is defined using the
      appender syntax defined above.
 
-     <p>For non-root categories the syntax is almost the same:
-     <pre>
-     log4j.logger.logger_name=[level|INHERITED|NULL], appenderName, appenderName, ...
-     </pre>
+     For non-root categories the syntax is almost the same:
 
-     <p>The meaning of the optional level value is discussed above
+     log4j.logger.logger_name=[level|INHERITED|NULL], appenderName, appenderName, ...
+
+
+     The meaning of the optional level value is discussed above
      in relation to the root logger. In addition however, the value
      INHERITED can be specified meaning that the named logger should
      inherit its level from the logger hierarchy.
 
-     <p>If no level value is supplied, then the level of the
+     If no level value is supplied, then the level of the
      named logger remains untouched.
 
-     <p>By default categories inherit their level from the
+     By default categories inherit their level from the
      hierarchy. However, if you set the level of a logger and later
      decide that that logger should inherit its level, then you should
      specify INHERITED as the value for the level value. NULL is a
      synonym for INHERITED.
 
-     <p>Similar to the root logger syntax, each <i>appenderName</i>
+     Similar to the root logger syntax, each <i>appenderName</i>
      (separated by commas) will be attached to the named logger.
 
-     <p>See the <a href="../../../../manual.html#additivity">appender
+     See the <a href="../../../../manual.html#additivity">appender
      additivity rule</a> in the user manual for the meaning of the
      <code>additivity</code> flag.
 
@@ -235,16 +228,16 @@ public class PropertyConfigurator implements Configurator {
      specifying an {@link org.apache.log4j.or.ObjectRenderer ObjectRenderer}
      for the object type would like to customize.
 
-     <p>The syntax is:
+     The syntax is:
 
-     <pre>
+
      log4j.renderer.fully.qualified.name.of.rendered.class=fully.qualified.name.of.rendering.class
-     </pre>
+
 
      As in,
-     <pre>
+
      log4j.renderer.my.Fruit=my.FruitRenderer
-     </pre>
+
 
      <h3>ThrowableRenderer</h3>
 
@@ -252,17 +245,13 @@ public class PropertyConfigurator implements Configurator {
      converted to String before being logged. This is done by
      specifying an {@link org.apache.log4j.spi.ThrowableRenderer ThrowableRenderer}.
 
-     <p>The syntax is:
+     The syntax is:
 
-     <pre>
+
      log4j.throwableRenderer=fully.qualified.name.of.rendering.class
      log4j.throwableRenderer.paramName=paramValue
-     </pre>
-
      As in,
-     <pre>
      log4j.throwableRenderer=org.apache.log4j.EnhancedThrowableRenderer
-     </pre>
 
      <h3>Logger Factories</h3>
 
@@ -276,10 +265,8 @@ public class PropertyConfigurator implements Configurator {
 
      <h3>Example</h3>
 
-     <p>An example configuration is given below. Other configuration
+     An example configuration is given below. Other configuration
      file examples are given in the <code>examples</code> folder.
-
-     <pre>
 
      # Set options for appender named "A1".
      # Appender "A1" will be a SyslogAppender
@@ -324,20 +311,17 @@ public class PropertyConfigurator implements Configurator {
      # Output will go to A1.
      log4j.logger.SECURITY.access=WARN
 
-
      # The logger "class.of.the.day" inherits its level from the
      # logger hierarchy.  Output will go to the appender's of the root
      # logger, A2 in this case.
      log4j.logger.class.of.the.day=INHERIT
-     </pre>
 
-     <p>Refer to the <b>setOption</b> method in each Appender and
+     Refer to the <b>setOption</b> method in each Appender and
      Layout for class specific options.
 
-     <p>Use the <code>#</code> or <code>!</code> characters at the
+     Use the <code>#</code> or <code>!</code> characters at the
      beginning of a line for comments.
 
-     <p>
      @param configFileName The name of the configuration file where the
      configuration information is stored.
 
