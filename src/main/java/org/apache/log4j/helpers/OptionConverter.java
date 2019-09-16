@@ -399,12 +399,10 @@ public class OptionConverter {
      <code>hierarchy</code> passed as a parameter.
      <p>
      @param url The location of the configuration file or resource.
-     @param clazz The classname, of the log4j configurator which will parse
-     the file or resource at <code>url</code>. This must be a subclass of
-     {@link Configurator}, or null. If this value is null then a default
-     configurator of {@link PropertyConfigurator} is used, unless the
-     filename pointed to by <code>url</code> ends in '.xml', in which case
-     {@link org.apache.log4j.xml.DOMConfigurator} is used.
+     @param clazz The classname, of the log4j configurator which will parse  the file or resource at <code>url</code>.
+     This must be a subclass of {@link Configurator}, or null.
+     If this value is null then a default configurator of {@link PropertyConfigurator} is used,
+     unless the  filename pointed to by <code>url</code> ends in '.xml', in which case {@link org.apache.log4j.xml.DOMConfigurator} is used.
      @param hierarchy The {@link org.apache.log4j.Hierarchy} to act on.
      @since 1.1.4 */
 
