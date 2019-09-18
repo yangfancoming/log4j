@@ -126,24 +126,20 @@ public class OptionConverter {
     }
 
     /**
-     Converts a standard or custom priority level to a Level
-     object.   If <code>value</code> is of form
-     "level#classname", then the specified class' toLevel method
-     is called to process the specified level string; if no '#'
-     character is present, then the default {@link org.apache.log4j.Level}
+     Converts a standard or custom priority level to a Level object.
+     If <code>value</code> is of form "level#classname",
+     then the specified class' toLevel method is called to process the specified level string;
+     if no '#'  character is present, then the default {@link org.apache.log4j.Level}
      class is used to process the level value.
 
      As a special case, if the <code>value</code> parameter is
-     equal to the string "NULL", then the value <code>null</code> will
-     be returned.
+     equal to the string "NULL", then the value <code>null</code> will  be returned.
 
       If any error occurs while converting the value to a level,
-     the <code>defaultValue</code> parameter, which may be
-     <code>null</code>, is returned.
+     the <code>defaultValue</code> parameter, which may be <code>null</code>, is returned.
 
       Case of <code>value</code> is insignificant for the level level, but is
      significant for the class name part, if present.
-
      @since 1.1 */
     public static Level toLevel(String value, Level defaultValue) {
         if(value == null)
@@ -249,10 +245,8 @@ public class OptionConverter {
 
     /**
      Instantiate an object given a class name. Check that the
-     <code>className</code> is a subclass of
-     <code>superClass</code>. If that test fails or the object could
-     not be instantiated, then <code>defaultValue</code> is returned.
-
+     <code>className</code> is a subclass of <code>superClass</code>.
+     If that test fails or the object could  not be instantiated, then <code>defaultValue</code> is returned.
      @param className The fully qualified class name of the object to instantiate.
      @param superClass The class to which the new object should belong.
      @param defaultValue The object to return in case of non-fulfillment
