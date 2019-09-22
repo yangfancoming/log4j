@@ -245,6 +245,7 @@ public class RollingFileAppender extends FileAppender {
     maxFileSize = OptionConverter.toFileSize(value, maxFileSize + 1);
   }
 
+  @Override
   protected
   void setQWForFiles(Writer writer) {
      this.qw = new CountingQuietWriter(writer, errorHandler);

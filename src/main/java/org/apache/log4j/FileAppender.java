@@ -19,7 +19,6 @@ import org.apache.log4j.spi.ErrorCode;
 
 /**
  *  FileAppender appends log events to a file.
- *
  *  <p>Support for <code>java.io.Writer</code> and console appending
  *  has been deprecated and then removed. See the replacement
  *  solutions: {@link WriterAppender} and {@link ConsoleAppender}.
@@ -28,11 +27,8 @@ public class FileAppender extends WriterAppender {
 
     /** Controls file truncatation. The default value for this variable
      * is <code>true</code>, meaning that by default a
-     * <code>FileAppender</code> will append to an existing file and not
-     * truncate it.
-     *
-     * <p>This option is meaningful only if the FileAppender opens the
-     * file.
+     * <code>FileAppender</code> will append to an existing file and not truncate it.
+     * <p>This option is meaningful only if the FileAppender opens the file.
      */
     protected boolean fileAppend = true;
 
@@ -62,13 +58,12 @@ public class FileAppender extends WriterAppender {
      designated by <code>filename</code>. The opened filename will
      become the output destination for this appender.
 
-     <p>If the <code>append</code> parameter is true, the file will be
-     appended to. Otherwise, the file designated by
+     <p>If the <code>append</code> parameter is true, the file will be appended to.
+     Otherwise, the file designated by
      <code>filename</code> will be truncated before being opened.
 
      <p>If the <code>bufferedIO</code> parameter is <code>true</code>,
      then buffered IO will be used to write to the output file.
-
      */
 
     public FileAppender(Layout layout, String filename, boolean append, boolean bufferedIO, int bufferSize) throws IOException {
@@ -92,8 +87,8 @@ public class FileAppender extends WriterAppender {
     }
 
     /**
-     Instantiate a FileAppender and open the file designated by
-     <code>filename</code>. The opened filename will become the output  destination for this appender.
+     Instantiate a FileAppender and open the file designated by <code>filename</code>.
+     The opened filename will become the output  destination for this appender.
      <p>The file will be appended to.  */
 
     public FileAppender(Layout layout, String filename) throws IOException {
@@ -101,12 +96,10 @@ public class FileAppender extends WriterAppender {
     }
 
     /**
-     The <b>File</b> property takes a string value which should be the
-     name of the file to append to.
+     The <b>File</b> property takes a string value which should be the name of the file to append to.
      <p><font color="#DD0044"><b>Note that the special values
      "System.out" or "System.err" are no longer honored.</b></font>
-     <p>Note: Actual opening of the file is made when {@link
-    #activateOptions} is called, not when the options are set.
+     <p>Note: Actual opening of the file is made when {@link  #activateOptions} is called, not when the options are set.
      */
     public void setFile(String file) {
         // Trim spaces from both ends. The users probably does not want
@@ -129,12 +122,11 @@ public class FileAppender extends WriterAppender {
     }
 
     /**
-     If the value of <b>File</b> is not <code>null</code>, then {@link
-    #setFile} is called with the values of <b>File</b>  and
+     If the value of <b>File</b> is not <code>null</code>, then {@link  #setFile} is called with the values of <b>File</b>  and
      <b>Append</b> properties.
-
-     @since 0.8.1 */
-
+     @since 0.8.1
+     */
+    @Override
     public void activateOptions() {
         if(fileName != null) {
             try {
@@ -153,7 +145,6 @@ public class FileAppender extends WriterAppender {
     /**
      Closes the previously opened file.
      */
-
     protected void closeFile() {
         if(this.qw != null) {
             try {
@@ -172,8 +163,7 @@ public class FileAppender extends WriterAppender {
 
     /**
      Get the value of the <b>BufferedIO</b> option.
-     <p>BufferedIO will significatnly increase performance on heavily
-     loaded systems.
+     <p>BufferedIO will significatnly increase performance on heavily loaded systems.
      */
     public boolean getBufferedIO() {
         return this.bufferedIO;
@@ -187,29 +177,22 @@ public class FileAppender extends WriterAppender {
         return this.bufferSize;
     }
 
-
-
     /**
      The <b>Append</b> option takes a boolean value. It is set to
      <code>true</code> by default. If true, then <code>File</code>
      will be opened in append mode by {@link #setFile setFile} (see
      above). Otherwise, {@link #setFile setFile} will open
      <code>File</code> in truncate mode.
-     <p>Note: Actual opening of the file is made when {@link
-    #activateOptions} is called, not when the options are set.
+     <p>Note: Actual opening of the file is made when {@link #activateOptions} is called, not when the options are set.
      */
-
     public void setAppend(boolean flag) {
         fileAppend = flag;
     }
 
     /**
-     The <b>BufferedIO</b> option takes a boolean value. It is set to
-     <code>false</code> by default. If true, then <code>File</code>
-     will be opened and the resulting {@link java.io.Writer} wrapped
-     around a {@link BufferedWriter}.
-     BufferedIO will significatnly increase performance on heavily
-     loaded systems.
+     The <b>BufferedIO</b> option takes a boolean value. It is set to <code>false</code> by default.
+     If true, then <code>File</code> will be opened and the resulting {@link java.io.Writer} wrapped around a {@link BufferedWriter}.
+     BufferedIO will significatnly increase performance on heavily  loaded systems.
      */
     public void setBufferedIO(boolean bufferedIO) {
         this.bufferedIO = bufferedIO;
@@ -227,19 +210,13 @@ public class FileAppender extends WriterAppender {
     }
 
     /**
-     <p>Sets and <i>opens</i> the file where the log output will
-     go. The specified file must be writable.
-
-     <p>If there was already an opened file, then the previous file
-     is closed first.
-
+     <p>Sets and <i>opens</i> the file where the log output will go. The specified file must be writable.
+     <p>If there was already an opened file, then the previous file is closed first.
      <p><b>Do not use this method directly. To configure a FileAppender
-     or one of its subclasses, set its properties one by one and then
-     call activateOptions.</b>
-
+     or one of its subclasses, set its properties one by one and then call activateOptions.</b>
      @param fileName The path to the log file.
-     @param append   If true will append to fileName. Otherwise will
-     truncate fileName.  */
+     @param append   If true will append to fileName. Otherwise will  truncate fileName.
+     */
     public synchronized void setFile(String fileName, boolean append, boolean bufferedIO, int bufferSize)  throws IOException {
         LogLog.debug("setFile called: "+fileName+", "+append);
         // It does not make sense to have immediate flush and bufferedIO.
@@ -247,7 +224,7 @@ public class FileAppender extends WriterAppender {
             setImmediateFlush(false);
         }
         reset();
-        FileOutputStream ostream = null;
+        FileOutputStream ostream;
         try {
             //   attempt to create file
             ostream = new FileOutputStream(fileName, append);
@@ -288,8 +265,8 @@ public class FileAppender extends WriterAppender {
     }
 
     /**
-     Close any previously opened file and call the parent's
-     <code>reset</code>.  */
+     Close any previously opened file and call the parent's <code>reset</code>.
+     */
     @Override
     protected void reset() {
         closeFile();
