@@ -116,9 +116,7 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
     /**
      Check if the named logger exists in the hierarchy. If so return
      its reference, otherwise returns <code>null</code>.
-
      @param name The name of the logger to search for.
-
      */
     @Override
     public  Logger exists(String name) {
@@ -193,24 +191,18 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
     }
 
     /**
-     Returns an integer representation of the this repository's
-     threshold.
-
+     Returns an integer representation of the this repository's threshold.
      @since 1.2 */
     //public
     //int getThresholdInt() {
     //  return thresholdInt;
     //}
 
-
     /**
-     Return a new logger instance named as the first parameter using
-     the default factory.
-
+     Return a new logger instance named as the first parameter using the default factory.
      <p>If a logger of that name already exists, then it will be
      returned.  Otherwise, a new logger will be instantiated and
      then linked with its existing ancestors as well as children.
-
      @param name The name of the logger to retrieve.
 
      */
@@ -223,12 +215,9 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
     /**
      Return a new logger instance named as the first parameter using
      <code>factory</code>.
-
      <p>If a logger of that name already exists, then it will be
      returned.  Otherwise, a new logger will be instantiated by the
-     <code>factory</code> parameter and linked with its existing
-     ancestors as well as children.
-
+     <code>factory</code> parameter and linked with its existing ancestors as well as children.
      @param name The name of the logger to retrieve.
      @param factory The factory that will make the new logger instance.
      传入Logger名字，获取真对该名字唯一的一个Logger，只会在第一次创建，第二次是直接返回第一次创建的Logger对象
@@ -284,11 +273,9 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
     }
 
     /**
-     Returns all the currently defined categories in this hierarchy as
-     an {@link java.util.Enumeration Enumeration}.
-
-     <p>The root logger is <em>not</em> included in the returned
-     {@link Enumeration}.  */
+     Returns all the currently defined categories in this hierarchy as  an {@link java.util.Enumeration Enumeration}.
+     <p>The root logger is <em>not</em> included in the returned  {@link Enumeration}.
+     */
     @Override
     public
     Enumeration getCurrentLoggers() {
@@ -354,18 +341,13 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
 
     /**
      Reset all values contained in this hierarchy instance to their
-     default.  This removes all appenders from all categories, sets
-     the level of all non-root categories to <code>null</code>,
-     sets their additivity flag to <code>true</code> and sets the level
-     of the root logger to {@link Level#DEBUG DEBUG}.  Moreover,
-     message disabling is set its default "off" value.
-
+     default.  This removes all appenders from all categories, sets  the level of all non-root categories to <code>null</code>,
+     sets their additivity flag to <code>true</code> and sets the level  of the root logger to {@link Level#DEBUG DEBUG}.
+     Moreover, message disabling is set its default "off" value.
      <p>Existing categories are not removed. They are just reset.
-
-     <p>This method should be used sparingly and with care as it will
-     block all logging until it is completed.</p>
-
-     @since 0.8.5 */
+     <p>This method should be used sparingly and with care as it will block all logging until it is completed.</p>
+     @since 0.8.5
+     */
 
     @Override
     public void resetConfiguration() {
@@ -458,14 +440,9 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
 
 
     /**
-     This method loops through all the *potential* parents of
-     'cat'. There 3 possible cases:
-
+     This method loops through all the *potential* parents of 'cat'. There 3 possible cases:
      1) No entry for the potential parent of 'cat' exists
-
-     We create a ProvisionNode for this potential parent and insert
-     'cat' in that provision node.
-
+     We create a ProvisionNode for this potential parent and insert 'cat' in that provision node.
      2) There entry is of type Logger for the potential parent.
 
      The entry is 'cat's nearest existing parent. We update cat's
@@ -474,7 +451,6 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
      responsibility.
 
      3) There entry is of type ProvisionNode for this potential parent.
-
      We add 'cat' to the list of children for this potential parent.
      */
 
@@ -519,16 +495,10 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
     /**
      We update the links for all the children that placed themselves
      in the provision node 'pn'. The second argument 'cat' is a
-     reference for the newly created Logger, parent of all the
-     children in 'pn'
-
+     reference for the newly created Logger, parent of all the  children in 'pn'
      We loop on all the children 'c' in 'pn':
-
-     If the child 'c' has been already linked to a child of
-     'cat' then there is no need to update 'c'.
-
-     Otherwise, we set cat's parent field to c's parent and set
-     c's parent field to cat.
+     If the child 'c' has been already linked to a child of 'cat' then there is no need to update 'c'.
+     Otherwise, we set cat's parent field to c's parent and set  c's parent field to cat.
      */
 
     private final void updateChildren(ProvisionNode pn, Logger logger) {
