@@ -229,19 +229,16 @@ public class Category implements AppenderAttachable {
 
     /**
      Log a message object with the {@link Level#ERROR ERROR} Level.
-
      This method first checks if this category is ERROR
-     enabled by comparing the level of this category with {@link
-    Level#ERROR ERROR} Level. If this category is ERROR
-     enabled, then it converts the message object passed as parameter
-     to a string by invoking the appropriate {@link
-    org.apache.log4j.or.ObjectRenderer}. It proceeds to call all the
-     registered appenders in this category and also higher in the
+     enabled by comparing the level of this category with {@link  Level#ERROR ERROR} Level.
+   If this category is ERROR  enabled,
+    then it converts the message object passed as parameter
+     to a string by invoking the appropriate {@link org.apache.log4j.or.ObjectRenderer}.
+    It proceeds to call all the  registered appenders in this category and also higher in the
      hierarchy depending on the value of the additivity flag.
-
      <b>WARNING</b> Note that passing a {@link Throwable} to this
-     method will print the name of the Throwable but no
-     stack trace. To print a stack trace use the {@link #error(Object,Throwable)} form instead.
+     method will print the name of the Throwable but no  stack trace.
+    To print a stack trace use the {@link #error(Object,Throwable)} form instead.
      @param message the message object to log */
     public void error(Object message) {
         if(repository.isDisabled(Level.ERROR_INT))
@@ -252,11 +249,8 @@ public class Category implements AppenderAttachable {
 
     /**
      Log a message object with the ERROR level including
-     the stack trace of the {@link Throwable} t passed as
-     parameter.
-
+     the stack trace of the {@link Throwable} t passed as  parameter.
      See {@link #error(Object)} form for more detailed information.
-
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
     public void error(Object message, Throwable t) {
@@ -269,8 +263,7 @@ public class Category implements AppenderAttachable {
 
     /**
      If the named category exists (in the default hierarchy) then it
-     returns a reference to the category, otherwise it returns
-     null.
+     returns a reference to the category, otherwise it returns  null.
      @deprecated Please use {@link LogManager#exists} instead.
      @since 0.8.5 */
     public static Logger exists(String name) {
@@ -279,16 +272,14 @@ public class Category implements AppenderAttachable {
 
     /**
      Log a message object with the {@link Level#FATAL FATAL} Level.
-
      This method first checks if this category is FATAL
-     enabled by comparing the level of this category with {@link
-    Level#FATAL FATAL} Level. If the category is FATAL
+     enabled by comparing the level of this category with {@link Level#FATAL FATAL} Level.
+     If the category is FATAL
      enabled, then it converts the message object passed as parameter
      to a string by invoking the appropriate
      {@link org.apache.log4j.or.ObjectRenderer}. It
      proceeds to call all the registered appenders in this category and
-     also higher in the hierarchy depending on the value of the
-     additivity flag.
+     also higher in the hierarchy depending on the value of the additivity flag.
 
      <b>WARNING</b> Note that passing a {@link Throwable} to this
      method will print the name of the Throwable but no stack trace. To
