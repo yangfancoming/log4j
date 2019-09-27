@@ -296,12 +296,8 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-     Log a message object with the FATAL level including
-     the stack trace of the {@link Throwable} t passed as
-     parameter.
-
+     Log a message object with the FATAL level including the stack trace of the {@link Throwable} t passed as parameter.
      See {@link #fatal(Object)} for more detailed information.
-
      @param message the message object to log.
      @param t the exception to log, including its stack trace.  */
     public void fatal(Object message, Throwable t) {
@@ -341,9 +337,8 @@ public class Category implements AppenderAttachable {
 
     /**
      Look for the appender named as name.
-
-     Return the appender with that name if in the list. Return
-     null otherwise.  */
+     Return the appender with that name if in the list. Return null otherwise.
+     */
     @Override
     public synchronized Appender getAppender(String name) {
         if(aai == null || name == null)
@@ -353,13 +348,11 @@ public class Category implements AppenderAttachable {
 
     /**
      Starting from this category, search the category hierarchy for a
-     non-null level and return it. Otherwise, return the level of the
-     root category.
+     non-null level and return it. Otherwise, return the level of the root category.
 
      The Category class is designed so that this method executes as
      quickly as possible.
      */
-
     public Level getEffectiveLevel() {
         for(Category c = this; c != null; c=c.parent) {
             if(c.level != null)
@@ -369,11 +362,8 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-     *
-     * @deprecated Please use the the {@link #getEffectiveLevel} method
-     * instead.
+     * @deprecated Please use the the {@link #getEffectiveLevel} method instead.
      * */
-
     public Priority getChainedPriority() {
         for(Category c = this; c != null; c=c.parent) {
             if(c.level != null)
@@ -397,9 +387,7 @@ public class Category implements AppenderAttachable {
 
     /**
      Return the default Hierarchy instance.
-
      @deprecated Please use {@link LogManager#getLoggerRepository()} instead.
-
      @since 1.0
      */
     public static LoggerRepository getDefaultHierarchy() {
@@ -482,15 +470,11 @@ public class Category implements AppenderAttachable {
     }
 
     /**
-     Return the <em>inherited</em> {@link ResourceBundle} for this
-     category.
+     Return the <em>inherited</em> {@link ResourceBundle} for this  category.
 
-     This method walks the hierarchy to find the appropriate
-     resource bundle. It will return the resource bundle attached to
-     the closest ancestor of this category, much like the way
-     priorities are searched. In case there is no bundle in the
-     hierarchy then null is returned.
-
+     This method walks the hierarchy to find the appropriate  resource bundle.
+     It will return the resource bundle attached to the closest ancestor of this category,
+      much like the way  priorities are searched. In case there is no bundle in the hierarchy then null is returned.
      @since 0.9.0 */
 
     public ResourceBundle getResourceBundle() {
