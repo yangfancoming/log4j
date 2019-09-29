@@ -126,6 +126,7 @@ public class XLogger extends Logger implements OptionHandler {
     public XFactory() {
     }
 
+    @Override
     public
     Logger  makeNewLoggerInstance(String name) {
       return new XLogger(name);

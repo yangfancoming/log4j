@@ -202,6 +202,7 @@ public class DOMTestCase extends TestCase {
          * @param name logger name.
          * @return new logger.
          */
+      @Override
       public Logger makeNewLoggerInstance(final String name) {
           Logger logger = new CustomLogger(name);
           assertFalse(additivity);
