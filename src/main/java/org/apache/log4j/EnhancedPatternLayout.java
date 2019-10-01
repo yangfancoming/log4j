@@ -403,8 +403,7 @@ public class EnhancedPatternLayout extends Layout {
 
   /** A conversion pattern equivalent to the TTCCCLayout.
       Current value is <b>%r [%t] %p %c %x - %m%n</b>. */
-  public static final String TTCC_CONVERSION_PATTERN =
-    "%r [%t] %p %c %x - %m%n";
+  public static final String TTCC_CONVERSION_PATTERN =  "%r [%t] %p %c %x - %m%n";
 
     /**
      * Initial size of internal buffer, no longer used.
@@ -506,6 +505,7 @@ public class EnhancedPatternLayout extends Layout {
     Activates the conversion pattern. Do not forget to call this method after
     you change the parameters of the EnhancedPatternLayout instance.
   */
+  @Override
   public void activateOptions() {
       // nothing to do.
   }

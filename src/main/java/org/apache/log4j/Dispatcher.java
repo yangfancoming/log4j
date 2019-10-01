@@ -8,7 +8,6 @@ import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * Obsolete AsyncAppender dispatcher provided for compatibility only.
- *
  * @deprecated Since 1.3.
  */
 class Dispatcher extends Thread {
