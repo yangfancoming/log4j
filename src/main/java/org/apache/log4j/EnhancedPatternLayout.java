@@ -513,6 +513,7 @@ public class EnhancedPatternLayout extends Layout {
 
   /**
    *  Formats a logging event to a writer.
+   *
    * @param event logging event to be formatted.
   */
   public String format(final LoggingEvent event) {
