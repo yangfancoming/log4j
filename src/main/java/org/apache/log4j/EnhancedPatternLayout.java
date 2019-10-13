@@ -515,6 +515,7 @@ public class EnhancedPatternLayout extends Layout {
    *  Formats a logging event to a writer.
    * @param event logging event to be formatted.
   */
+  @Override
   public String format(final LoggingEvent event) {
       StringBuffer buf = new StringBuffer();
       for(PatternConverter c = head;
