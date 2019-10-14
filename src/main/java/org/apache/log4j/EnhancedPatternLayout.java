@@ -157,15 +157,11 @@ import org.apache.log4j.spi.LoggingEvent;
    <tr>
    <td align=center><b>L</b></td>
 
-   <td>Used to output the line number from where the logging request
-   was issued.
+   <td>Used to output the line number from where the logging request was issued.
 
    <p><b>WARNING</b> Generating caller location information is
-   extremely slow and should be avoided unless execution speed
-   is not an issue.
-
+   extremely slow and should be avoided unless execution speed  is not an issue.
    </tr>
-
 
    <tr>
      <td align=center><b>m</b></td>
@@ -222,20 +218,15 @@ import org.apache.log4j.spi.LoggingEvent;
    </tr>
 
    <tr>
-
      <td align=center><b>x</b></td>
-
      <td>Used to output the NDC (nested diagnostic context) associated
      with the thread that generated the logging event.
      </td>
    </tr>
 
-
    <tr>
      <td align=center><b>X</b></td>
-
      <td>
-
      <p>Used to output the MDC (mapped diagnostic context) associated
      with the thread that generated the logging event. The <b>X</b>
      conversion character can be followed by the key for the
@@ -265,7 +256,6 @@ import org.apache.log4j.spi.LoggingEvent;
      is output using a format {{key1,val1},{key2,val2}}</p>
      </td>
    </tr>
-
             <tr>
      <td align=center><b>throwable</b></td>
 
