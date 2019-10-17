@@ -431,7 +431,6 @@ public class EnhancedPatternLayout extends Layout {
 
   /**
      Constructs a EnhancedPatternLayout using the DEFAULT_LAYOUT_PATTERN.
-
      The default pattern just produces the application supplied message.
   */
   public EnhancedPatternLayout() {
@@ -454,9 +453,7 @@ public class EnhancedPatternLayout extends Layout {
 
   /**
    * Set the <b>ConversionPattern</b> option. This is the string which
-   * controls formatting and consists of a mix of literal content and
-   * conversion specifiers.
-   *
+   * controls formatting and consists of a mix of literal content and conversion specifiers.
    * @param conversionPattern conversion pattern.
   */
   public void setConversionPattern(final String conversionPattern) {
@@ -481,9 +478,7 @@ public class EnhancedPatternLayout extends Layout {
 
     /**
       Returns PatternParser used to parse the conversion string. Subclasses
-      may override this to return a subclass of PatternParser which recognize
-      custom conversion characters.
-
+      may override this to return a subclass of PatternParser which recognize custom conversion characters.
       @since 0.9.0
     */
     protected org.apache.log4j.helpers.PatternParser createPatternParser(String pattern) {
