@@ -83,6 +83,7 @@ public final class BridgePatternConverter
   /**
    * {@inheritDoc}
    */
+  @Override
   protected String convert(final LoggingEvent event) {
     //
     //  code should be unreachable.

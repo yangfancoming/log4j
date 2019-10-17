@@ -49,6 +49,7 @@ public class MyPatternParser extends PatternParser {
       super(formattingInfo);
     }
 
+    @Override
     public
     String convert(LoggingEvent event) {
       return String.valueOf(++counter);

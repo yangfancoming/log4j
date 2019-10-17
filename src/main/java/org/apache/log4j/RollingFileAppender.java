@@ -185,6 +185,7 @@ public class RollingFileAppender extends FileAppender {
     }
   }
 
+  @Override
   public
   synchronized
   void setFile(String fileName, boolean append, boolean bufferedIO, int bufferSize)

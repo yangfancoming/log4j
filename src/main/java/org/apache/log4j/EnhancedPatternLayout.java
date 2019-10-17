@@ -495,7 +495,6 @@ public class EnhancedPatternLayout extends Layout {
       // nothing to do.
   }
 
-
   /**
    *  Formats a logging event to a writer.
    * @param event logging event to be formatted.
@@ -503,9 +502,7 @@ public class EnhancedPatternLayout extends Layout {
   @Override
   public String format(final LoggingEvent event) {
       StringBuffer buf = new StringBuffer();
-      for(PatternConverter c = head;
-          c != null;
-          c = c.next) {
+      for(PatternConverter c = head;c != null;c = c.next) {
           c.format(buf, event);
       }
       return buf.toString();

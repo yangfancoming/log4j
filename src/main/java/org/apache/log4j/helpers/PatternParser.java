@@ -372,6 +372,7 @@ public class PatternParser {
       this.type = type;
     }
 
+    @Override
     public
     String convert(LoggingEvent event) {
       switch(type) {
@@ -404,6 +405,7 @@ public class PatternParser {
       sbuf.append(literal);
     }
 
+    @Override
     public
     String convert(LoggingEvent event) {
       return literal;
@@ -420,6 +422,7 @@ public class PatternParser {
       this.df = df;
     }
 
+    @Override
     public
     String convert(LoggingEvent event) {
       date.setTime(event.timeStamp);
@@ -442,6 +445,7 @@ public class PatternParser {
       this.key = key;
     }
 
+    @Override
     public
     String convert(LoggingEvent event) {
       if (key == null) {
@@ -480,6 +484,7 @@ public class PatternParser {
       this.type = type;
     }
 
+    @Override
     public
     String convert(LoggingEvent event) {
       LocationInfo locationInfo = event.getLocationInformation();
@@ -508,6 +513,7 @@ public class PatternParser {
     abstract
     String getFullyQualifiedName(LoggingEvent event);
 
+    @Override
     public
     String convert(LoggingEvent event) {
       String n = getFullyQualifiedName(event);

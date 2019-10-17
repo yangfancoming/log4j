@@ -14,7 +14,6 @@ import org.apache.log4j.helpers.LogLog;
  * Abstract superclass of the other appenders in the package.
  *  This class provides the code for common functionality,
  *  such as support for threshold filtering and support for general filters.
- *
  * @since 0.8.1
  * */
 public abstract class AppenderSkeleton implements Appender, OptionHandler {
@@ -61,9 +60,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
     /**
      * Create new instance.
      * Provided for compatibility with log4j 1.3.
-     *
-     * @param isActive true if appender is ready for use upon construction.
-     *                 Not used in log4j 1.2.x.
+     * @param isActive true if appender is ready for use upon construction. Not used in log4j 1.2.x.
      * @since 1.2.15
      */
     protected AppenderSkeleton(final boolean isActive) {
@@ -80,7 +77,6 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
 
     /**
      Add a filter to end of the filter list.
-
      @since 0.9.0
      */
     @Override
@@ -254,8 +250,7 @@ public abstract class AppenderSkeleton implements Appender, OptionHandler {
      Set the threshold level. All log events with lower level
      than the threshold level are ignored by the appender.
      <p>In configuration files this option is specified by setting the
-     value of the <b>Threshold</b> option to a level
-     string, such as "DEBUG", "INFO" and so on.
+     value of the <b>Threshold</b> option to a level string, such as "DEBUG", "INFO" and so on.
      @since 0.8.3 */
     public void setThreshold(Priority threshold) {
         this.threshold = threshold;
