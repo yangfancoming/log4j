@@ -518,7 +518,6 @@ public class EnhancedPatternLayout extends Layout {
 
   /**
    * Will return false if any of the conversion specifiers in the pattern handles {@link Exception Exceptions}.
-   *
    * @return true if the pattern formats any information from exceptions.
    */
   @Override
