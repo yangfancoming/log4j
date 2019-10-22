@@ -224,11 +224,14 @@ public class DOMTestCase extends TestCase {
   public static class CustomErrorHandler implements ErrorHandler {
       public CustomErrorHandler() {}
       public void activateOptions() {}
+      @Override
       public void setLogger(final Logger logger) {}
       public void error(String message, Exception e, int errorCode) {}
       public void error(String message) {}
       public void error(String message, Exception e, int errorCode, LoggingEvent event) {}
+      @Override
       public void setAppender(Appender appender) {}
+      @Override
       public void setBackupAppender(Appender appender) {}
   }
 

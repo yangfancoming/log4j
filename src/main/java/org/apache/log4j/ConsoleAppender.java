@@ -52,9 +52,8 @@ public class ConsoleAppender extends WriterAppender {
     }
 
     /**
-     *  Sets the value of the <b>Target</b> option. Recognized values
-     *  are "System.out" and "System.err". Any other value will be ignored.
-     * */
+     *  Sets the value of the <b>Target</b> option. Recognized values are "System.out" and "System.err". Any other value will be ignored.
+     */
     public
     void setTarget(String value) {
         String v = value.trim();
@@ -70,7 +69,7 @@ public class ConsoleAppender extends WriterAppender {
 
     /**
      * Returns the current value of the <b>Target</b> property. The default value of the option is "System.out". See also {@link #setTarget}.
-     * */
+     */
     public String getTarget() {
         return target;
     }

@@ -44,6 +44,7 @@ public final class VectorErrorHandler implements ErrorHandler {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setLogger(final Logger logger) {
     this.logger = logger;
   }
@@ -138,6 +139,7 @@ public final class VectorErrorHandler implements ErrorHandler {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setAppender(final Appender appender) {
     this.appender = appender;
   }
@@ -153,6 +155,7 @@ public final class VectorErrorHandler implements ErrorHandler {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setBackupAppender(final Appender appender) {
     this.backupAppender = appender;
   }

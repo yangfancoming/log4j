@@ -24,8 +24,8 @@ public class CountingQuietWriter extends QuietWriter {
     super(writer, eh);
   }
 
-  public
-  void write(String string) {
+  @Override
+  public void write(String string) {
     try {
       out.write(string);
       count += string.length();

@@ -37,7 +37,8 @@ public class FallbackErrorHandler implements ErrorHandler {
      <em>Adds</em> the logger passed as parameter to the list of
      loggers that we need to search for in case of appender failure.
   */
-  public 
+  @Override
+  public
   void setLogger(Logger logger) {
     LogLog.debug("FB: Adding logger [" + logger.getName() + "].");
     if(loggers == null) {
@@ -105,6 +106,7 @@ public class FallbackErrorHandler implements ErrorHandler {
   /**
      The appender to which this error handler is attached.
    */
+  @Override
   public
   void setAppender(Appender primary) {
     LogLog.debug("FB: Setting primary appender to [" + primary.getName() + "].");
@@ -114,6 +116,7 @@ public class FallbackErrorHandler implements ErrorHandler {
   /**
      Set the backup appender.
    */
+  @Override
   public
   void setBackupAppender(Appender backup) {
     LogLog.debug("FB: Setting backup appender to [" + backup.getName() + "].");

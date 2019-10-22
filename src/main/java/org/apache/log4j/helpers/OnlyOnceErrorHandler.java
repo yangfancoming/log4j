@@ -34,7 +34,8 @@ public class OnlyOnceErrorHandler implements ErrorHandler {
   /**
      Does not do anything.
    */
-  public 
+  @Override
+  public
   void setLogger(Logger logger) {
   }
 
@@ -86,6 +87,7 @@ public class OnlyOnceErrorHandler implements ErrorHandler {
   /**
      Does not do anything.
    */
+  @Override
   public
   void setAppender(Appender appender) {
   }
@@ -93,6 +95,7 @@ public class OnlyOnceErrorHandler implements ErrorHandler {
   /**
      Does not do anything.
    */
+  @Override
   public
   void setBackupAppender(Appender appender) {
   }

@@ -22,6 +22,7 @@ public class QuietWriter extends FilterWriter {
     }
 
     // appender输出日志到特定的输出位置
+    @Override
     public  void write(String string) {
         if (string != null) {
             try {
@@ -33,6 +34,7 @@ public class QuietWriter extends FilterWriter {
     }
 
 
+    @Override
     public void flush() {
         try {
             out.flush();
