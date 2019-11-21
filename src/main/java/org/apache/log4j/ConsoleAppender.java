@@ -54,8 +54,7 @@ public class ConsoleAppender extends WriterAppender {
     /**
      *  Sets the value of the <b>Target</b> option. Recognized values are "System.out" and "System.err". Any other value will be ignored.
      */
-    public
-    void setTarget(String value) {
+    public void setTarget(String value) {
         String v = value.trim();
 
         if (SYSTEM_OUT.equalsIgnoreCase(v)) {
@@ -173,8 +172,7 @@ public class ConsoleAppender extends WriterAppender {
             System.out.write(b);
         }
         @Override
-        public void write(final byte[] b, final int off, final int len)
-                throws IOException {
+        public void write(final byte[] b, final int off, final int len){
             System.out.write(b, off, len);
         }
         @Override

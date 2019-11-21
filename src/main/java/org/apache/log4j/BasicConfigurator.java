@@ -6,7 +6,6 @@
 
 package org.apache.log4j;
 
-
 /**
    Use this class to quickly configure the package.
    <p>For file based configuration see {@link PropertyConfigurator}.

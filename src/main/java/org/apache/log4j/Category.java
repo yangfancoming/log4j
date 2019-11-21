@@ -231,8 +231,7 @@ public class Category implements AppenderAttachable {
      Log a message object with the {@link Level#ERROR ERROR} Level.
      This method first checks if this category is ERROR
      enabled by comparing the level of this category with {@link  Level#ERROR ERROR} Level.
-   If this category is ERROR  enabled,
-    then it converts the message object passed as parameter
+   If this category is ERROR  enabled,then it converts the message object passed as parameter
      to a string by invoking the appropriate {@link org.apache.log4j.or.ObjectRenderer}.
     It proceeds to call all the  registered appenders in this category and also higher in the
      hierarchy depending on the value of the additivity flag.
@@ -308,8 +307,7 @@ public class Category implements AppenderAttachable {
     }
 
     /**  This method creates a new logging event and logs the event  without further checks.  */
-    protected
-    void forcedLog(String fqcn, Priority level, Object message, Throwable t) {
+    protected void forcedLog(String fqcn, Priority level, Object message, Throwable t) {
         callAppenders(new LoggingEvent(fqcn, this, level, message, t));
     }
 
@@ -317,8 +315,8 @@ public class Category implements AppenderAttachable {
     /**
      Get the additivity flag for this Category instance.
      */
-    public
-    boolean getAdditivity() {
+
+    public boolean getAdditivity() {
         return additive;
     }
 

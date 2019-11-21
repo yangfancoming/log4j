@@ -20,15 +20,13 @@ import org.apache.log4j.spi.LoggingEvent;
 /**
  * The AsyncAppender lets users log events asynchronously.
  * The AsyncAppender will collect the events sent to it and then dispatch them
- * to all the appenders that are attached to it. You can attach multiple
- * appenders to an AsyncAppender.
+ * to all the appenders that are attached to it. You can attach multiple appenders to an AsyncAppender.
  * The AsyncAppender uses a separate thread to serve the events in its buffer.
  * <b>Important note:</b> The <code>AsyncAppender</code> can only be script
  * configured using the {@link org.apache.log4j.xml.DOMConfigurator}.
  * @since 0.9.1
  */
-public class AsyncAppender extends AppenderSkeleton
-        implements AppenderAttachable {
+public class AsyncAppender extends AppenderSkeleton implements AppenderAttachable {
     /**
      * The default buffer size is set to 128 events.
      */
@@ -130,50 +128,29 @@ public class AsyncAppender extends AppenderSkeleton
 
                 if (previousSize < bufferSize) {
                     buffer.add(event);
-
-                    //
-                    //   if buffer had been empty
-                    //       signal all threads waiting on buffer
-                    //       to check their conditions.
-                    //
+                    //   if buffer had been empty  signal all threads waiting on buffer  to check their conditions.
                     if (previousSize == 0) {
                         buffer.notifyAll();
                     }
 
                     break;
                 }
-
-                //
                 //   Following code is only reachable if buffer is full
-                //
-                //
-                //   if blocking and thread is not already interrupted
-                //      and not the dispatcher then
-                //      wait for a buffer notification
+                //   if blocking and thread is not already interrupted and not the dispatcher then wait for a buffer notification
                 boolean discard = true;
-                if (blocking
-                        && !Thread.interrupted()
-                        && Thread.currentThread() != dispatcher) {
+                if (blocking  && !Thread.interrupted()  && Thread.currentThread() != dispatcher) {
                     try {
                         buffer.wait();
                         discard = false;
                     } catch (InterruptedException e) {
-                        //
-                        //  reset interrupt status so
-                        //    calling code can see interrupt on
-                        //    their next wait or sleep.
+                        //  reset interrupt status so calling code can see interrupt on their next wait or sleep.
                         Thread.currentThread().interrupt();
                     }
                 }
-
-                //
-                //   if blocking is false or thread has been interrupted
-                //   add event to discard map.
-                //
+                //   if blocking is false or thread has been interrupted add event to discard map.
                 if (discard) {
                     String loggerName = event.getLoggerName();
                     DiscardSummary summary = (DiscardSummary) discardMap.get(loggerName);
-
                     if (summary == null) {
                         summary = new DiscardSummary(event);
                         discardMap.put(loggerName, summary);
@@ -205,9 +182,7 @@ public class AsyncAppender extends AppenderSkeleton
             dispatcher.join();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            org.apache.log4j.helpers.LogLog.error(
-                    "Got an InterruptedException while waiting for the "
-                            + "dispatcher to finish.", e);
+            org.apache.log4j.helpers.LogLog.error("Got an InterruptedException while waiting for the dispatcher to finish.", e);
         }
 
         //
@@ -241,7 +216,6 @@ public class AsyncAppender extends AppenderSkeleton
 
     /**
      * Get appender by name.
-     *
      * @param name name, may not be null.
      * @return matching appender or null.
      */
@@ -319,11 +293,8 @@ public class AsyncAppender extends AppenderSkeleton
      * information related to the event. As a result, the event that will be
      * ultimately logged will likely to contain the wrong location information
      * (if present in the log format).
-     * <p/>
-     * <p/>
      * Location information extraction is comparatively very slow and should be
      * avoided unless performance is not a concern.
-     * </p>
      * @param flag true if location information should be extracted.
      */
     public void setLocationInfo(final boolean flag) {
@@ -335,7 +306,6 @@ public class AsyncAppender extends AppenderSkeleton
      * before the calling thread is blocked (if blocking is true)
      * or until messages are summarized and discarded.  Changing
      * the size will not affect messages already in the buffer.
-     *
      * @param size buffer size, must be positive.
      */
     public void setBufferSize(final int size) {
@@ -361,7 +331,6 @@ public class AsyncAppender extends AppenderSkeleton
     /**
      * Sets whether appender should wait if there is no
      * space available in the event buffer or immediately return.
-     *
      * @since 1.2.14
      * @param value true if appender should wait until available space in buffer.
      */
@@ -376,7 +345,6 @@ public class AsyncAppender extends AppenderSkeleton
      * Gets whether appender should block calling thread when buffer is full.
      * If false, messages will be counted by logger and a summary
      * message appended after the contents of the buffer have been appended.
-     *
      * @since 1.2.14
      * @return true if calling thread will be blocked when buffer is full.
      */

@@ -143,9 +143,7 @@ public class Hierarchy implements LoggerRepository, RendererSupport, ThrowableRe
 
 
     /**
-     Enable logging for logging requests with level <code>l</code> or
-     higher. By default all levels are enabled.
-
+     Enable logging for logging requests with level <code>l</code> or higher. By default all levels are enabled.
      @param l The minimum level for which logging requests are sent to
      their appenders.  */
     @Override
