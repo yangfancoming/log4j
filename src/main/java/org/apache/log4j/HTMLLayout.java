@@ -8,12 +8,9 @@ import org.apache.log4j.helpers.Transform;
 
 /**
  * This layout outputs events in a HTML table.
- *
  * Appenders using this layout should have their encoding
  * set to UTF-8 or UTF-16, otherwise events containing
- * non ASCII characters could result in corrupted
- * log files.
- *
+ * non ASCII characters could result in corrupted log files.
  *  @author Ceki G&uuml;lc&uuml;
  */
 public class HTMLLayout extends Layout {
@@ -30,13 +27,10 @@ public class HTMLLayout extends Layout {
      A string constant used in naming the option for setting the the
      location information flag.  Current value of this string
      constant is <b>LocationInfo</b>.
-
      <p>Note that all option keys are case sensitive.
-
      @deprecated Options are now handled using the JavaBeans paradigm.
      This constant is not longer needed and will be removed in the
      <em>near</em> term.
-
      */
     public static final String LOCATION_INFO_OPTION = "LocationInfo";
 
@@ -53,45 +47,37 @@ public class HTMLLayout extends Layout {
     String title = "Log4J Log Messages";
 
     /**
-     The <b>LocationInfo</b> option takes a boolean value. By
-     default, it is set to false which means there will be no location
+     The <b>LocationInfo</b> option takes a boolean value. By  default, it is set to false which means there will be no location
      information output by this layout. If the the option is set to
-     true, then the file name and line number of the statement
-     at the origin of the log statement will be output.
-
+     true, then the file name and line number of the statement at the origin of the log statement will be output.
      <p>If you are embedding this layout within an {@link
     org.apache.log4j.net.SMTPAppender} then make sure to set the
      <b>LocationInfo</b> option of that appender as well.
      */
-    public
-    void setLocationInfo(boolean flag) {
+    public void setLocationInfo(boolean flag) {
         locationInfo = flag;
     }
 
     /**
      Returns the current value of the <b>LocationInfo</b> option.
      */
-    public
-    boolean getLocationInfo() {
+    public boolean getLocationInfo() {
         return locationInfo;
     }
 
     /**
      The <b>Title</b> option takes a String value. This option sets the
      document title of the generated HTML document.
-
      <p>Defaults to 'Log4J Log Messages'.
      */
-    public
-    void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
     /**
      Returns the current value of the <b>Title</b> option.
      */
-    public
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -99,16 +85,14 @@ public class HTMLLayout extends Layout {
      Returns the content type output by this layout, i.e "text/html".
      */
     @Override
-    public
-    String getContentType() {
+    public String getContentType() {
         return "text/html";
     }
 
     /**
      No options to activate.
      */
-    public
-    void activateOptions() {
+    public void activateOptions() {
     }
 
     public
@@ -200,8 +184,7 @@ public class HTMLLayout extends Layout {
      Returns appropriate HTML headers.
      */
     @Override
-    public
-    String getHeader() {
+    public String getHeader() {
         StringBuffer sbuf = new StringBuffer();
         sbuf.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">"  + Layout.LINE_SEP);
         sbuf.append("<html>" + Layout.LINE_SEP);
@@ -236,8 +219,7 @@ public class HTMLLayout extends Layout {
      Returns the appropriate HTML footers.
      */
     @Override
-    public
-    String getFooter() {
+    public String getFooter() {
         StringBuffer sbuf = new StringBuffer();
         sbuf.append("</table>" + Layout.LINE_SEP);
         sbuf.append("<br>" + Layout.LINE_SEP);
@@ -249,8 +231,7 @@ public class HTMLLayout extends Layout {
      The HTML layout handles the throwable contained in logging
      events. Hence, this method return <code>false</code>.  */
     @Override
-    public
-    boolean ignoresThrowable() {
+    public boolean ignoresThrowable() {
         return false;
     }
 }
