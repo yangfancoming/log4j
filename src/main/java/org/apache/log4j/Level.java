@@ -53,16 +53,15 @@ public class Level extends Priority implements Serializable {
     final static public Level DEBUG = new Level(DEBUG_INT, "DEBUG", 7);
 
     /**
-     * The TRACE Level designates finer-grained
-     * informational events than the DEBUG</code level.
+     * The TRACE Level designates finer-grained informational events than the DEBUG</code level.
      *  @since 1.2.12
      */
     public static final Level TRACE = new Level(TRACE_INT, "TRACE", 7);
 
 
     /**
-     The ALL has the lowest possible rank and is intended to
-     turn on all logging.  */
+     The ALL has the lowest possible rank and is intended to  turn on all logging.
+     */
     final static public Level ALL = new Level(ALL_INT, "ALL", 7);
 
     /**

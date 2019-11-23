@@ -45,13 +45,10 @@ public abstract class Layout implements OptionHandler {
     }
 
     /**
-     If the layout handles the throwable object contained within
-     {@link LoggingEvent}, then the layout should return
+     If the layout handles the throwable object contained within {@link LoggingEvent}, then the layout should return
      <code>false</code>. Otherwise, if the layout ignores throwable
      object, then the layout should return <code>true</code>.
-     If ignoresThrowable is true, the appender is responsible for
-     rendering the throwable.
-
+     If ignoresThrowable is true, the appender is responsible for rendering the throwable.
      <p>The {@link SimpleLayout}, {@link TTCCLayout}, {@link
     PatternLayout} all return <code>true</code>. The {@link
     org.apache.log4j.xml.XMLLayout} returns <code>false</code>.
