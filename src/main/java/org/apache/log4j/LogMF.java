@@ -30,7 +30,6 @@ import java.util.Locale;
 public final class LogMF extends LogXF {
     /**
      * private constructor.
-     *
      */
     private LogMF() {
     }
@@ -76,10 +75,7 @@ public final class LogMF extends LogXF {
         Locale currentLocale = Locale.getDefault();
         if (currentLocale != dateLocale || dateFormat == null) {
             dateLocale = currentLocale;
-            dateFormat = DateFormat.getDateTimeInstance(
-                                DateFormat.SHORT,
-                                DateFormat.SHORT,
-                                currentLocale);
+            dateFormat = DateFormat.getDateTimeInstance( DateFormat.SHORT,DateFormat.SHORT,currentLocale);
         }
         return dateFormat.format(d);
     }
@@ -93,8 +89,7 @@ public final class LogMF extends LogXF {
     private static String formatObject(final Object arg0) {
         if (arg0 instanceof String) {
             return arg0.toString();
-        } else if (arg0 instanceof Double ||
-                   arg0 instanceof Float) {
+        } else if (arg0 instanceof Double || arg0 instanceof Float) {
            return formatNumber(arg0);
         } else if (arg0 instanceof Date) {
             return formatDate(arg0);
@@ -104,9 +99,7 @@ public final class LogMF extends LogXF {
 
 
     /**
-     * Determines if pattern contains only {n} format elements
-     * and not apostrophes.
-     *
+     * Determines if pattern contains only {n} format elements and not apostrophes.
      * @param pattern pattern, may not be null.
      * @return true if pattern only contains {n} format elements.
      */
@@ -117,10 +110,7 @@ public final class LogMF extends LogXF {
         for(int pos = pattern.indexOf('{');
             pos != -1;
             pos = pattern.indexOf('{', pos + 1)) {
-            if (pos + 2 >= pattern.length() ||
-                    pattern.charAt(pos+2) != '}' ||
-                    pattern.charAt(pos+1) < '0' ||
-                    pattern.charAt(pos+1) > '9') {
+            if (pos + 2 >= pattern.length() ||  pattern.charAt(pos+2) != '}' || pattern.charAt(pos+1) < '0' || pattern.charAt(pos+1) > '9') {
                 return false;
             }
         }
@@ -256,37 +246,29 @@ public final class LogMF extends LogXF {
 
     /**
      * Equivalent of Logger.forcedLog.
-     *
      * @param logger logger, may not be null.
      * @param level level, may not be null.
      * @param msg message, may be null.
      */
-    private static void forcedLog(final Logger logger,
-                                  final Level level,
-                                  final String msg) {
+    private static void forcedLog(final Logger logger,final Level level,final String msg) {
         logger.callAppenders(new LoggingEvent(FQCN, logger, level, msg, null));
     }
 
     /**
      * Equivalent of Logger.forcedLog.
-     *
      * @param logger logger, may not be null.
      * @param level level, may not be null.
      * @param msg message, may be null.
      * @param t throwable.
      */
-    private static void forcedLog(final Logger logger,
-                                  final Level level,
-                                  final String msg,
-                                  final Throwable t) {
+    private static void forcedLog(final Logger logger,final Level level,final String msg, final Throwable t) {
         logger.callAppenders(new LoggingEvent(FQCN, logger, level, msg, t));
     }
     /**
          * Log a parameterized message at trace level.
          * @param logger logger, may not be null.
          * @param pattern pattern, may be null.
-         * @param arguments an array of arguments to be
-         *          formatted and substituted.
+         * @param arguments an array of arguments to be  formatted and substituted.
          */
     public static void trace(final Logger logger, final String pattern,
         final Object[] arguments) {
@@ -368,9 +350,7 @@ public final class LogMF extends LogXF {
          * @param arguments an array of arguments to be
          *          formatted and substituted.
          */
-    public static void trace(final Logger logger,
-                             final Throwable t,
-                             final String pattern,
+    public static void trace(final Logger logger,final Throwable t, final String pattern,
         final Object[] arguments) {
         if (logger.isEnabledFor(TRACE)) {
             forcedLog(logger, TRACE, format(pattern, arguments), t);
@@ -384,9 +364,7 @@ public final class LogMF extends LogXF {
      * @param pattern pattern, may be null.
      * @param arguments an array of arguments to be formatted and substituted.
      */
-    public static void debug(final Logger logger,
-                             final Throwable t,
-                             final String pattern,
+    public static void debug(final Logger logger,final Throwable t,final String pattern,
         final Object[] arguments) {
         if (logger.isDebugEnabled()) {
             forcedLog(logger, Level.DEBUG, format(pattern, arguments), t);
@@ -400,9 +378,7 @@ public final class LogMF extends LogXF {
      * @param pattern pattern, may be null.
      * @param arguments an array of arguments to be formatted and substituted.
      */
-    public static void info(final Logger logger,
-                            final Throwable t,
-                            final String pattern,
+    public static void info(final Logger logger,final Throwable t,final String pattern,
         final Object[] arguments) {
         if (logger.isInfoEnabled()) {
             forcedLog(logger, Level.INFO, format(pattern, arguments), t);
