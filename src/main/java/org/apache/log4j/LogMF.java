@@ -1330,8 +1330,7 @@ public final class LogMF extends LogXF {
       */
     public static void logrb(final Logger logger,final Level level,final String bundleName,final String key, final Object param1) {
         if (logger.isEnabledFor(level)) {
-            forcedLog(logger, level,
-                    format(bundleName, key, toArray(param1)));
+            forcedLog(logger, level,format(bundleName, key, toArray(param1)));
         }
     }
 

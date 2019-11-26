@@ -17,16 +17,11 @@ import org.apache.log4j.helpers.ThreadLocalMap;
    when a server handles multiple clients near-simultaneously.
 
    <p><b><em>The MDC is managed on a per thread basis</em></b>. A
-   child thread automatically inherits a <em>copy</em> of the mapped
-   diagnostic context of its parent.
-  
-   <p>The MDC class requires JDK 1.2 or above. Under JDK 1.1 the MDC
-   will always return empty values but otherwise will not affect or
-   harm your application.
-   
-   @since 1.2
+   child thread automatically inherits a <em>copy</em> of the mapped diagnostic context of its parent.
 
-   @author Ceki G&uuml;lc&uuml; 
+   <p>The MDC class requires JDK 1.2 or above. Under JDK 1.1 the MDC
+   will always return empty values but otherwise will not affect or  harm your application.
+   @since 1.2
 */
 public class MDC {
   
@@ -56,12 +51,8 @@ public class MDC {
 
   /**
      Put a context value (the <code>o</code> parameter) as identified
-     with the <code>key</code> parameter into the current thread's
-     context map.
-
-     <p>If the current thread does not have a context map it is
-     created as a side effect.
-    
+     with the <code>key</code> parameter into the current thread's context map.
+     <p>If the current thread does not have a context map it is created as a side effect.
    */
   static
   public
@@ -73,7 +64,6 @@ public class MDC {
   
   /**
      Get the context identified by the <code>key</code> parameter.
-
      <p>This method has no side effects.
    */
   static 
@@ -86,9 +76,7 @@ public class MDC {
   }
 
   /**
-     Remove the the context identified by the <code>key</code>
-     parameter.
-
+     Remove the the context identified by the <code>key</code>  parameter.
   */
   static 
   public
@@ -100,8 +88,7 @@ public class MDC {
 
 
   /**
-   * Get the current thread's MDC as a hashtable. This method is
-   * intended to be used internally.  
+   * Get the current thread's MDC as a hashtable. This method is intended to be used internally.
    * */
   public static Hashtable getContext() {
     if (mdc != null) {
@@ -122,22 +109,22 @@ public class MDC {
   }
 
 
-  private
-  void put0(String key, Object o) {
-    if(java1 || tlm == null) {
-      return;
-    } else {
-      Hashtable ht = (Hashtable) ((ThreadLocalMap)tlm).get();
-      if(ht == null) {
-        ht = new Hashtable(HT_SIZE);
-        ((ThreadLocalMap)tlm).set(ht);
-      }    
-      ht.put(key, o);
+
+    private void put0(String key, Object o) {
+        if(java1 || tlm == null) {
+            return;
+        } else {
+            Hashtable ht = (Hashtable) ((ThreadLocalMap)tlm).get();
+            if(ht == null) {
+                ht = new Hashtable(HT_SIZE);
+                ((ThreadLocalMap)tlm).set(ht);
+            }
+            ht.put(key, o);
+        }
     }
-  }
-  
-  private
-  Object get0(String key) {
+
+
+    private Object get0(String key) {
     if(java1 || tlm == null) {
       return null;
     } else {       
@@ -150,8 +137,8 @@ public class MDC {
     }
   }
 
-  private
-  void remove0(String key) {
+
+    private void remove0(String key) {
     if(!java1 && tlm != null) {
       Hashtable ht = (Hashtable) ((ThreadLocalMap)tlm).get();
       if(ht != null) {
@@ -165,8 +152,8 @@ public class MDC {
   }
 
 
-  private
-  Hashtable getContext0() {
+
+    private Hashtable getContext0() {
      if(java1 || tlm == null) {
       return null;
     } else {       
@@ -174,8 +161,8 @@ public class MDC {
     }
   }
 
-  private
-  void clear0() {
+
+    private void clear0() {
     if(!java1 && tlm != null) {
       Hashtable ht = (Hashtable) ((ThreadLocalMap)tlm).get();
       if(ht != null) {

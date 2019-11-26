@@ -15,17 +15,10 @@ import org.apache.log4j.helpers.CountingQuietWriter;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
-   RollingFileAppender extends FileAppender to backup the log files when
-   they reach a certain size.
-   
+   RollingFileAppender extends FileAppender to backup the log files when they reach a certain size.
    The log4j extras companion includes alternatives which should be considered
    for new deployments and which are discussed in the documentation
    for org.apache.log4j.rolling.RollingFileAppender.
-   
-
-   @author Heinz Richter
-   @author Ceki G&uuml;lc&uuml;
-
 */
 public class RollingFileAppender extends FileAppender {
 
@@ -51,27 +44,20 @@ public class RollingFileAppender extends FileAppender {
 
   /**
     Instantiate a RollingFileAppender and open the file designated by
-    <code>filename</code>. The opened filename will become the ouput
-    destination for this appender.
-
-    <p>If the <code>append</code> parameter is true, the file will be
-    appended to. Otherwise, the file desginated by
+    <code>filename</code>. The opened filename will become the ouput destination for this appender.
+    <p>If the <code>append</code> parameter is true, the file will be appended to. Otherwise, the file desginated by
     <code>filename</code> will be truncated before being opened.
   */
-  public
-  RollingFileAppender(Layout layout, String filename, boolean append)
-                                      throws IOException {
+  public RollingFileAppender(Layout layout, String filename, boolean append) throws IOException {
     super(layout, filename, append);
   }
 
   /**
-     Instantiate a FileAppender and open the file designated by
-    <code>filename</code>. The opened filename will become the output
-    destination for this appender.
-
+     Instantiate a FileAppender and open the file designated by  <code>filename</code>.
+   The opened filename will become the output destination for this appender.
     <p>The file will be appended to.  */
-  public
-  RollingFileAppender(Layout layout, String filename) throws IOException {
+
+  public RollingFileAppender(Layout layout, String filename) throws IOException {
     super(layout, filename);
   }
 
@@ -84,9 +70,7 @@ public class RollingFileAppender extends FileAppender {
   }
 
  /**
-    Get the maximum size that the output file is allowed to reach
-    before being rolled over to backup files.
-
+    Get the maximum size that the output file is allowed to reach before being rolled over to backup files.
     @since 1.1
  */
   public
@@ -103,13 +87,12 @@ public class RollingFileAppender extends FileAppender {
      <code>File.MaxBackupIndex</code>}. Moreover, <code>File</code> is
      renamed <code>File.1</code> and closed. A new <code>File</code> is
      created to receive further log output.
-
      <p>If <code>MaxBackupIndex</code> is equal to zero, then the
      <code>File</code> is truncated with no backup files created.
 
    */
-  public // synchronization not necessary since doAppend is alreasy synched
-  void rollOver() {
+   // synchronization not necessary since doAppend is alreasy synched
+  public void rollOver() {
     File target;
     File file;
 
@@ -143,15 +126,11 @@ public class RollingFileAppender extends FileAppender {
     if(renameSucceeded) {
       // Rename fileName to fileName.1
       target = new File(fileName + "." + 1);
-
       this.closeFile(); // keep windows happy.
-
       file = new File(fileName);
       LogLog.debug("Renaming file " + file + " to " + target);
       renameSucceeded = file.renameTo(target);
-      //
       //   if file rename failed, reopen file with append = true
-      //
       if (!renameSucceeded) {
           try {
             this.setFile(fileName, true, bufferedIO, bufferSize);
@@ -186,9 +165,7 @@ public class RollingFileAppender extends FileAppender {
   }
 
   @Override
-  public
-  synchronized
-  void setFile(String fileName, boolean append, boolean bufferedIO, int bufferSize)
+    public synchronized void setFile(String fileName, boolean append, boolean bufferedIO, int bufferSize)
                                                                  throws IOException {
     super.setFile(fileName, append, this.bufferedIO, this.bufferSize);
     if(append) {
@@ -207,8 +184,7 @@ public class RollingFileAppender extends FileAppender {
      backup files and the log file will be truncated when it reaches
      <code>MaxFileSize</code>.
    */
-  public
-  void setMaxBackupIndex(int maxBackups) {
+  public void setMaxBackupIndex(int maxBackups) {
     this.maxBackupIndex = maxBackups;
   }
 
@@ -224,8 +200,7 @@ public class RollingFileAppender extends FileAppender {
 
      @see #setMaxFileSize(String)
  */
-  public
-  void setMaximumFileSize(long maxFileSize) {
+  public void setMaximumFileSize(long maxFileSize) {
     this.maxFileSize = maxFileSize;
   }
 
@@ -241,21 +216,17 @@ public class RollingFileAppender extends FileAppender {
      or gigabytes. For example, the value "10KB" will be interpreted
      as 10240.
    */
-  public
-  void setMaxFileSize(String value) {
+  public void setMaxFileSize(String value) {
     maxFileSize = OptionConverter.toFileSize(value, maxFileSize + 1);
   }
 
   @Override
-  protected
-  void setQWForFiles(Writer writer) {
+  protected void setQWForFiles(Writer writer) {
      this.qw = new CountingQuietWriter(writer, errorHandler);
   }
 
   /**
-     This method differentiates RollingFileAppender from its super
-     class.
-
+     This method differentiates RollingFileAppender from its super class.
      @since 0.9.0
   */
   protected
